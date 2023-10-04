@@ -115,9 +115,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6161010213560961220}
   - component: {fileID: 3314902011943992805}
-  m_Layer: 0
-  m_Name: HexTile_Pasture
-  m_TagString: Untagged
+  - component: {fileID: -718818530329850937}
+  m_Layer: 7
+  m_Name: NormalTile
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,6 +162,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c874fa2b3ce8f8246bc08b7b8a1c6c09, type: 3}
+--- !u!114 &-718818530329850937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539101885611274806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d3c6ab8c9913e43bf0660e91f25245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &6017758404450277105
 GameObject:
   m_ObjectHideFlags: 0
