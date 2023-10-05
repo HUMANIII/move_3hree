@@ -7,7 +7,7 @@ public class TileScript : MonoBehaviour
     protected List<GameObject> nearTiles = new();
     protected GameObject player;
 
-    public int lineNumber { get; set; } = 0;
+    public int LineNumber { get; set; } = 0;
     protected TileManager tileManager;
 
     protected float playerSearchFactor;
@@ -24,37 +24,33 @@ public class TileScript : MonoBehaviour
 
     public void Init (int LineNum)
     {
-        lineNumber = LineNum;
+        LineNumber = LineNum;
     }
 
     public virtual Vector3 GetPos()
     {
-        tileManager.PlayerLineCounter = lineNumber;
+        tileManager.PlayerLineCounter = LineNumber;
         return gameObject.transform.position;
     }
 
     public virtual void CheckTile()
     {
+        CheckPlayerRange();
         if (player.transform.position.z >= transform.position.z)
         {
             CanMove = false;
         }
-        else
-        {
-            CheckPlayerRange();
-        }
 
-        if (tileManager.PlayerLineCounter - lineNumber > 1)
+        if (tileManager.PlayerLineCounter - LineNumber > 1)
         {
             tileManager.destroyTiles.Add(gameObject);
             gameObject.SetActive(false);
         }
     }
 
-    public void CheckPlayerRange()
+    public virtual void CheckPlayerRange()
     {
         float range = Vector3.Distance(transform.position, player.transform.position);
         CanMove = range < playerSearchRange * playerSearchFactor;
-        
     }
 }

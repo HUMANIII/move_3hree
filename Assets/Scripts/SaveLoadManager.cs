@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class SaveLoadManager : MonoBehaviour
 {
-    public static GameManager Instance = null;
+    public static SaveLoadManager Instance = null;
 
     public bool isGameOver = true;
     private void Awake()
@@ -13,20 +12,12 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
     }
-    public void GameOver()
-    {        
-        isGameOver = true;
-    }
 
-    public void GameStart()
-    {
-        isGameOver = false;
-    }
+   
 }

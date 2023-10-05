@@ -220,7 +220,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4559605514125194}
   - component: {fileID: 1457395421107463786}
-  - component: {fileID: 2987835214705709073}
   - component: {fileID: 3562510623091761700}
   m_Layer: 7
   m_Name: HoleTile
@@ -256,18 +255,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39b7c9373c7f01c45b19547f32cfd267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2987835214705709073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991328963452212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d3c6ab8c9913e43bf0660e91f25245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!64 &3562510623091761700

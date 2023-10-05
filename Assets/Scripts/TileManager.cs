@@ -29,21 +29,10 @@ public class TileManager : MonoBehaviour
 
     private void Awake()
     {
-        Init();
         sideInterval *= sizeFator;
         upperInterval *= sizeFator;
         SetTilePoses();
         StartGame();
-    }
-
-    private void Init()
-    {
-        if (tileColumn == 0)
-            tileColumn = 7;
-        if (tileRow == 0)
-            tileRow = 5;
-        if (maximumTrapTile == 0)
-            maximumTrapTile = 5;
     }
 
     private void SetTilePoses()

@@ -21,7 +21,7 @@ public class TimerScripts : MonoBehaviour
         Timer -= Time.deltaTime;
 
         if (Timer <= 0)
-            Debug.Log("gameOver");
+            GameManager.Instance.GameOver();
     }
 
     public void ResetTimer()

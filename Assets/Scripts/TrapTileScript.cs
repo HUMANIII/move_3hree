@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapTileScript : MonoBehaviour
+public class TrapTileScript : TileScript
 {
-    TileManager tileManager;
-    private int lineNumber;
+    public override void CheckTile()
+    {
+        base.CheckTile();
 
-    private void Awake()
-    {
-        tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
-    }
-    public void Init(int LineNum)
-    {
-        lineNumber = LineNum;
-    }
-    public void CheckTile()
-    {
-        if(tileManager.PlayerLineCounter - lineNumber > 1)
+        if(tileManager.PlayerLineCounter - LineNumber > 1)
         {
             tileManager.TrapTileCount--;
         }
