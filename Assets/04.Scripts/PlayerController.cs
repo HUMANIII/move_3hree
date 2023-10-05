@@ -14,13 +14,14 @@ public class PlayerController : MonoBehaviour
         Left
     }
 
-    private MoveTo moveTo;
+    private MoveTo moveTo; //버튼 사용 할 때 쓸 예정
 
     private Camera mainCam;
     private TileManager tileManager;
     private TimerScripts timerScripts;
     
-    public int timerDecreaseFactor = 10;
+    public int timerDecreaseFactor = 10; 
+    public int scoreFactor = 10;
 
     private void Awake()
     {
@@ -63,6 +64,10 @@ public class PlayerController : MonoBehaviour
     }
     public void MovePosition(Vector3 pos)
     {
+        if (pos.x == transform.position.x)
+            GameManager.Instance.CurScore += scoreFactor;
+        else
+            GameManager.Instance.CurScore += scoreFactor / 2;
         pos.y += 1.8f;
         transform.position = pos;
         tileManager.SpawnTile();

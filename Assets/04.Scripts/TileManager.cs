@@ -72,7 +72,7 @@ public class TileManager : MonoBehaviour
             {
                 var tile = Instantiate(GetRandomTile(), tilePos + new Vector3(0f, 0f, LineCounter * upperInterval * 2), Quaternion.identity);
                 tiles.Add(tile);
-                tile.transform.localScale *= (sizeFator - 0.1f);
+                tile.transform.localScale *= sizeFator;
                 tile.SendMessage("Init", LineCounter);
                 allTiles.Add(tile);
             }            
