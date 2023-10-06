@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Camera mainCam;
     private TileManager tileManager;
     private TimerScripts timerScripts;
+    private int knockbackCounter = 0;
     
     public int timerDecreaseFactor = 10; 
     public int scoreFactor = 10;
@@ -79,5 +80,15 @@ public class PlayerController : MonoBehaviour
         pos.y += 1.8f;
         transform.position = pos;
         tileManager.SpawnTile();
+    }
+
+    public void Knockback()
+    {
+        var knockbackRange = tileManager.upperInterval * (knockbackCounter + 1) * 2;
+        var pos = transform.position;
+        pos.z -= knockbackRange;
+        transform.position = pos;
+        tileManager.CheckAllTiles();
+        knockbackCounter++;
     }
 }

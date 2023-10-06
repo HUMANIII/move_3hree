@@ -7,14 +7,15 @@ public class TileManager : MonoBehaviour
 {
     public GameObject normalTile;
     public GameObject holeTile;
-    public GameObject extremeTile;
+    public GameObject fallingObjectTile;
+    public GameObject knockbackTile;
 
     public GameObject battery;
     public GameObject ram;
 
     public float sizeFator = 2f;
     private float sideInterval = 0.75f;
-    private float upperInterval = 0.866f;
+    public float upperInterval { get; private set; } = 0.866f;
 
     public int tileColumn;
     public int tileRow;
@@ -86,14 +87,19 @@ public class TileManager : MonoBehaviour
             }            
             LineCounter++;
         }
-        foreach(var tile in AllTiles)
-        {
-            tile.SendMessage("CheckTile");            
-        }
+        CheckAllTiles();
         foreach(var obj in  DestroyTiles)
         {
             AllTiles.Remove(obj);
             Destroy(obj);
+        }
+    }
+
+    public void CheckAllTiles()
+    {
+        foreach (var tile in AllTiles)
+        {
+            tile.SendMessage("CheckTile");
         }
     }
 
@@ -137,14 +143,18 @@ public class TileManager : MonoBehaviour
         }
         switch (Random.value)
         {
-            case < 0.1f:
+            case < 0.07f:
                 TrapTileCount++;
                 isNormal = false;
                 return holeTile;
+            case < 0.14f:
+                TrapTileCount++;
+                isNormal = false;
+                return fallingObjectTile;
             case < 0.2f:
                 TrapTileCount++;
                 isNormal = false;
-                return extremeTile;
+                return knockbackTile;
             default:
                 isNormal = true;
                 return normalTile;

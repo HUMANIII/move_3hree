@@ -21,7 +21,10 @@ public class TimerScripts : MonoBehaviour
         Timer -= Time.deltaTime;
 
         if (Timer <= 0)
-            GameManager.Instance.GameOver();
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Knockback();
+            ResetTimer();
+        }
     }
 
     public void ResetTimer()
