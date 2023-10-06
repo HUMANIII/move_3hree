@@ -43,7 +43,7 @@ public class TileScript : MonoBehaviour
 
         if (tileManager.PlayerLineCounter - LineNumber > 1)
         {
-            tileManager.destroyTiles.Add(gameObject);
+            tileManager.DestroyTiles.Add(gameObject);
             gameObject.SetActive(false);
         }
     }

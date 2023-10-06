@@ -34,7 +34,7 @@ public class FallingObjTile : TrapTileScript
         {
             SetWarnSign();
         }
-        if (playerDistance <= 0 && isSignSetted)
+        if (player.transform.position.z >= transform.position.z)
         {
             FallObj();
         }

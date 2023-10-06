@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using SaveDataVC = SaveDataV1;
+using UnityEngine.SceneManagement;
+using SaveDataVC = SaveDataV2;
 
 
 public class GameManager : MonoBehaviour
@@ -11,8 +12,9 @@ public class GameManager : MonoBehaviour
 
     public int BestScore { get; private set; }
     public int CurScore { get; set; } = 0;
+    public int RamCount { get; set; } = 0;
 
-    public bool isGameOver = true;
+    public bool IsGameOver { get; private set; } = false;
     private void Awake()
     {
         if (Instance == null)
@@ -24,32 +26,30 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
+        IsGameOver = false;
+        CurScore = 0;
         LoadData();
     }
 
     public void GameOver()
     {        
-        isGameOver = true;
+        IsGameOver = true;
         BestScore = Mathf.Max(BestScore, CurScore);
         SaveData();
     }
 
-    public void GameStart()
+    public void GameReStart()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        IsGameOver = false;
         CurScore = 0;
-        LoadData();
-        isGameOver = false;
     }
 
     private void SaveData()
     {
-
         var data = new SaveDataVC();
         data.bestScore = BestScore;
+        data.ramCount = RamCount;
         SaveLoadSystem.Save(data, "saveData.Json");
     }
 
@@ -57,5 +57,6 @@ public class GameManager : MonoBehaviour
     {
         var data = SaveLoadSystem.Load("saveData.Json") as SaveDataVC;
         BestScore = data.bestScore;
+        RamCount = data.ramCount;
     }
 }

@@ -9,13 +9,14 @@ public class WarningSign : MonoBehaviour
 
     private GameObject player;
     private Rigidbody rb;
-    private Collider collider;
+    private Collider cldr;
+
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        cldr = GetComponent<Collider>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -23,8 +24,13 @@ public class WarningSign : MonoBehaviour
         var go = collision.gameObject;
         if (go == player || go == fallingObj)
         {
-            collider.enabled = false;
+            cldr.isTrigger = true;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == player)
+            GameManager.Instance.GameOver();
     }
 }

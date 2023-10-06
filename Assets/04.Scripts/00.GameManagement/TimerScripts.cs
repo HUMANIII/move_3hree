@@ -5,13 +5,13 @@ using UnityEngine;
 public class TimerScripts : MonoBehaviour
 {
     public float Timer { get; set; }
-    private float curMaxTime;
+    public static float curMaxTime;
 
-    public float maxTime = 2f;
-    public float minTime = 0.6f;
+    public static float maxTime = 2f;
+    public static float minTime = 0.6f;
     public float decreaseFactor = 0.1f;
 
-    private void Awake()
+    private void Start()
     {
         curMaxTime = maxTime;
         ResetTimer();
@@ -34,8 +34,9 @@ public class TimerScripts : MonoBehaviour
         curMaxTime = Mathf.Clamp(curMaxTime - decreaseFactor, minTime, maxTime);
     }
 
-    public void RestoreTime(float amount)
+    public static void RestoreTime(float amount)
     {
         curMaxTime = Mathf.Clamp(curMaxTime + amount, minTime, maxTime);
+        Debug.Log(curMaxTime);
     }
 }

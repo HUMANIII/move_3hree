@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     }
     protected void Update()
     {
+        if (GameManager.Instance.IsGameOver)
+            return;
+
         if(Input.GetMouseButtonDown(0)) 
         {
             Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
@@ -56,7 +59,12 @@ public class PlayerController : MonoBehaviour
                     timerScripts.ResetTimer();
                 }
             }
-        }        
+        }
+
+        if (transform.position.y < -5)
+        {
+            GameManager.Instance.GameOver();
+        }
 
         if(Input.GetKeyDown(KeyCode.W)) { }
         if(Input.GetKeyDown(KeyCode.A)) { }

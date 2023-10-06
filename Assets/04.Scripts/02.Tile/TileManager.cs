@@ -9,6 +9,9 @@ public class TileManager : MonoBehaviour
     public GameObject holeTile;
     public GameObject extremeTile;
 
+    public GameObject battery;
+    public GameObject ram;
+
     public float sizeFator = 2f;
     private float sideInterval = 0.75f;
     private float upperInterval = 0.866f;
@@ -16,16 +19,17 @@ public class TileManager : MonoBehaviour
     public int tileColumn;
     public int tileRow;
 
+    public int maximunItemNumber = 2;
     public int maximumTrapTile;
     public int TrapTileCount { get; set; }
+    public int ItemCount { get; set; } = 0;
 
     public int LineCounter { get; set; }
     public int PlayerLineCounter { get; set; }
 
-    //private Vector3 curCenterTilePos = new();
-    private List<Vector3> tilePoses = new();
-    public List<GameObject> allTiles { get; set; } = new();
-    public List<GameObject> destroyTiles { get; set; } = new();
+    private readonly List<Vector3> TilePoses = new();
+    public List<GameObject> AllTiles { get; set; } = new();
+    public List<GameObject> DestroyTiles { get; set; } = new();
 
     private void Awake()
     {
@@ -37,7 +41,7 @@ public class TileManager : MonoBehaviour
 
     private void SetTilePoses()
     {
-        tilePoses.Clear();
+        TilePoses.Clear();
 
         float xPos = 0f;
         float zPos = 0f;
@@ -57,7 +61,7 @@ public class TileManager : MonoBehaviour
                     zPos -= upperInterval;
                     break;
             }
-            tilePoses.Add(new Vector3(xPos, 0f, zPos));
+            TilePoses.Add(new Vector3(xPos, 0f, zPos));
 
             xPos *= -1;
         }
@@ -68,24 +72,37 @@ public class TileManager : MonoBehaviour
         List<GameObject> tiles = new();
         while(LineCounter < PlayerLineCounter + tileColumn)
         {
-            foreach (var tilePos in tilePoses)
+            foreach (var tilePos in TilePoses)
             {
-                var tile = Instantiate(GetRandomTile(), tilePos + new Vector3(0f, 0f, LineCounter * upperInterval * 2), Quaternion.identity);
+                var tile = Instantiate(GetRandomTile(out bool isNormalTile), tilePos + new Vector3(0f, 0f, LineCounter * upperInterval * 2), Quaternion.identity);
                 tiles.Add(tile);
                 tile.transform.localScale *= sizeFator;
                 tile.SendMessage("Init", LineCounter);
-                allTiles.Add(tile);
+                if(isNormalTile && !(LineCounter == 0))
+                {
+                    SpawnItem(tile);
+                }
+                AllTiles.Add(tile);
             }            
             LineCounter++;
         }
-        foreach(var tile in allTiles)
+        foreach(var tile in AllTiles)
         {
             tile.SendMessage("CheckTile");            
         }
-        foreach(var obj in  destroyTiles)
+        foreach(var obj in  DestroyTiles)
         {
-            allTiles.Remove(obj);
+            AllTiles.Remove(obj);
             Destroy(obj);
+        }
+    }
+
+    private void SpawnItem(GameObject tile)
+    {
+        var item = GetRandomItem();
+        if (item != null)
+        {
+            Instantiate(item, tile.transform);
         }
     }
     
@@ -93,40 +110,63 @@ public class TileManager : MonoBehaviour
     {   
         SpawnTile();
 
-        foreach (GameObject tile in allTiles)
+        foreach (GameObject tile in AllTiles)
             tile.SendMessage("CheckPlayerRange");
     }
 
     public void MoveTiles()
     {
-        foreach (var tile in allTiles)
+        foreach (var tile in AllTiles)
         {
             tile.transform.Translate(0f, 0f, -upperInterval * 2);
             tile.SendMessage("MoveTile");
         }
-        foreach(var tile in destroyTiles)
+        foreach(var tile in DestroyTiles)
         {
-            allTiles.Remove(tile);
+            AllTiles.Remove(tile);
             Destroy(tile);
         }
     }
 
-    private GameObject GetRandomTile()
+    private GameObject GetRandomTile(out bool isNormal)
     {
         if (maximumTrapTile <= TrapTileCount || LineCounter == 0)
         {
+            isNormal = true;
             return normalTile;
         }
         switch (Random.value)
         {
             case < 0.1f:
                 TrapTileCount++;
+                isNormal = false;
                 return holeTile;
             case < 0.2f:
                 TrapTileCount++;
+                isNormal = false;
                 return extremeTile;
             default:
+                isNormal = true;
                 return normalTile;
+        }
+    }
+    
+    private GameObject GetRandomItem()
+    {
+        if (maximunItemNumber <= ItemCount)
+        {
+            return null;
+        }
+        switch (Random.value)
+        {
+            case < 0.1f:
+                ItemCount++;
+                return ram;
+            case < 0.2f:
+                ItemCount++;
+                return battery;
+            default:
+                return null;
         }
     }
  }

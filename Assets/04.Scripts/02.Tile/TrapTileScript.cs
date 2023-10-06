@@ -13,4 +13,12 @@ public class TrapTileScript : TileScript
             tileManager.TrapTileCount--;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject == player)
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
 }

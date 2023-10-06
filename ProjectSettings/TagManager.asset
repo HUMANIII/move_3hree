@@ -7,6 +7,7 @@ TagManager:
   - TileManager
   - Tile
   - Timer
+  - Pannel
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,23 @@ public class SaveDataV1 : SaveData
     public int bestScore = 0;
 
     public override SaveData VersionUp()
+    {
+        var rtn = new SaveDataV2();
+        rtn.bestScore = bestScore;
+        return rtn;
+    }
+}
+
+public class SaveDataV2 : SaveDataV1
+{
+    public SaveDataV2()
+    {
+        Version = 2;
+    }
+
+    public int ramCount = 0;
+
+    public override SaveData VersionUp()
     {        
         return null;
     }

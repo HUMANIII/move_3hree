@@ -9,20 +9,25 @@ public class TimerTest : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI bestScoreText;
     private TimerScripts timerScripts;
+    public GameObject endPannel;
 
     private void Awake()
     {
-        timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();        
+        timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
     }
     private void Start()
     {
+        //endPannel = GameObject.FindGameObjectWithTag("Pannel");
         bestScoreText.text = "BestScore = " + GameManager.Instance.BestScore.ToString();
     }
     private void Update()
     {
         timerText.text = timerScripts.Timer.ToString();
         scoreText.text = GameManager.Instance.CurScore.ToString();
-        if(GameManager.Instance.isGameOver) { bestScoreText.text = "BestScore = " + GameManager.Instance.BestScore.ToString(); }
-    }
-    
+        if(GameManager.Instance.IsGameOver) 
+        {
+            endPannel.SetActive(true);
+            bestScoreText.text = "BestScore = " + GameManager.Instance.BestScore.ToString(); 
+        }
+    }    
 }
