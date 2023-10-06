@@ -13,10 +13,6 @@ public class EndTest : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    private void Start()
-    {
-        restartButton.onClick.AddListener(GameManager.Instance.GameReStart);        
-    }
     private void OnEnable()
     {
         score.text = $"BestScore : {GameManager.Instance.BestScore} \n Score : {GameManager.Instance.CurScore}";

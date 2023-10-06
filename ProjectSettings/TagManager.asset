@@ -8,6 +8,8 @@ TagManager:
   - Tile
   - Timer
   - Pannel
+  - UIManager
+  - Tuto
   layers:
   - Default
   - TransparentFX

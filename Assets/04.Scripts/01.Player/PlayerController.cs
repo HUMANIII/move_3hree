@@ -35,10 +35,6 @@ public class PlayerController : MonoBehaviour
         moveUpperInterval = tileManager.upperInterval;
         moveSideInterval = tileManager.sideInterval;
     }
-    private void FixedUpdate()
-    {
-        
-    }
     protected void Update()
     {
         if (GameManager.Instance.IsGameOver)
@@ -57,12 +53,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(tileScript.CanMove);
                 if(tileScript.CanMove)                
                 {
-                    MovePosition(tileScript.GetPos());
-                    if(tileManager.PlayerLineCounter % timerDecreaseFactor == 0)
-                    {
-                        timerScripts.DecreaseMaxTime();
-                    }
-                    timerScripts.ResetTimer();
+                    MovePosition(tileScript.GetPos());                    
                 }
             }
         }
@@ -72,9 +63,19 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.GameOver();
         }
 
-        if(Input.GetKeyDown(KeyCode.W)) { MoveWithButton(MoveTo.Forward); }
-        if(Input.GetKeyDown(KeyCode.A)) { MoveWithButton(MoveTo.Left); }
-        if(Input.GetKeyDown(KeyCode.D)) { MoveWithButton(MoveTo.Right); }
+        //testCode
+        if(Input.GetKeyDown(KeyCode.W)) 
+        { 
+            MoveWithButton(MoveTo.Forward); 
+        }
+        if(Input.GetKeyDown(KeyCode.A)) 
+        {
+            MoveWithButton(MoveTo.Left); 
+        }
+        if(Input.GetKeyDown(KeyCode.D)) 
+        {
+            MoveWithButton(MoveTo.Right); 
+        }
     }
     public void MovePosition(Vector3 pos)
     {
@@ -85,19 +86,37 @@ public class PlayerController : MonoBehaviour
         pos.y += 1.8f;
         transform.position = pos;
         tileManager.SpawnTile();
-        tileManager.CheckAllTiles();
+        tileManager.CheckAllTiles(); 
+
+        if (tileManager.PlayerLineCounter % timerDecreaseFactor == 0)
+        {
+            timerScripts.DecreaseMaxTime();
+        }
+        timerScripts.ResetTimer();
     }
 
     public void MoveWithButton(MoveTo where) 
     {
-        var pos = where switch
+        Vector3 pos = where switch
         {
             MoveTo.Forward => new Vector3(0f, 0f, moveUpperInterval * 2),
             MoveTo.Left => new Vector3(-moveSideInterval * 2, 0f, moveUpperInterval),
             MoveTo.Right => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),            
         };
-        pos += transform.position;
-        MovePosition(pos);
+        pos += transform.position;        
+        var tiles = GameObject.FindGameObjectsWithTag("Tile");
+        GameObject nearestTile = null;
+        float distance = float.MaxValue;
+        foreach (var tile in tiles)
+        {
+            var tileDistance = Vector3.Distance(tile.transform.position, pos);
+            if(distance > tileDistance)
+            {
+                distance = tileDistance; 
+                nearestTile = tile;
+            }
+        }
+        MovePosition(nearestTile.GetComponent<TileScript>().GetPos());
     }
 
     public void Knockback()

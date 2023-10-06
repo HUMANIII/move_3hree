@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 299277663}
   m_Layer: 5
   m_Name: TutoPanel
-  m_TagString: Untagged
+  m_TagString: Tuto
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 393264691}
   m_Layer: 5
   m_Name: SettingPanel
-  m_TagString: Untagged
+  m_TagString: Setting
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1990,7 +1990,7 @@ GameObject:
   - component: {fileID: 838094269}
   m_Layer: 0
   m_Name: UIManager
-  m_TagString: Untagged
+  m_TagString: UIManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2022,9 +2022,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c8459a068f27d47a9e8b7220e31a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tutopopup: {fileID: 299277661}
-  Settingpopup: {fileID: 393264689}
-  Shoppopup: {fileID: 1094957451}
 --- !u!1001 &898993653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2182,7 +2179,7 @@ GameObject:
   - component: {fileID: 1094957453}
   m_Layer: 5
   m_Name: ShopPanel
-  m_TagString: Untagged
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3142,7 +3139,7 @@ GameObject:
   - component: {fileID: 1687716474}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Pannel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
