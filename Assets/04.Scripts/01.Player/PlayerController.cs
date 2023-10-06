@@ -6,15 +6,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Flags]
-    enum MoveTo
+    public enum MoveTo
     {
         Forward,
         Right,
         Left
     }
-
-    private MoveTo moveTo; //버튼 사용 할 때 쓸 예정
 
     private Camera mainCam;
     private TileManager tileManager;
@@ -24,11 +21,19 @@ public class PlayerController : MonoBehaviour
     public int timerDecreaseFactor = 10; 
     public int scoreFactor = 10;
 
+    private float moveUpperInterval;
+    private float moveSideInterval;
+
     private void Awake()
     {
         mainCam = Camera.main;
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
+    }
+    private void Start()
+    {
+        moveUpperInterval = tileManager.upperInterval;
+        moveSideInterval = tileManager.sideInterval;
     }
     private void FixedUpdate()
     {
@@ -45,7 +50,7 @@ public class PlayerController : MonoBehaviour
             TileScript tileScript = null;
 
             if (Physics.Raycast(ray, out RaycastHit hit, 999f))
-                hit.collider.TryGetComponent<TileScript>(out tileScript);
+                hit.collider.TryGetComponent(out tileScript);
 
             if (tileScript != null)
             {
@@ -67,9 +72,9 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.GameOver();
         }
 
-        if(Input.GetKeyDown(KeyCode.W)) { }
-        if(Input.GetKeyDown(KeyCode.A)) { }
-        if(Input.GetKeyDown(KeyCode.D)) { }
+        if(Input.GetKeyDown(KeyCode.W)) { MoveWithButton(MoveTo.Forward); }
+        if(Input.GetKeyDown(KeyCode.A)) { MoveWithButton(MoveTo.Left); }
+        if(Input.GetKeyDown(KeyCode.D)) { MoveWithButton(MoveTo.Right); }
     }
     public void MovePosition(Vector3 pos)
     {
@@ -80,11 +85,24 @@ public class PlayerController : MonoBehaviour
         pos.y += 1.8f;
         transform.position = pos;
         tileManager.SpawnTile();
+        tileManager.CheckAllTiles();
+    }
+
+    public void MoveWithButton(MoveTo where) 
+    {
+        var pos = where switch
+        {
+            MoveTo.Forward => new Vector3(0f, 0f, moveUpperInterval * 2),
+            MoveTo.Left => new Vector3(-moveSideInterval * 2, 0f, moveUpperInterval),
+            MoveTo.Right => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),            
+        };
+        pos += transform.position;
+        MovePosition(pos);
     }
 
     public void Knockback()
     {
-        var knockbackRange = tileManager.upperInterval * (knockbackCounter + 1) * 2;
+        var knockbackRange = moveUpperInterval * (knockbackCounter + 1) * 2;
         var pos = transform.position;
         pos.z -= knockbackRange;
         transform.position = pos;

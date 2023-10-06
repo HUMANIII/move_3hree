@@ -14,7 +14,7 @@ public class TileManager : MonoBehaviour
     public GameObject ram;
 
     public float sizeFator = 2f;
-    private float sideInterval = 0.75f;
+    public float sideInterval { get; private set; } = 0.75f;
     public float upperInterval { get; private set; } = 0.866f;
 
     public int tileColumn;
@@ -87,7 +87,6 @@ public class TileManager : MonoBehaviour
             }            
             LineCounter++;
         }
-        CheckAllTiles();
         foreach(var obj in  DestroyTiles)
         {
             AllTiles.Remove(obj);

@@ -18,7 +18,10 @@ public class TimerScripts : MonoBehaviour
     }
     private void FixedUpdate()                    
     {
-        Timer -= Time.deltaTime;
+        if(!GameManager.Instance.IsGameOver)
+        {
+            Timer -= Time.deltaTime;
+        }
 
         if (Timer <= 0)
         {
