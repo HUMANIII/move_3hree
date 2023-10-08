@@ -30,10 +30,12 @@ public class UIManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         var Panel = GameObject.FindGameObjectWithTag("Pannel");
-
-        Tutopopup = Panel.transform.GetChild(2).gameObject;
-        Settingpopup = Panel.transform.GetChild(3).gameObject;
-        Shoppopup = Panel.transform.GetChild(4).gameObject;
+        if(Panel != null)
+        {
+            Tutopopup = Panel.transform.GetChild(2).gameObject;
+            Settingpopup = Panel.transform.GetChild(3).gameObject;
+            Shoppopup = Panel.transform.GetChild(4).gameObject;
+        }
     }
 
     public void OnMainMenuButton()

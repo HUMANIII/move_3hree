@@ -56,7 +56,10 @@ public class GameManager : MonoBehaviour
     private void LoadData()
     {
         var data = SaveLoadSystem.Load("saveData.Json") as SaveDataVC;
-        BestScore = data.bestScore;
-        RamCount = data.ramCount;
+        if(data != null)
+        {
+            BestScore = data.bestScore;
+            RamCount = data.ramCount;
+        }
     }
 }
