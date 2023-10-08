@@ -45,6 +45,11 @@ public class UIManager : MonoBehaviour
     
     public void OnStartButton()
     {
+        var gm = GameManager.Instance;
+        if(gm != null)
+        {
+            gm.GameReStart();
+        }
         SceneManager.LoadScene("GameScene");
     }
 

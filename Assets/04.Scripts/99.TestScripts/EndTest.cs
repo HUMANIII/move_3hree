@@ -15,6 +15,7 @@ public class EndTest : MonoBehaviour
     }
     private void OnEnable()
     {
-        score.text = $"BestScore : {GameManager.Instance.BestScore} \n Score : {GameManager.Instance.CurScore}";
+        var gm = GameManager.Instance;
+        score.text = $"BestScore : {gm.BestScore} \n Score : {gm.CurScore}";
     }
 }

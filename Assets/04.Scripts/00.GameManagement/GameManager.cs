@@ -40,9 +40,9 @@ public class GameManager : MonoBehaviour
 
     public void GameReStart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         IsGameOver = false;
         CurScore = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void SaveData()

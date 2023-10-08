@@ -16,8 +16,7 @@ public class InGameUISetting : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        var uiMgr = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
-        homeButton.onClick.AddListener(uiMgr.OnMainMenuButton);
-        restartButton.onClick.AddListener(uiMgr.OnStartButton);
+        homeButton.onClick.AddListener(UIManager.Instance.OnMainMenuButton);
+        restartButton.onClick.AddListener(GameManager.Instance.GameReStart);
     }
 }
