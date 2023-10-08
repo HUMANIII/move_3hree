@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int RamCount { get; set; } = 0;
 
     public bool IsGameOver { get; private set; } = false;
+    public bool IsPause { get; private set; } = false;
     private void Awake()
     {
         if (Instance == null)
@@ -61,5 +62,15 @@ public class GameManager : MonoBehaviour
             BestScore = data.bestScore;
             RamCount = data.ramCount;
         }
+    }
+
+    public void Pause()
+    {
+        IsPause = true;
+    }
+
+    public void Resume()
+    {
+        IsPause = false;
     }
 }

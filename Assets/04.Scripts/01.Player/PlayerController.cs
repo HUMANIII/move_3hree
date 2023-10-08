@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour
     }
     protected void Update()
     {
-        if (GameManager.Instance.IsGameOver)
+        var gm = GameManager.Instance;
+        if (gm.IsGameOver || gm.IsPause)
             return;
 
         if(Input.GetMouseButtonDown(0)) 
