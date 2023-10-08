@@ -78,7 +78,7 @@ public class TileManager : MonoBehaviour
                 var tile = Instantiate(GetRandomTile(out bool isNormalTile), tilePos + new Vector3(0f, 0f, LineCounter * upperInterval * 2), Quaternion.identity);
                 tiles.Add(tile);
                 tile.transform.localScale *= sizeFator;
-                tile.SendMessage("Init", LineCounter);
+                tile.SendMessage("Init", LineCounter,SendMessageOptions.DontRequireReceiver);
                 if(isNormalTile && !(LineCounter == 0))
                 {
                     SpawnItem(tile);
@@ -98,7 +98,7 @@ public class TileManager : MonoBehaviour
     {
         foreach (var tile in AllTiles)
         {
-            tile.SendMessage("CheckTile");
+            tile.SendMessage("CheckTile", SendMessageOptions.DontRequireReceiver);
         }
     }
 
@@ -116,7 +116,7 @@ public class TileManager : MonoBehaviour
         SpawnTile();
 
         foreach (GameObject tile in AllTiles)
-            tile.SendMessage("CheckPlayerRange");
+            tile.SendMessage("CheckPlayerRange", SendMessageOptions.DontRequireReceiver);
     }
 
     public void MoveTiles()
@@ -124,7 +124,7 @@ public class TileManager : MonoBehaviour
         foreach (var tile in AllTiles)
         {
             tile.transform.Translate(0f, 0f, -upperInterval * 2);
-            tile.SendMessage("MoveTile");
+            tile.SendMessage("MoveTile", SendMessageOptions.DontRequireReceiver);
         }
         foreach(var tile in DestroyTiles)
         {

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EndTest : MonoBehaviour
 {
     public TextMeshProUGUI score;
-    public Button restartButton;
+    //public Button restartButton;
 
     private void Awake()
     {
