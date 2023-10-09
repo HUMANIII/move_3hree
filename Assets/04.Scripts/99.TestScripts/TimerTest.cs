@@ -13,6 +13,7 @@ public class TimerTest : MonoBehaviour
     private TimerScripts timerScripts;
     public GameObject endPannel;    
     public GameObject pausePage;    
+    public GameObject moveButtons;    
 
     private void Awake()
     {
@@ -20,9 +21,18 @@ public class TimerTest : MonoBehaviour
     }
     private void Start()
     {
+        var gm = GameManager.Instance;
         pauseBtn.onClick.AddListener(Pause);
         //endPannel = GameObject.FindGameObjectWithTag("Pannel");
-        bestScoreText.text = "BestScore = " + GameManager.Instance.BestScore.ToString();
+        bestScoreText.text = "BestScore = " + gm.BestScore.ToString();
+        if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+        {
+            moveButtons.SetActive(true);
+        }
+        else
+        {
+            moveButtons.SetActive(false);
+        }
     }
     private void Update()
     {
@@ -39,6 +49,20 @@ public class TimerTest : MonoBehaviour
     private void Pause()
     {
         pausePage.SetActive(true);
-        GameManager.Instance.Pause();
+        GameManager.Instance.TogglePause();
+    }
+
+    public void ToggleMoveOpt()
+    {
+        var gm = GameManager.Instance;
+        gm.ToggleMoveOption();
+        if((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+        {
+            moveButtons.SetActive(true);
+        }
+        else
+        {
+            moveButtons.SetActive(false);
+        }
     }
 }

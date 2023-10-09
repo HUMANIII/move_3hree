@@ -48,5 +48,10 @@ public class UIMatching : MonoBehaviour
     private void Update()
     {
         dateCounter.text = DateTime.Now.ToString("hh:mm");
+        
+        if(Input.GetKey(KeyCode.F2))
+        {
+            GameManager.Instance.ToggleMoveOption();
+        }
     }
 }

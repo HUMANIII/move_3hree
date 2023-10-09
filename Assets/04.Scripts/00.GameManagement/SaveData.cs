@@ -36,7 +36,24 @@ public class SaveDataV2 : SaveDataV1
     public int ramCount = 0;
 
     public override SaveData VersionUp()
-    {        
+    {      
+        var rtn = new SaveDataV3();
+        rtn.ramCount = ramCount;
+        return rtn;
+    }
+}
+
+public class SaveDataV3 : SaveDataV2
+{
+    public SaveDataV3()
+    {
+        Version = 3;
+    }
+
+    public GameManager.Settings options = 0;
+
+    public override SaveData VersionUp()
+    {
         return null;
     }
 }

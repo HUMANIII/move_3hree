@@ -38,10 +38,10 @@ public class PlayerController : MonoBehaviour
     protected void Update()
     {
         var gm = GameManager.Instance;
-        if (gm.IsGameOver || gm.IsPause)
-            return;
+        if ((gm.Options & (GameManager.Settings.IsGameOver | GameManager.Settings.IsPause)) != 0)
+            return;        
 
-        if(Input.GetMouseButtonDown(0)) 
+        if(((gm.Options & GameManager.Settings.ControllWithButton) == 0) && Input.GetMouseButtonDown(0)) 
         {
             Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
             TileScript tileScript = null;
@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour
 
             if (tileScript != null)
             {
-                Debug.Log(tileScript.CanMove);
                 if(tileScript.CanMove)                
                 {
                     MovePosition(tileScript.GetPos());                    
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (transform.position.y < -5)
+        if (transform.position.y < -0.5f)
         {
             GameManager.Instance.GameOver();
         }
@@ -98,6 +97,9 @@ public class PlayerController : MonoBehaviour
 
     public void MoveWithButton(MoveTo where) 
     {
+        if((GameManager.Instance.Options & GameManager.Settings.ControllWithButton) == 0)
+            return;
+        
         Vector3 pos = where switch
         {
             MoveTo.Forward => new Vector3(0f, 0f, moveUpperInterval * 2),
