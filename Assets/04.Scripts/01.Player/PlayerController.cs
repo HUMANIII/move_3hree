@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerController : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
             return;        
 
         if(((gm.Options & GameManager.Settings.ControllWithButton) == 0) && Input.GetMouseButtonDown(0)) 
-        {
+        { 
             Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
             TileScript tileScript = null;
 
@@ -65,6 +66,10 @@ public class PlayerController : MonoBehaviour
                 if(tileScript.CanMove)                
                 {
                     MovePosition(tileScript.GetPos());                    
+                    if(tileScript as TrapTileScript != null) 
+                    {
+                        gm.IsTrapped();
+                    }
                 }
             }
         }
