@@ -14,6 +14,7 @@ public class Knockback : MonoBehaviour
         if(other.gameObject == player)
         {
             player.GetComponent<PlayerController>().Knockback();
+            GameManager.Instance.ReleaseTrap();
         }
     }
 }

@@ -161,6 +161,7 @@ public class PlayerController : MonoBehaviour
         transform.position = pos;
         tileManager.CheckAllTiles();
         knockbackCounter++;
+        CheckUnderTile(pos);
     }        
 
     private TileScript CheckUnderTile(Vector3 pos)
