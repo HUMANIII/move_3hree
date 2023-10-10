@@ -26,11 +26,15 @@ public class WarningSign : MonoBehaviour
         {
             cldr.isTrigger = true;
             rb.constraints = RigidbodyConstraints.FreezeAll;
+            GameManager.Instance.GameOver();
+            fallingObj.SetActive(true);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == player)
-            GameManager.Instance.GameOver();
+        {
+            
+        }
     }
 }

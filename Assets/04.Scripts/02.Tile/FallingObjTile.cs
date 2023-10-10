@@ -34,10 +34,6 @@ public class FallingObjTile : TrapTileScript
         {
             SetWarnSign();
         }
-        if (player.transform.position.z >= transform.position.z)
-        {
-            FallObj();
-        }
         base.CheckPlayerRange();
     }
 }

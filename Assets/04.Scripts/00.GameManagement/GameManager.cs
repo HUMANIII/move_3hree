@@ -13,9 +13,16 @@ public class GameManager : MonoBehaviour
     public enum Settings
     {
         None = 0,
+        ControllWithButton = 1
+    }
+
+    [Flags]
+    public enum States
+    {
+        None = 0,
         IsGameOver = 1,
         IsPause = 2,
-        ControllWithButton = 4
+        IsTrapped = 4,
     }
 
     public static GameManager Instance = null;
@@ -25,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int RamCount { get; set; } = 0;
 
     public Settings Options { get; private set; }
+    public States State { get; private set; }
 
     public bool IsGameOver { get; private set; } = false;
     public bool IsPause { get; private set; } = false;
@@ -39,7 +47,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Options &= ~Settings.IsGameOver;
+        State &= ~States.IsGameOver;
         IsGameOver = false;
         CurScore = 0;
         LoadData();
@@ -48,7 +56,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {        
         IsGameOver = true;
-        Options |= Settings.IsGameOver;
+        State |= States.IsGameOver;
         BestScore = Mathf.Max(BestScore, CurScore);
         SaveData();
     }
@@ -56,7 +64,8 @@ public class GameManager : MonoBehaviour
     public void GameReStart()
     {
         IsGameOver = false;
-        Options &= ~Settings.IsGameOver;
+        State &= ~States.IsGameOver;
+        State &= ~States.IsTrapped;
         CurScore = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -67,7 +76,7 @@ public class GameManager : MonoBehaviour
         {
             bestScore = BestScore,
             ramCount = RamCount,
-            options = Options & ~(Settings.IsPause | Settings.IsGameOver)
+            options = Options,
         };
         SaveLoadSystem.Save(data, "saveData.Json");
     }
@@ -85,17 +94,15 @@ public class GameManager : MonoBehaviour
 
     public void TogglePause()
     {
-        Options ^= Settings.IsPause;
-    }
-
-    public void Resume()
-    {
-        Options &= ~Settings.IsPause;
-        IsPause = false;
+        State ^= States.IsPause;
     }
 
     public void ToggleMoveOption()
     {
         Options ^= Settings.ControllWithButton;        
+    }
+    public void IsTrapped()
+    {
+        State |= States.IsTrapped;
     }
 }
