@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
@@ -7,15 +8,20 @@ public class TileManager : MonoBehaviour
 {
     public GameObject normalTile;
     public GameObject holeTile;
+    public float holeTileSpawnRate;
     public GameObject fallingObjectTile;
+    public float fallingObjectTileSpawnRate;
     public GameObject knockbackTile;
+    public float knockbackTileSpawnRate;
+    public GameObject holdTile;
+    public float holdTileSpawnRate;
 
     public GameObject battery;
     public GameObject ram;
 
-    public float sizeFator = 2f;
-    public float sideInterval { get; private set; } = 0.75f;
-    public float upperInterval { get; private set; } = 0.866f;
+    public readonly float sizeFator = 2f;
+    public float SideInterval { get; private set; } = 0.75f;
+    public float UpperInterval { get; private set; } = 0.866f;
 
     public int tileColumn;
     public int tileRow;
@@ -34,8 +40,8 @@ public class TileManager : MonoBehaviour
 
     private void Awake()
     {
-        sideInterval *= sizeFator;
-        upperInterval *= sizeFator;
+        SideInterval *= sizeFator;
+        UpperInterval *= sizeFator;
         SetTilePoses();
         StartGame();
     }
@@ -51,15 +57,15 @@ public class TileManager : MonoBehaviour
         {
             if((i + 1) % 2 == 0)
             {
-                xPos += 2 * sideInterval;
+                xPos += 2 * SideInterval;
             }
             switch ((i + 1) % 4)
             {
                 case 2:
-                    zPos += upperInterval;
+                    zPos += UpperInterval;
                     break;
                 case 0:
-                    zPos -= upperInterval;
+                    zPos -= UpperInterval;
                     break;
             }
             TilePoses.Add(new Vector3(xPos, 0f, zPos));
@@ -75,7 +81,7 @@ public class TileManager : MonoBehaviour
         {
             foreach (var tilePos in TilePoses)
             {
-                var tile = Instantiate(GetRandomTile(out bool isNormalTile), tilePos + new Vector3(0f, 0f, LineCounter * upperInterval * 2), Quaternion.identity);
+                var tile = Instantiate(GetRandomTile(out bool isNormalTile), tilePos + new Vector3(0f, 0f, LineCounter * UpperInterval * 2), Quaternion.identity);
                 tiles.Add(tile);
                 tile.transform.localScale *= sizeFator;
                 tile.SendMessage("Init", LineCounter,SendMessageOptions.DontRequireReceiver);
@@ -123,7 +129,7 @@ public class TileManager : MonoBehaviour
     {
         foreach (var tile in AllTiles)
         {
-            tile.transform.Translate(0f, 0f, -upperInterval * 2);
+            tile.transform.Translate(0f, 0f, -UpperInterval * 2);
             tile.SendMessage("MoveTile", SendMessageOptions.DontRequireReceiver);
         }
         foreach(var tile in DestroyTiles)
@@ -140,24 +146,39 @@ public class TileManager : MonoBehaviour
             isNormal = true;
             return normalTile;
         }
-        switch (Random.value)
+
+        var rv = Random.value;
+        var rate = holdTileSpawnRate;
+        if (rv < rate)
         {
-            case < 0.07f:
-                TrapTileCount++;
-                isNormal = false;
-                return holeTile;
-            case < 0.14f:
-                TrapTileCount++;
-                isNormal = false;
-                return fallingObjectTile;
-            case < 0.2f:
-                TrapTileCount++;
-                isNormal = false;
-                return knockbackTile;
-            default:
-                isNormal = true;
-                return normalTile;
+            TrapTileCount++;
+            isNormal = false;
+            return holdTile;
         }
+        rate += fallingObjectTileSpawnRate;
+        if (rv < rate)
+        {
+            TrapTileCount++;
+            isNormal = false;
+            return fallingObjectTile;
+        }
+        rate += knockbackTileSpawnRate;
+        if (rv < rate)
+        {
+            TrapTileCount++;
+            isNormal = false;
+            return knockbackTile;
+        }
+        rate += holdTileSpawnRate;
+        if (rv < rate)
+        {
+            TrapTileCount++;
+            isNormal = false;
+            return holdTile;
+        }
+
+        isNormal = true;
+        return normalTile;
     }
     
     private GameObject GetRandomItem()

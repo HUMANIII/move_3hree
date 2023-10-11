@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        moveUpperInterval = tileManager.upperInterval;
-        moveSideInterval = tileManager.sideInterval;
+        moveUpperInterval = tileManager.UpperInterval;
+        moveSideInterval = tileManager.SideInterval;
     }
 
     private void FixedUpdate()
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         var gm = GameManager.Instance;
         if ((gm.State & (GameManager.States.IsGameOver | GameManager.States.IsPause)) != 0)
-            return;        
+            return;
 
         if(((gm.Options & GameManager.Settings.ControllWithButton) == 0) && Input.GetMouseButtonDown(0)) 
         { 
@@ -63,7 +63,12 @@ public class PlayerController : MonoBehaviour
 
             if (tileScript != null)
             {
-                if(tileScript.CanMove)                
+                if((gm.State & GameManager.States.IsTrapped) != 0) 
+                {
+                    var ht = CheckUnderTile(transform.position) as HoldTile;
+                    ht.Struggle();
+                }
+                else if(tileScript.CanMove)                
                 {
                     MovePosition(tileScript.GetPos());                    
                     if(tileScript as TrapTileScript != null) 
@@ -113,30 +118,28 @@ public class PlayerController : MonoBehaviour
 
     public void MoveWithButton(MoveTo where) 
     {
-        if((GameManager.Instance.Options & GameManager.Settings.ControllWithButton) == 0)
-            return;
-        if ((GameManager.Instance.State & GameManager.States.IsTrapped) != 0)
+        var gm = GameManager.Instance;
+        if ((gm.Options & GameManager.Settings.ControllWithButton) == 0)
             return;
 
-        Vector3 pos = where switch
+        Vector3 pos = transform.position;
+        if ((gm.State & GameManager.States.IsTrapped) != 0)
+        {
+            var ht = CheckUnderTile(pos) as HoldTile;
+            if(ht != null)
+            {
+                ht.Struggle();
+            }
+            return;
+        }
+
+        pos += where switch
         {
             MoveTo.Forward => new Vector3(0f, 0f, moveUpperInterval * 2),
             MoveTo.Left => new Vector3(-moveSideInterval * 2, 0f, moveUpperInterval),
             MoveTo.Right => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),            
         };
-        pos += transform.position;
-        //var tiles = GameObject.FindGameObjectsWithTag("Tile");
-        //GameObject nearestTile = null;
-        //float distance = float.MaxValue;
-        //foreach (var tile in tiles)
-        //{
-        //    var tileDistance = Vector3.Distance(tile.transform.position, pos);
-        //    if(distance > tileDistance)
-        //    {
-        //        distance = tileDistance; 
-        //        nearestTile = tile;
-        //    }
-        //}
+
         var ts = CheckUnderTile(pos);
         if (ts == null) 
         {
