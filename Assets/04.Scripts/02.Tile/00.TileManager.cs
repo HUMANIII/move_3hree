@@ -49,7 +49,11 @@ public class TileManager : MonoBehaviour
         UpperInterval *= sizeFator;
         SetTilePoses();
         SetStage(curStageNumber);
-        StartGame();
+    }
+
+    private void Start()
+    {
+        StartGame();        
     }
 
     private void SetTilePoses()

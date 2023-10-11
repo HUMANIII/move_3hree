@@ -8,14 +8,10 @@ public class PlayerControllBtn : MonoBehaviour
     public Button rightMoveBtn;
     public Button centerMoveBtn;
     public Button leftMoveBtn;
-    PlayerController playerController;
 
-    private void Awake()
+    private void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-    }
-    void Start()
-    {
+        var playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         rightMoveBtn.onClick.AddListener(() => playerController.MoveWithButton(PlayerController.MoveTo.Right));
         centerMoveBtn.onClick.AddListener(() => playerController.MoveWithButton(PlayerController.MoveTo.Forward));
         leftMoveBtn.onClick.AddListener(() => playerController.MoveWithButton(PlayerController.MoveTo.Left));

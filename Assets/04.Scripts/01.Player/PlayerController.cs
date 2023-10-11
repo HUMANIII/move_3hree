@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEditor;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
@@ -14,9 +15,10 @@ public class PlayerController : MonoBehaviour
         Left
     }
 
-    private Camera mainCam;
-    private TileManager tileManager;
-    private TimerScripts timerScripts;
+    protected Camera mainCam;
+    protected TileManager tileManager;
+    protected TimerScripts timerScripts;
+    protected PlayerStatManager playerStatManager;
     private int knockbackCounter = 0;
     
     public int timerDecreaseFactor = 10; 
@@ -25,23 +27,24 @@ public class PlayerController : MonoBehaviour
     private float moveUpperInterval;
     private float moveSideInterval;
 
-    private void Awake()
+    protected void Awake()
     {
         mainCam = Camera.main;
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
+        playerStatManager = GameObject.FindGameObjectWithTag("PlayerStatManager").GetComponent<PlayerStatManager>();
     }
-    private void Start()
+    protected void Start()
     {
         moveUpperInterval = tileManager.UpperInterval;
         moveSideInterval = tileManager.SideInterval;
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         var gm = GameManager.Instance;
 
-        if (transform.position.y < -0.5f && !gm.IsGameOver)
+        if (transform.position.y < -0.5f && (gm.State & GameManager.States.IsGameOver) == 0)
         {
             gm.GameOver();
         }
@@ -171,9 +174,9 @@ public class PlayerController : MonoBehaviour
         tileManager.CheckAllTiles();
         knockbackCounter++;
         CheckUnderTile(pos);
-    }        
+    }
 
-    private TileScript CheckUnderTile(Vector3 pos)
+    protected TileScript CheckUnderTile(Vector3 pos)
     {
         Physics.Raycast(pos, Vector3.down, out var hitInfo,10f);
         if (hitInfo.collider == null)

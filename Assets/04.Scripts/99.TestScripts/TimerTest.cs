@@ -39,8 +39,8 @@ public class TimerTest : MonoBehaviour
         var gm = GameManager.Instance;
         timerSlier.maxValue = TimerScripts.curMaxTime;
         timerSlier.value = timerScripts.Timer;
-        scoreText.text = gm.CurScore.ToString();
-        if(gm.IsGameOver) 
+        scoreText.text = gm.CurScore.ToString();        
+        if((gm.State & GameManager.States.IsGameOver) != 0)
         {
             endPannel.SetActive(true);
             bestScoreText.text = "BestScore = " + GameManager.Instance.BestScore.ToString();

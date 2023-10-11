@@ -34,8 +34,6 @@ public class GameManager : MonoBehaviour
     public Settings Options { get; private set; }
     public States State { get; private set; }
 
-    public bool IsGameOver { get; private set; } = false;
-    public bool IsPause { get; private set; } = false;
     private void Awake()
     {
         if (Instance == null)
@@ -47,15 +45,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        State &= ~States.IsGameOver;
-        IsGameOver = false;
+        State &= ~(States.IsGameOver | States.IsTrapped);
         CurScore = 0;
         LoadData();
     }
 
     public void GameOver()
     {        
-        IsGameOver = true;
         State |= States.IsGameOver;
         BestScore = Mathf.Max(BestScore, CurScore);
         SaveData();
@@ -63,7 +59,6 @@ public class GameManager : MonoBehaviour
 
     public void GameReStart()
     {
-        IsGameOver = false;
         State &= ~States.IsGameOver;
         State &= ~States.IsTrapped;
         CurScore = 0;

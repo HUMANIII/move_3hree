@@ -10,6 +10,9 @@ TagManager:
   - Pannel
   - UIManager
   - Tuto
+  - Setting
+  - Shop
+  - PlayerStatManager
   layers:
   - Default
   - TransparentFX
