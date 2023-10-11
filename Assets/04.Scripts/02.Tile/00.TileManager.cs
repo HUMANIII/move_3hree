@@ -6,20 +6,25 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
-    public GameObject normalTile;
-    public GameObject holeTile;
-    public float holeTileSpawnRate;
-    public GameObject fallingObjectTile;
-    public float fallingObjectTileSpawnRate;
-    public GameObject knockbackTile;
-    public float knockbackTileSpawnRate;
-    public GameObject holdTile;
-    public float holdTileSpawnRate;
+    public StageManager StageManager;
+
+    private int curStageNumber = 1;
+    public int nextStateScore;
+
+    private GameObject normalTile;
+    private GameObject holeTile;
+    private float holeTileSpawnRate;
+    private GameObject fallingObjectTile;
+    private float fallingObjectTileSpawnRate;
+    private GameObject knockbackTile;
+    private float knockbackTileSpawnRate;
+    private GameObject holdTile;
+    private float holdTileSpawnRate;
 
     public GameObject battery;
     public GameObject ram;
 
-    public readonly float sizeFator = 2f;
+    public float sizeFator = 2f;
     public float SideInterval { get; private set; } = 0.75f;
     public float UpperInterval { get; private set; } = 0.866f;
 
@@ -27,7 +32,7 @@ public class TileManager : MonoBehaviour
     public int tileRow;
 
     public int maximunItemNumber = 2;
-    public int maximumTrapTile;
+    private int maximumTrapTile;
     public int TrapTileCount { get; set; }
     public int ItemCount { get; set; } = 0;
 
@@ -43,6 +48,7 @@ public class TileManager : MonoBehaviour
         SideInterval *= sizeFator;
         UpperInterval *= sizeFator;
         SetTilePoses();
+        SetStage(curStageNumber);
         StartGame();
     }
 
@@ -76,6 +82,11 @@ public class TileManager : MonoBehaviour
 
     public void SpawnTile()
     {
+        if(nextStateScore != 0 && nextStateScore < GameManager.Instance.CurScore)
+        {
+            curStageNumber++;
+            SetStage(curStageNumber);
+        }
         List<GameObject> tiles = new();
         while(LineCounter < PlayerLineCounter + tileColumn)
         {
@@ -120,23 +131,9 @@ public class TileManager : MonoBehaviour
     public void StartGame()
     {   
         SpawnTile();
-
+        //SetStage(stageNumber);
         foreach (GameObject tile in AllTiles)
             tile.SendMessage("CheckPlayerRange", SendMessageOptions.DontRequireReceiver);
-    }
-
-    public void MoveTiles()
-    {
-        foreach (var tile in AllTiles)
-        {
-            tile.transform.Translate(0f, 0f, -UpperInterval * 2);
-            tile.SendMessage("MoveTile", SendMessageOptions.DontRequireReceiver);
-        }
-        foreach(var tile in DestroyTiles)
-        {
-            AllTiles.Remove(tile);
-            Destroy(tile);
-        }
     }
 
     private GameObject GetRandomTile(out bool isNormal)
@@ -148,12 +145,12 @@ public class TileManager : MonoBehaviour
         }
 
         var rv = Random.value;
-        var rate = holdTileSpawnRate;
+        var rate = holeTileSpawnRate;
         if (rv < rate)
         {
             TrapTileCount++;
             isNormal = false;
-            return holdTile;
+            return holeTile;
         }
         rate += fallingObjectTileSpawnRate;
         if (rv < rate)
@@ -176,7 +173,6 @@ public class TileManager : MonoBehaviour
             isNormal = false;
             return holdTile;
         }
-
         isNormal = true;
         return normalTile;
     }
@@ -198,5 +194,21 @@ public class TileManager : MonoBehaviour
             default:
                 return null;
         }
+    }
+
+    private void SetStage(int stage)
+    {
+        var si = StageManager.GetStageTileInfo(stage);
+        normalTile = si.normalTile;
+        holeTile = si.holeTile;
+        holeTileSpawnRate = si.holeTileSpawnRate;
+        fallingObjectTile = si.fallingObjectTile;
+        fallingObjectTileSpawnRate = si.fallingObjectTileSpawnRate;
+        knockbackTile = si.knockbackTile;
+        knockbackTileSpawnRate = si.knockbackTileSpawnRate;
+        holdTile = si.holdTile;
+        holdTileSpawnRate = si.holdTileSpawnRate;
+        maximumTrapTile = si.maximumTrapTile;
+        nextStateScore = si.nextStateScore;
     }
  }

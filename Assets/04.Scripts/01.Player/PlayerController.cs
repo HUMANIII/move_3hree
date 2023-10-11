@@ -49,6 +49,11 @@ public class PlayerController : MonoBehaviour
 
     protected void Update()
     {
+        //testCode
+        if(Input.GetKeyDown(KeyCode.F8))
+        {
+            GameManager.Instance.CurScore += 500;
+        }
         var gm = GameManager.Instance;
         if ((gm.State & (GameManager.States.IsGameOver | GameManager.States.IsPause)) != 0)
             return;
@@ -137,7 +142,8 @@ public class PlayerController : MonoBehaviour
         {
             MoveTo.Forward => new Vector3(0f, 0f, moveUpperInterval * 2),
             MoveTo.Left => new Vector3(-moveSideInterval * 2, 0f, moveUpperInterval),
-            MoveTo.Right => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),            
+            MoveTo.Right => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),           
+            _ => new Vector3()
         };
 
         var ts = CheckUnderTile(pos);

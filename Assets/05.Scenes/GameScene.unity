@@ -517,6 +517,7 @@ Transform:
   - {fileID: 2024312080}
   - {fileID: 1576318547}
   - {fileID: 1946956873}
+  - {fileID: 1299320873}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &142948124
@@ -2962,6 +2963,87 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1299320872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299320873}
+  - component: {fileID: 1299320874}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299320873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299320872}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 102103334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299320874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299320872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f32de519c282074cb649eb7a414f045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageTileInfos:
+  - name: Stage1
+    normalTile: {fileID: 5539101885611274806, guid: 49f22a9c93f021040a6d0cacd8cfefb2, type: 3}
+    holeTile: {fileID: 1991328963452212, guid: dc899da57486f4c4fa53c3bb800568d6, type: 3}
+    holeTileSpawnRate: 0.05
+    fallingObjectTile: {fileID: 5539101885611274806, guid: d90118b6e77e19049bdc69a6ff4ef57f, type: 3}
+    fallingObjectTileSpawnRate: 0.05
+    knockbackTile: {fileID: 5539101885611274806, guid: c155b88ae372fc549a764758e8c39285, type: 3}
+    knockbackTileSpawnRate: 0.05
+    holdTile: {fileID: 5539101885611274806, guid: 26bc7b28db6f74f4d9673cb9df72a02f, type: 3}
+    holdTileSpawnRate: 0
+    maximumTrapTile: 5
+    nextStateScore: 1000
+  - name: Stage2
+    normalTile: {fileID: 5539101885611274806, guid: 341a1188e3e9b4c4286276678438c8c3, type: 3}
+    holeTile: {fileID: 1991328963452212, guid: 825b86b37aad9c144a822503ab5e3910, type: 3}
+    holeTileSpawnRate: 0.05
+    fallingObjectTile: {fileID: 5539101885611274806, guid: b83ac9016999bc14eb837c212ba4205d, type: 3}
+    fallingObjectTileSpawnRate: 0
+    knockbackTile: {fileID: 5539101885611274806, guid: d8fa5a8975d10e64d974d3484ad25d7a, type: 3}
+    knockbackTileSpawnRate: 0.05
+    holdTile: {fileID: 5539101885611274806, guid: 721d84e231cc40046a71cd884e26a30c, type: 3}
+    holdTileSpawnRate: 0.05
+    maximumTrapTile: 6
+    nextStateScore: 2000
+  - name: Stage3
+    normalTile: {fileID: 5539101885611274806, guid: 6346dd6dc3703004398ec80e039230c1, type: 3}
+    holeTile: {fileID: 1991328963452212, guid: 0050ca46889824448b693dc71b06b71b, type: 3}
+    holeTileSpawnRate: 0.05
+    fallingObjectTile: {fileID: 5539101885611274806, guid: d2f8bab5561428d4f9c14845ad904ad7, type: 3}
+    fallingObjectTileSpawnRate: 0.05
+    knockbackTile: {fileID: 5539101885611274806, guid: d47bce2d0976bac4eb16886d35206016, type: 3}
+    knockbackTileSpawnRate: 0
+    holdTile: {fileID: 5539101885611274806, guid: 91d501cc30968fb4dac31583e5de116f, type: 3}
+    holdTileSpawnRate: 0.05
+    maximumTrapTile: 7
+    nextStateScore: 0
 --- !u!1 &1317080000
 GameObject:
   m_ObjectHideFlags: 0
@@ -3129,8 +3211,8 @@ GameObject:
   - component: {fileID: 1398947699}
   - component: {fileID: 1398947698}
   - component: {fileID: 1398947697}
-  - component: {fileID: 1398947696}
   - component: {fileID: 1398947695}
+  - component: {fileID: 1398947700}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -3146,8 +3228,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398947693}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.724, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3180,20 +3262,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1398947696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398947693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1add98526b6100a4986948bcb88c7aa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerDecreaseFactor: 10
-  scoreFactor: 10
 --- !u!136 &1398947697
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3267,6 +3335,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398947693}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1398947700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398947693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1add98526b6100a4986948bcb88c7aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerDecreaseFactor: 10
+  scoreFactor: 10
 --- !u!1 &1407022076
 GameObject:
   m_ObjectHideFlags: 0
@@ -3666,21 +3748,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c75466e731f63488d09e9dc7d262cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalTile: {fileID: 5539101885611274806, guid: 49f22a9c93f021040a6d0cacd8cfefb2, type: 3}
-  holeTile: {fileID: 1991328963452212, guid: dc899da57486f4c4fa53c3bb800568d6, type: 3}
-  holeTileSpawnRate: 0.05
-  fallingObjectTile: {fileID: 5539101885611274806, guid: d90118b6e77e19049bdc69a6ff4ef57f, type: 3}
-  fallingObjectTileSpawnRate: 0.05
-  knockbackTile: {fileID: 5539101885611274806, guid: c155b88ae372fc549a764758e8c39285, type: 3}
-  knockbackTileSpawnRate: 0.05
-  holdTile: {fileID: 1991328963452212, guid: dc899da57486f4c4fa53c3bb800568d6, type: 3}
-  holdTileSpawnRate: 0.05
+  StageManager: {fileID: 1299320874}
+  nextStateScore: 0
   battery: {fileID: 5082646507619332066, guid: 4b43a5ba67fcfb6458324835b2edbcb2, type: 3}
   ram: {fileID: 1331504609611442201, guid: a0eb710c4f378d84d8bba7197686b7e7, type: 3}
+  sizeFator: 2
   tileColumn: 7
   tileRow: 5
   maximunItemNumber: 2
-  maximumTrapTile: 5
 --- !u!1 &1583838470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4080,7 +4155,7 @@ Transform:
   m_GameObject: {fileID: 1714031277}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16754349, y: 0, z: 0, w: 0.9858647}
-  m_LocalPosition: {x: 0, y: 9.224, z: -10}
+  m_LocalPosition: {x: 0, y: 9.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4617,7 +4692,7 @@ Transform:
   m_GameObject: {fileID: 2024312079}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16754349, y: -0, z: -0, w: 0.9858647}
-  m_LocalPosition: {x: 0, y: 9.224, z: -10}
+  m_LocalPosition: {x: 0, y: 9.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4814,6 +4889,6 @@ SceneRoots:
   - {fileID: 102103334}
   - {fileID: 1051221625}
   - {fileID: 851916980}
-  - {fileID: 1398947694}
   - {fileID: 371415592}
   - {fileID: 904448966}
+  - {fileID: 1398947694}
