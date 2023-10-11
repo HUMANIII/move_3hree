@@ -96,17 +96,14 @@ public class PlayerController : MonoBehaviour
         //testCode
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log(Time.time);
             MoveWithButton(MoveTo.Forward);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Debug.Log(Time.time);
             MoveWithButton(MoveTo.Left);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            Debug.Log(Time.time);
             MoveWithButton(MoveTo.Right);
         }
     }
@@ -125,9 +122,12 @@ public class PlayerController : MonoBehaviour
         //transform.position = pos;
         pos.y += 1.8f;
         var ts = TileManager.CheckUnderTile(pos);
-        ts.GetPos();
-        if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-            pos.y -= 1.4f;
+        if(ts != null) 
+        {
+            ts.GetPos();
+            if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+                pos.y -= 1.4f;
+        }
         MoveObjectAndTriggerEvent(pos);
         tileManager.SpawnTile();
         tileManager.CheckAllTiles(); 
@@ -165,13 +165,7 @@ public class PlayerController : MonoBehaviour
         };
         MovePosition(pos);
         var ts = TileManager.CheckUnderTile(transform.position);
-        if (ts == null) 
-        {
-            pos.y += 1.7f;
-            //transform.position = pos;
-            //rb.MovePosition(pos);
-        }
-        else
+        if (ts != null)         
         {
             ts.GetPos();
             if(ts.GetComponent<TrapTileScript>() != null)
@@ -191,12 +185,9 @@ public class PlayerController : MonoBehaviour
         var knockbackRange = moveUpperInterval * (kc + 1) * 2;
         var pos = transform.position;
         pos.z -= knockbackRange;
-        //transform.position = pos;
         MoveObjectAndTriggerEvent(pos);
-        //rb.MovePosition(pos);
         tileManager.CheckAllTiles();
         knockbackCounter++;
-        //TileManager.CheckUnderTile(pos);
     }
 
     void MoveObjectAndTriggerEvent(Vector3 newPosition)
