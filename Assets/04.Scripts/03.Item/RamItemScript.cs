@@ -9,6 +9,15 @@ public class RamItemScript : ItemScript
     public int maxAmount = 5;
     public int minAmount = 2;
     public int defaultAmount = 2;
+
+    private void Start()
+    {
+        var ps = PlayerStatManager.Instance;
+        var amount = ps.ramItemRate * ps.upgrade.ramItem;
+        minAmount += amount;
+        maxAmount +=  amount; 
+        defaultAmount += amount;
+    }
     protected override void ActiveEffect()
     {
         var gm = GameManager.Instance;

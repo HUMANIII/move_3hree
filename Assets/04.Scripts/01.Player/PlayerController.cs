@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using static UnityEditor.PlayerSettings;
 
 public class PlayerController : MonoBehaviour
@@ -15,10 +16,12 @@ public class PlayerController : MonoBehaviour
         Left
     }
 
+    protected Rigidbody rb;
     protected Camera mainCam;
     protected TileManager tileManager;
     protected TimerScripts timerScripts;
     protected PlayerStatManager playerStatManager;
+    protected Collider cr;
     private int knockbackCounter = 0;
     
     public int timerDecreaseFactor = 10; 
@@ -33,17 +36,20 @@ public class PlayerController : MonoBehaviour
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
         playerStatManager = GameObject.FindGameObjectWithTag("PlayerStatManager").GetComponent<PlayerStatManager>();
+        rb = GetComponent<Rigidbody>();
+        cr = GetComponent<Collider>();
     }
     protected void Start()
     {
         moveUpperInterval = tileManager.UpperInterval;
         moveSideInterval = tileManager.SideInterval;
+        knockbackCounter -= playerStatManager.upgrade.knockbackResist;
     }
 
     protected void FixedUpdate()
     {
         var gm = GameManager.Instance;
-
+        
         if (transform.position.y < -0.5f && (gm.State & GameManager.States.IsGameOver) == 0)
         {
             gm.GameOver();
@@ -73,34 +79,38 @@ public class PlayerController : MonoBehaviour
             {
                 if((gm.State & GameManager.States.IsTrapped) != 0) 
                 {
-                    var ht = CheckUnderTile(transform.position) as HoldTile;
+                    var ht = TileManager.CheckUnderTile(transform.position) as HoldTile;
                     ht.Struggle();
                 }
                 else if(tileScript.CanMove)                
                 {
-                    MovePosition(tileScript.GetPos());                    
                     if(tileScript as TrapTileScript != null) 
                     {
                         gm.IsTrapped();
                     }
+                    MovePosition(tileScript.GetPos());                    
                 }
             }
         }
 
         //testCode
-        if(Input.GetKeyDown(KeyCode.W)) 
-        { 
-            MoveWithButton(MoveTo.Forward); 
-        }
-        if(Input.GetKeyDown(KeyCode.A)) 
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            MoveWithButton(MoveTo.Left); 
+            Debug.Log(Time.time);
+            MoveWithButton(MoveTo.Forward);
         }
-        if(Input.GetKeyDown(KeyCode.D)) 
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            MoveWithButton(MoveTo.Right); 
+            Debug.Log(Time.time);
+            MoveWithButton(MoveTo.Left);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Debug.Log(Time.time);
+            MoveWithButton(MoveTo.Right);
         }
     }
+
     public void MovePosition(Vector3 pos)
     {
         var gm = GameManager.Instance;
@@ -111,9 +121,14 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.CurScore += scoreFactor;
         else
             GameManager.Instance.CurScore += scoreFactor / 2;
-
+        //rb.MovePosition(pos);
+        //transform.position = pos;
         pos.y += 1.8f;
-        transform.position = pos;
+        var ts = TileManager.CheckUnderTile(pos);
+        ts.GetPos();
+        if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+            pos.y -= 1.4f;
+        MoveObjectAndTriggerEvent(pos);
         tileManager.SpawnTile();
         tileManager.CheckAllTiles(); 
 
@@ -133,7 +148,7 @@ public class PlayerController : MonoBehaviour
         Vector3 pos = transform.position;
         if ((gm.State & GameManager.States.IsTrapped) != 0)
         {
-            var ht = CheckUnderTile(pos) as HoldTile;
+            var ht = TileManager.CheckUnderTile(pos) as HoldTile;
             if(ht != null)
             {
                 ht.Struggle();
@@ -148,42 +163,53 @@ public class PlayerController : MonoBehaviour
             MoveTo.Right => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),           
             _ => new Vector3()
         };
-
-        var ts = CheckUnderTile(pos);
+        MovePosition(pos);
+        var ts = TileManager.CheckUnderTile(transform.position);
         if (ts == null) 
         {
-            pos.y += 1.8f;
-            transform.position = pos;
+            pos.y += 1.7f;
+            //transform.position = pos;
+            //rb.MovePosition(pos);
         }
         else
         {
-            MovePosition(ts.GetPos());
+            ts.GetPos();
             if(ts.GetComponent<TrapTileScript>() != null)
             {
-                GameManager.Instance.IsTrapped();
+                GameManager.Instance.IsTrapped();                
+            }
+            if (ts.gameObject.GetComponent<KnockbackTile>() != null)
+            {
+                GameManager.Instance.ReleaseTrap();
             }
         }
     }
 
     public void Knockback()
     {
-        var knockbackRange = moveUpperInterval * (knockbackCounter + 1) * 2;
+        var kc = Mathf.Clamp(knockbackCounter, 0, 1);
+        var knockbackRange = moveUpperInterval * (kc + 1) * 2;
         var pos = transform.position;
         pos.z -= knockbackRange;
-        transform.position = pos;
+        //transform.position = pos;
+        MoveObjectAndTriggerEvent(pos);
+        //rb.MovePosition(pos);
         tileManager.CheckAllTiles();
         knockbackCounter++;
-        CheckUnderTile(pos);
+        //TileManager.CheckUnderTile(pos);
     }
 
-    protected TileScript CheckUnderTile(Vector3 pos)
+    void MoveObjectAndTriggerEvent(Vector3 newPosition)
     {
-        Physics.Raycast(pos, Vector3.down, out var hitInfo,10f);
-        if (hitInfo.collider == null)
+        transform.position = newPosition;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.8f);
+        foreach (Collider collider in colliders)
         {
-            GameManager.Instance.IsTrapped();
-            return null;
+            var kb = collider.GetComponent<KnockbackTile>();
+            if(kb != null)
+            {
+                Knockback();
+            }
         }
-        return hitInfo.collider.GetComponent<TileScript>();
     }
 }

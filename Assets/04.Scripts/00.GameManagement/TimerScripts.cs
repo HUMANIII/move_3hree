@@ -13,6 +13,9 @@ public class TimerScripts : MonoBehaviour
 
     private void Start()
     {
+        var ps = PlayerStatManager.Instance;
+
+        maxTime += ps.maxTimeRate * ps.upgrade.maxTime;
         curMaxTime = maxTime;
         ResetTimer();
     }

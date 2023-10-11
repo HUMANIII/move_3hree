@@ -38,6 +38,7 @@ public class SaveDataV2 : SaveDataV1
     public override SaveData VersionUp()
     {      
         var rtn = new SaveDataV3();
+        rtn.bestScore = bestScore;
         rtn.ramCount = ramCount;
         return rtn;
     }
@@ -51,6 +52,26 @@ public class SaveDataV3 : SaveDataV2
     }
 
     public GameManager.Settings options = 0;
+
+    public override SaveData VersionUp()
+    {
+        var rtn = new SaveDataV4();
+        rtn.bestScore = bestScore;
+        rtn.ramCount = ramCount;
+        rtn.options = options;
+        return rtn;
+    }
+}
+
+public class SaveDataV4 : SaveDataV3
+{
+    public SaveDataV4()
+    {
+        Version = 4;
+        upgrade = new();
+    }
+
+    public PlayerStatManager.Upgrade upgrade;
 
     public override SaveData VersionUp()
     {

@@ -145,6 +145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_PowerUpIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 101270, guid: 3d243c40e01e59d468614489ab0e63a8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 489088, guid: 3d243c40e01e59d468614489ab0e63a8, type: 3}
       propertyPath: m_LocalScale.x
       value: 283.94876
@@ -219,7 +223,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &128844297
 RectTransform:
@@ -417,7 +421,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &155193352
 RectTransform:
@@ -551,7 +555,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &182417131
 RectTransform:
@@ -687,7 +691,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &250080252
 RectTransform:
@@ -826,7 +830,7 @@ GameObject:
   m_TagString: Tuto
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!224 &299277662
 RectTransform:
@@ -906,7 +910,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &304955235
 RectTransform:
@@ -1038,7 +1042,7 @@ GameObject:
   m_TagString: Setting
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!224 &393264690
 RectTransform:
@@ -1184,7 +1188,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &435092314
 RectTransform:
@@ -1314,6 +1318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_SettingsIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 132204, guid: 1cfd8d7e494348944ba747e008d44c89, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 454414, guid: 1cfd8d7e494348944ba747e008d44c89, type: 3}
       propertyPath: m_LocalScale.x
       value: 250.54301
@@ -1382,6 +1390,10 @@ PrefabInstance:
     - target: {fileID: 121416, guid: 809e2098a6ba7c34e85f666cff3cfbaa, type: 3}
       propertyPath: m_Name
       value: SI_ShoppingCartIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 121416, guid: 809e2098a6ba7c34e85f666cff3cfbaa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 427478, guid: 809e2098a6ba7c34e85f666cff3cfbaa, type: 3}
       propertyPath: m_LocalScale.x
@@ -1456,7 +1468,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &518565902
 RectTransform:
@@ -1590,7 +1602,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &537284244
 RectTransform:
@@ -1814,6 +1826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SI_Symbol_QuestionMark
       objectReference: {fileID: 0}
+    - target: {fileID: 159708, guid: 803ad814869ead7498eeef7e54e1afa8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 460320, guid: 803ad814869ead7498eeef7e54e1afa8, type: 3}
       propertyPath: m_LocalScale.x
       value: 83.51434
@@ -1884,7 +1900,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &810275996
 RectTransform:
@@ -2016,7 +2032,7 @@ GameObject:
   m_TagString: UIManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &838094268
 Transform:
@@ -2026,9 +2042,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838094267}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1501834, y: 1.4092331, z: 89.972206}
-  m_LocalScale: {x: 0.0052083335, y: 0.0052083335, z: 0.0052083335}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2060,7 +2076,7 @@ GameObject:
   m_TagString: PlayerStatManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &870907973
 MonoBehaviour:
@@ -2074,6 +2090,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec90646659ca0a4491b494d28a71773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxTimeLimit: 4
+  batteryItemLimit: 4
+  ramItemLimit: 4
+  knockbackResistLimit: 1
+  overclockEfficiencyLimit: 4
+  overclockOptimizationLimit: 4
   playerList:
   - {fileID: 5883352043745300146, guid: 7ea6362c117cc69499c14669d57a755c, type: 3}
   - {fileID: 5883352043745300146, guid: ba3f695f244974549b02a58f0171a3d1, type: 3}
@@ -2104,6 +2126,10 @@ PrefabInstance:
     - target: {fileID: 118984, guid: c71cc5c446c1cac41a15c3394cea4b51, type: 3}
       propertyPath: m_Name
       value: SI_RunIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 118984, guid: c71cc5c446c1cac41a15c3394cea4b51, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 435292, guid: c71cc5c446c1cac41a15c3394cea4b51, type: 3}
       propertyPath: m_LocalScale.x
@@ -2178,7 +2204,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &998993378
 RectTransform:
@@ -2253,7 +2279,7 @@ GameObject:
   m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!224 &1094957452
 RectTransform:
@@ -2332,6 +2358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: smartphone
       objectReference: {fileID: 0}
+    - target: {fileID: 1251250760778474, guid: 1730c87d1a8da71498ba75f2be14092d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4651242044701208, guid: 1730c87d1a8da71498ba75f2be14092d, type: 3}
       propertyPath: m_LocalScale.x
       value: 2004.3441
@@ -2405,7 +2435,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1229082030
 RectTransform:
@@ -2539,7 +2569,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1245412492
 RectTransform:
@@ -2679,7 +2709,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1307911846
 RectTransform:
@@ -2811,7 +2841,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1333927862
 RectTransform:
@@ -2945,7 +2975,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1497323502
 RectTransform:
@@ -3078,7 +3108,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1582104532
 RectTransform:
@@ -3213,7 +3243,7 @@ GameObject:
   m_TagString: Pannel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1687716474
 MonoBehaviour:
@@ -3324,7 +3354,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1754120663
 RectTransform:
@@ -3456,7 +3486,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1761395611
 RectTransform:
@@ -3588,7 +3618,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1771778749
 RectTransform:
@@ -3721,7 +3751,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1799292165
 RectTransform:
@@ -3855,7 +3885,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1877678737
 RectTransform:
@@ -3989,7 +4019,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &1916221856
 RectTransform:
@@ -4122,7 +4152,7 @@ GameObject:
   m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1955123345
 MonoBehaviour:

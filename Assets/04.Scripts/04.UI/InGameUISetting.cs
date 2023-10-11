@@ -13,7 +13,13 @@ public class InGameUISetting : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.Instance.GameReStart();
+        }
+    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         homeButton.onClick.AddListener(UIManager.Instance.OnMainMenuButton);

@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 6161010213560961220}
   - component: {fileID: 3314902011943992805}
   - component: {fileID: 7399089958652687434}
+  - component: {fileID: -51002882451747478}
   m_Layer: 7
   m_Name: 02.KnockbackTile
   m_TagString: Tile
@@ -257,6 +258,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39b7c9373c7f01c45b19547f32cfd267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-51002882451747478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539101885611274806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc79f888e67d8f84090ce7404a5b4878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6017758404450277105
@@ -376,7 +389,6 @@ GameObject:
   - component: {fileID: 6049521257431984517}
   - component: {fileID: 3142695256660155712}
   - component: {fileID: 1743649446534568236}
-  - component: {fileID: 2276068556662324515}
   m_Layer: 2
   m_Name: Knockback
   m_TagString: Untagged
@@ -470,15 +482,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2276068556662324515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6894766281412288962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd6759b854f9d2b40892e2bed8443adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -199,6 +199,16 @@ public class TileManager : MonoBehaviour
                 return null;
         }
     }
+    public static TileScript CheckUnderTile(Vector3 pos)
+    {
+        Physics.Raycast(pos, Vector3.down, out var hitInfo, 10f);
+        if (hitInfo.collider == null)
+        {
+            GameManager.Instance.IsTrapped();
+            return null;
+        }
+        return hitInfo.collider.GetComponent<TileScript>();
+    }
 
     private void SetStage(int stage)
     {

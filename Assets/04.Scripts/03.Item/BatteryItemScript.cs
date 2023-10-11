@@ -9,6 +9,11 @@ public class BatteryItemScript : ItemScript
     public float decreaseAmount = 0.1f;
     public float defaultAmount = 0.5f;
 
+    private void Start()
+    {
+        var ps = PlayerStatManager.Instance;
+        defaultAmount += ps.upgrade.batteryItem * ps.batteryItemRate;
+    }
     protected override void ActiveEffect()
     {
         var amount = defaultAmount - decreaseAmount * GameManager.Instance.CurScore / scoreFactor * factor;
