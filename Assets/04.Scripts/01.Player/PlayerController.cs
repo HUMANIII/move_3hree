@@ -118,8 +118,6 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.CurScore += scoreFactor;
         else
             GameManager.Instance.CurScore += scoreFactor / 2;
-        //rb.MovePosition(pos);
-        //transform.position = pos;
         pos.y += 1.8f;
         var ts = TileManager.CheckUnderTile(pos);
         if(ts != null) 
@@ -186,7 +184,7 @@ public class PlayerController : MonoBehaviour
         var pos = transform.position;
         pos.z -= knockbackRange;
         MoveObjectAndTriggerEvent(pos);
-        tileManager.CheckAllTiles();
+        //tileManager.CheckAllTiles();
         knockbackCounter++;
     }
 

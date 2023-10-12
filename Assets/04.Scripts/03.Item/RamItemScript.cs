@@ -22,7 +22,6 @@ public class RamItemScript : ItemScript
     {
         var gm = GameManager.Instance;
         var counter = (factor / (gm.CurScore / scoreFactor)) + defaultAmount;
-        gm.RamCount += Mathf.Clamp(counter, minAmount, maxAmount);
-        Debug.Log(gm.RamCount);
+        gm.RamCount += Mathf.Clamp(counter, minAmount, maxAmount);        
     }
 }

@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     }
     public void IsTrapped()
     {
-        State |= States.IsTrapped;
+        State |= States.IsTrapped; 
     }
 
     public void ReleaseTrap()
