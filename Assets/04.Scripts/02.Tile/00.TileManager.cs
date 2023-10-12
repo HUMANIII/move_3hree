@@ -43,17 +43,22 @@ public class TileManager : MonoBehaviour
     public List<GameObject> AllTiles { get; set; } = new();
     public List<GameObject> DestroyTiles { get; set; } = new();
 
+    public int overclockCount = 5;
+    private int leftOverclockCount = 0;
+
     private void Awake()
     {
         SideInterval *= sizeFator;
         UpperInterval *= sizeFator;
         SetTilePoses();
         SetStage(curStageNumber);
+        var psm = PlayerStatManager.Instance;
+        overclockCount += psm.upgrade.overclockEfficiency * psm.overclockEfficiencyRate;
     }
 
     private void Start()
     {
-        StartGame();        
+        StartGame();
     }
 
     private void SetTilePoses()
@@ -107,6 +112,10 @@ public class TileManager : MonoBehaviour
                 AllTiles.Add(tile);
             }            
             LineCounter++;
+            if(leftOverclockCount > 0) 
+            {
+                leftOverclockCount--;
+            }
         }
         foreach(var obj in  DestroyTiles)
         {
@@ -142,7 +151,7 @@ public class TileManager : MonoBehaviour
 
     private GameObject GetRandomTile(out bool isNormal)
     {
-        if (maximumTrapTile <= TrapTileCount || LineCounter == 0)
+        if (leftOverclockCount > 0 || maximumTrapTile <= TrapTileCount || LineCounter == 0)
         {
             isNormal = true;
             return normalTile;
@@ -183,6 +192,10 @@ public class TileManager : MonoBehaviour
     
     private GameObject GetRandomItem()
     {
+        if (leftOverclockCount > 0)
+        {
+            return ram;
+        }
         if (maximunItemNumber <= ItemCount)
         {
             return null;
@@ -224,5 +237,10 @@ public class TileManager : MonoBehaviour
         holdTileSpawnRate = si.holdTileSpawnRate;
         maximumTrapTile = si.maximumTrapTile;
         nextStateScore = si.nextStateScore;
+    }
+
+    public void ActiveOverclock()
+    {
+        leftOverclockCount = overclockCount;
     }
  }

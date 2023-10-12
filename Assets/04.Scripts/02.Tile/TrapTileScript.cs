@@ -7,10 +7,10 @@ public class TrapTileScript : TileScript
     public override void CheckTile()
     {
         base.CheckTile();
-
+        
         if(tileManager.PlayerLineCounter - LineNumber > 1)
         {
-            tileManager.TrapTileCount--;
+            tileManager.TrapTileCount--;            
         }
     }
 

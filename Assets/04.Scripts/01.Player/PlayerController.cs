@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     private float moveUpperInterval;
     private float moveSideInterval;
 
+    public int overclockActiveCount = 50;
+    private int overclockActiveCounter;
+
     protected void Awake()
     {
         mainCam = Camera.main;
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
         playerStatManager = GameObject.FindGameObjectWithTag("PlayerStatManager").GetComponent<PlayerStatManager>();
         rb = GetComponent<Rigidbody>();
         cr = GetComponent<Collider>();
+        overclockActiveCount -= playerStatManager.upgrade.overclockOptimization * playerStatManager.overclockOptimizationRate;
     }
     protected void Start()
     {
@@ -58,12 +62,16 @@ public class PlayerController : MonoBehaviour
 
     protected void Update()
     {
-        //testCode
+        //cheatCode
         if(Input.GetKeyDown(KeyCode.F8))
         {
             GameManager.Instance.CurScore += 500;
         }
-        var gm = GameManager.Instance;
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            tileManager.ActiveOverclock();
+        }
+            var gm = GameManager.Instance;
         if ((gm.State & (GameManager.States.IsGameOver | GameManager.States.IsPause)) != 0)
             return;
 
@@ -126,9 +134,15 @@ public class PlayerController : MonoBehaviour
             if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
                 pos.y -= 1.4f;
         }
+        overclockActiveCounter++;
         MoveObjectAndTriggerEvent(pos);
+        if (overclockActiveCounter > overclockActiveCount) 
+        {
+            tileManager.ActiveOverclock();
+            overclockActiveCounter = 0;
+        }
         tileManager.SpawnTile();
-        tileManager.CheckAllTiles(); 
+        tileManager.CheckAllTiles();
 
         if (tileManager.PlayerLineCounter % timerDecreaseFactor == 0)
         {
