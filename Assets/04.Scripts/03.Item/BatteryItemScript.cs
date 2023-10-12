@@ -17,6 +17,6 @@ public class BatteryItemScript : ItemScript
     protected override void ActiveEffect()
     {
         var amount = defaultAmount - decreaseAmount * GameManager.Instance.CurScore / scoreFactor * factor;
-        TimerScripts.RestoreTime(Mathf.Clamp(amount, minAmount, defaultAmount));
+        GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>().RestoreTime(Mathf.Clamp(amount, minAmount, defaultAmount));
     }
 }

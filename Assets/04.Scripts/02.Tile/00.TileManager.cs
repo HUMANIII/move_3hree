@@ -45,6 +45,7 @@ public class TileManager : MonoBehaviour
 
     public int overclockCount = 5;
     private int leftOverclockCount = 0;
+    public bool Overclocked { private set; get; } = false;
 
     private void Awake()
     {
@@ -112,9 +113,13 @@ public class TileManager : MonoBehaviour
                 AllTiles.Add(tile);
             }            
             LineCounter++;
-            if(leftOverclockCount > 0) 
+            if(Overclocked) 
             {
                 leftOverclockCount--;
+            }
+            if(leftOverclockCount <= 1)
+            {
+                Overclocked = false;
             }
         }
         foreach(var obj in  DestroyTiles)
@@ -151,7 +156,7 @@ public class TileManager : MonoBehaviour
 
     private GameObject GetRandomTile(out bool isNormal)
     {
-        if (leftOverclockCount > 0 || maximumTrapTile <= TrapTileCount || LineCounter == 0)
+        if (Overclocked || maximumTrapTile <= TrapTileCount || LineCounter == 0)
         {
             isNormal = true;
             return normalTile;
@@ -192,7 +197,7 @@ public class TileManager : MonoBehaviour
     
     private GameObject GetRandomItem()
     {
-        if (leftOverclockCount > 0)
+        if (Overclocked)
         {
             return ram;
         }
@@ -242,5 +247,6 @@ public class TileManager : MonoBehaviour
     public void ActiveOverclock()
     {
         leftOverclockCount = overclockCount;
+        Overclocked = true;
     }
  }

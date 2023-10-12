@@ -22,16 +22,20 @@ public class PlayerController : MonoBehaviour
     protected TimerScripts timerScripts;
     protected PlayerStatManager playerStatManager;
     protected Collider cr;
-    private int knockbackCounter = 0;
+    protected int knockbackCounter = 0;
     
     public int timerDecreaseFactor = 10; 
     public int scoreFactor = 10;
 
-    private float moveUpperInterval;
-    private float moveSideInterval;
+    protected float moveUpperInterval;
+    protected float moveSideInterval;
 
-    public int overclockActiveCount = 50;
-    private int overclockActiveCounter;
+    public int overclockActiveCount = 40;
+    protected int overclockActiveCounter;
+    public bool overclocked { get; private set;}
+
+    public int moveCount = 1;
+    protected int moveCounter = 0;
 
     protected void Awake()
     {
@@ -40,7 +44,7 @@ public class PlayerController : MonoBehaviour
         timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
         playerStatManager = GameObject.FindGameObjectWithTag("PlayerStatManager").GetComponent<PlayerStatManager>();
         rb = GetComponent<Rigidbody>();
-        cr = GetComponent<Collider>();
+        cr = GetComponentInChildren<Collider>();
         overclockActiveCount -= playerStatManager.upgrade.overclockOptimization * playerStatManager.overclockOptimizationRate;
     }
     protected void Start()
@@ -123,9 +127,14 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (pos.x == transform.position.x)
+        {
             GameManager.Instance.CurScore += scoreFactor;
+        }
         else
+        {
             GameManager.Instance.CurScore += scoreFactor / 2;
+        }
+
         pos.y += 1.8f;
         var ts = TileManager.CheckUnderTile(pos);
         if(ts != null) 
@@ -134,9 +143,19 @@ public class PlayerController : MonoBehaviour
             if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
                 pos.y -= 1.4f;
         }
-        overclockActiveCounter++;
+
+        if((timerScripts.curMaxTime / 2f) < timerScripts.Timer)
+        {
+            overclockActiveCounter++;
+        }
+        else
+        {
+            overclockActiveCounter = 0;
+        }
+        Debug.Log(overclockActiveCounter);
         MoveObjectAndTriggerEvent(pos);
-        if (overclockActiveCounter > overclockActiveCount) 
+
+        if (overclockActiveCounter >= overclockActiveCount) 
         {
             tileManager.ActiveOverclock();
             overclockActiveCounter = 0;
@@ -148,7 +167,12 @@ public class PlayerController : MonoBehaviour
         {
             timerScripts.DecreaseMaxTime();
         }
-        timerScripts.ResetTimer();
+        moveCounter++;
+        if(moveCount <= moveCounter)
+        {
+            timerScripts.ResetTimer();
+            moveCounter = 0;
+        }
     }
 
     public void MoveWithButton(MoveTo where) 

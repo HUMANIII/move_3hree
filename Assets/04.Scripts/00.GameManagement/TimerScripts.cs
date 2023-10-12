@@ -6,11 +6,11 @@ using UnityEngine;
 public class TimerScripts : MonoBehaviour
 {
     public float Timer { get; set; }
-    public static float curMaxTime;
+    public float curMaxTime;
 
     
-    public static float maxTime = 2f;
-    public static float minTime = 0.6f;
+    public float maxTime = 2f;
+    public float minTime = 0.6f;
     public float decreaseFactor = 0.1f;
 
     private void Start()
@@ -45,7 +45,7 @@ public class TimerScripts : MonoBehaviour
         curMaxTime = Mathf.Clamp(curMaxTime - decreaseFactor, minTime, maxTime);
     }
 
-    public static void RestoreTime(float amount)
+    public void RestoreTime(float amount)
     {
         curMaxTime = Mathf.Clamp(curMaxTime + amount, minTime, maxTime);         
     }

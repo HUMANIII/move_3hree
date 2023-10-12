@@ -4,26 +4,27 @@ using UnityEngine;
 
 public abstract class ItemScript : MonoBehaviour
 {
-    protected GameObject player;
+    protected Collider player;
     protected TileManager tileManager;
     protected int scoreFactor;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        scoreFactor = player.GetComponent<PlayerController>().scoreFactor;
+        var plyr = GameObject.FindGameObjectWithTag("Player");
+        player = plyr.GetComponentInChildren<Collider>();
+        scoreFactor = plyr.GetComponent<PlayerController>().scoreFactor;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == player)
+        if(other == player)
         {
             ActiveEffect();
             Destroy(gameObject);
         }
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         tileManager.ItemCount--;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -8,6 +9,15 @@ using static PlayerStatManager;
 
 public class PlayerStatManager : MonoBehaviour
 {
+    [Flags]
+    public enum PhoneUnlockInfo
+    {
+        DefaultPhone = 1,
+        JailbreakedPhone = 2,
+        GreenApplePhone = 4,
+        BananaPhone = 8,
+        MithrillPhone = 16,
+    }
     public class Upgrade
     {
         public int maxTime;
@@ -16,6 +26,7 @@ public class PlayerStatManager : MonoBehaviour
         public int knockbackResist;
         public int overclockEfficiency;
         public int overclockOptimization;
+        public PhoneUnlockInfo phoneUnlockInfo;
     };
 
     public static PlayerStatManager Instance;

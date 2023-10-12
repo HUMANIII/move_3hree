@@ -2090,16 +2090,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec90646659ca0a4491b494d28a71773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimeLimit: 4
-  batteryItemLimit: 4
-  ramItemLimit: 4
-  knockbackResistLimit: 1
-  overclockEfficiencyLimit: 4
-  overclockOptimizationLimit: 4
   playerList:
-  - {fileID: 5883352043745300146, guid: 7ea6362c117cc69499c14669d57a755c, type: 3}
+  - {fileID: 752078592890140258, guid: fe24d427c1e27e64084884c65b6ab79b, type: 3}
   - {fileID: 5883352043745300146, guid: ba3f695f244974549b02a58f0171a3d1, type: 3}
   - {fileID: 5883352043745300146, guid: 600e13d8e4fbda8458f01749c1945fd1, type: 3}
+  maxTimeLimit: 4
+  maxTimeRate: 0.05
+  batteryItemLimit: 4
+  batteryItemRate: 0.05
+  ramItemLimit: 4
+  ramItemRate: 1
+  knockbackResistLimit: 1
+  overclockEfficiencyLimit: 4
+  overclockEfficiencyRate: 1
+  overclockOptimizationLimit: 4
+  overclockOptimizationRate: 5
 --- !u!4 &870907974
 Transform:
   m_ObjectHideFlags: 0
