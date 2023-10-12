@@ -93,10 +93,10 @@ public class PlayerStatManager : MonoBehaviour
         if(scene.name == "GameScene")
         {
             Instantiate(player,new Vector3(0f, 1.7f, 0f),Quaternion.identity);
-        }
+        } 
     }
 
-    public bool UpGradeMaxTime()
+    public bool UpgradeMaxTime()
     {
         if(upgrade.maxTime != maxTimeLimit)
         {
@@ -106,7 +106,7 @@ public class PlayerStatManager : MonoBehaviour
         }        
         return false;        
     }
-    public bool UpGradeBatteryItem()
+    public bool UpgradeBatteryItem()
     {
         if(upgrade.batteryItem != batteryItemLimit) 
         {
@@ -116,7 +116,7 @@ public class PlayerStatManager : MonoBehaviour
         }
         return false;
     }
-    public bool UpGradeRamItem()
+    public bool UpgradeRamItem()
     {
         if(upgrade.ramItem != ramItemLimit)
         {
@@ -126,7 +126,7 @@ public class PlayerStatManager : MonoBehaviour
         }
         return false;
     }
-    public bool UpGradeKnockbackResist()
+    public bool UpgradeKnockbackResist()
     {
         if(upgrade.knockbackResist != knockbackResistLimit)
         {
@@ -136,7 +136,7 @@ public class PlayerStatManager : MonoBehaviour
         }
         return false;
     }
-    public bool UpGradeOverclockEfficiency()
+    public bool UpgradeOverclockEfficiency()
     {
         if(upgrade.overclockEfficiency != overclockEfficiencyLimit)
         {
@@ -146,7 +146,7 @@ public class PlayerStatManager : MonoBehaviour
         }
         return false;
     }
-    public bool UpGradeOverclockOptimization()
+    public bool UpgradeOverclockOptimization()
     {
         if(upgrade.overclockOptimization != overclockOptimizationLimit)
         {
@@ -157,4 +157,36 @@ public class PlayerStatManager : MonoBehaviour
         return false;
     }
 
+    public bool UnlockJailbreakedPhone()
+    {
+        if((upgrade.phoneUnlockInfo & PhoneUnlockInfo.JailbreakedPhone) != 0)
+            return false;
+        upgrade.phoneUnlockInfo |= PhoneUnlockInfo.JailbreakedPhone;
+        GameManager.Instance.SaveData();
+        return true;
+    }
+    public bool UnlockGreenApplePhone()
+    {
+        if((upgrade.phoneUnlockInfo & PhoneUnlockInfo.GreenApplePhone) != 0)
+            return false;
+        upgrade.phoneUnlockInfo |= PhoneUnlockInfo.GreenApplePhone;
+        GameManager.Instance.SaveData();
+        return true;
+    }
+    public bool UnlockBananaPhone()
+    {
+        if((upgrade.phoneUnlockInfo & PhoneUnlockInfo.BananaPhone) != 0)
+            return false;
+        upgrade.phoneUnlockInfo |= PhoneUnlockInfo.BananaPhone;
+        GameManager.Instance.SaveData();
+        return true;
+    }
+    public bool UnlockMithrillPhone()
+    {
+        if((upgrade.phoneUnlockInfo & PhoneUnlockInfo.MithrillPhone) != 0)
+            return false;
+        upgrade.phoneUnlockInfo |= PhoneUnlockInfo.MithrillPhone;
+        GameManager.Instance.SaveData();
+        return true;
+    }
 }
