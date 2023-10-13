@@ -86,25 +86,33 @@ public class PlayerStatManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F3))
         {
-            testCounter++;
-            if(testCounter == playerList.Count)
-            {
-                testCounter = 0;
-            }
-            ChangePlayerType(testCounter);
+            TestMethod();
         }
     }
 
-    public void ChangePlayerType(PlayerType type)
+    public void TestMethod()
     {
-        ChangePlayerType((int)type); 
+        testCounter++;
+        if (testCounter == playerList.Count)
+        {
+            testCounter = 0;
+        }
+        ChangePlayerType(testCounter);
     }
+
     public void ChangePlayerType(int type)
     {
-        Debug.Log("PlayerChanged");
-        playerType = (PlayerType)type;
-        player = playerList[type];
-
+        
+            ChangePlayerType((PlayerType)type); 
+    }
+    public void ChangePlayerType(PlayerType type)
+    {
+        if (playerType != type)
+        {
+            Debug.Log("PlayerChanged");
+            playerType = type;
+            player = playerList[(int)type];
+        }
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

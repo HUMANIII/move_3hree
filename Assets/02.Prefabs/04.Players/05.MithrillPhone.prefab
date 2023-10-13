@@ -77,6 +77,10 @@ MonoBehaviour:
   scoreFactor: 10
   overclockActiveCount: 40
   moveCount: 1
+  warnEarly: 0
+  obstructionFactor: 2
+  ramGatheringFactor: 1
+  maxTimeLimitCtrl: 0
 --- !u!1 &3802717647883484208
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class FallingObjTile : TrapTileScript
 
     private void Start()
     {
-        //PlayerStatManager.Instance
+        anounceTime += player.GetComponent<PlayerController>().warnEarly;
     }
     public void SetWarnSign()
     {

@@ -32,12 +32,17 @@ public class PlayerController : MonoBehaviour
 
     public int overclockActiveCount = 40;
     protected int overclockActiveCounter;
-    public bool overclocked { get; private set;}
 
     public int moveCount = 1;
     protected int moveCounter = 0;
 
-    protected int warnEarly = 0;
+    public int warnEarly = 0;
+
+    public int obstructionFactor = 1;
+
+    public float ramGatheringFactor = 1;
+
+    public float maxTimeLimitCtrl = 0f;
 
     protected void Awake()
     {
@@ -109,21 +114,21 @@ public class PlayerController : MonoBehaviour
         }
 
         //testCode
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveWithButton(MoveTo.Forward);
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MoveWithButton(MoveTo.Left);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             MoveWithButton(MoveTo.Right);
         }
     }
 
-    public void MovePosition(Vector3 pos)
+    protected virtual void MovePosition(Vector3 pos)
     {
         var gm = GameManager.Instance;
         if ((gm.State & GameManager.States.IsTrapped) != 0)
@@ -221,7 +226,7 @@ public class PlayerController : MonoBehaviour
     public void Knockback()
     {
         var kc = Mathf.Clamp(knockbackCounter, 0, 1);
-        var knockbackRange = moveUpperInterval * (kc + 1) * 2;
+        var knockbackRange = moveUpperInterval * (kc + 1) * 2 * obstructionFactor;
         var pos = transform.position;
         pos.z -= knockbackRange;
         MoveObjectAndTriggerEvent(pos);
@@ -229,7 +234,7 @@ public class PlayerController : MonoBehaviour
         knockbackCounter++;
     }
 
-    void MoveObjectAndTriggerEvent(Vector3 newPosition)
+    protected void MoveObjectAndTriggerEvent(Vector3 newPosition)
     {
         transform.position = newPosition;
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.8f);

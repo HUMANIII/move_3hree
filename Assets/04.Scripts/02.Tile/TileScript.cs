@@ -15,7 +15,7 @@ public class TileScript : MonoBehaviour
 
     public bool CanMove { get; set; } = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         player = GameObject.FindGameObjectWithTag("Player");

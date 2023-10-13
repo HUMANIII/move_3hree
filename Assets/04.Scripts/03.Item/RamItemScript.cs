@@ -10,6 +10,7 @@ public class RamItemScript : ItemScript
     public int minAmount = 2;
     public int defaultAmount = 2;
     public bool overclocked = false;
+    private float ramGatheringFactor;
 
     protected override void Awake()
     {
@@ -23,13 +24,14 @@ public class RamItemScript : ItemScript
         {
             overclocked = true;
         }
+        ramGatheringFactor = player.GetComponentInParent<PlayerController>().ramGatheringFactor;
     }
 
     protected override void ActiveEffect()
-    {
+    {        
         var gm = GameManager.Instance;
         var counter = (factor / (gm.CurScore / scoreFactor)) + defaultAmount;
-        gm.RamCount += Mathf.Clamp(counter, minAmount, maxAmount);
+        gm.RamCount += (int)(Mathf.Clamp(counter, minAmount, maxAmount) * ramGatheringFactor);
     }
 
     protected override void OnDestroy()

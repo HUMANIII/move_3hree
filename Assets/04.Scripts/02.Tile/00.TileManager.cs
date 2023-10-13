@@ -54,11 +54,12 @@ public class TileManager : MonoBehaviour
         SetTilePoses();
         SetStage(curStageNumber);
         var psm = PlayerStatManager.Instance;
-        overclockCount += psm.upgrade.overclockEfficiency * psm.overclockEfficiencyRate;
+        overclockCount += psm.upgrade.overclockEfficiency * psm.overclockEfficiencyRate;        
     }
-
+    
     private void Start()
     {
+        tileColumn += GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().warnEarly;
         StartGame();
     }
 

@@ -6,7 +6,11 @@ public class HoldTile : TrapTileScript
 {
     public int clickCount;
     private int clickCounter = 0;
-    
+
+    private void Start()
+    {
+        clickCount *= player.GetComponent<PlayerController>().obstructionFactor;
+    }
     public void Struggle()
     {
         Debug.Log("Struggled");
