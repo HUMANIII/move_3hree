@@ -10,7 +10,7 @@ namespace RengeGames.HealthBars {
     [ExecuteAlways]
     [DisallowMultipleComponent]
     [AddComponentMenu("Health Bars/Circular Segmented Health Bar")]
-    public class UltimateCircularHealthBar : MonoBehaviour, ISegmentedHealthBar {
+    public class MaskedMaterial : MonoBehaviour, ISegmentedHealthBar {
         [Header("Data")] public float SegmentCount = 5f;
         public float RemovedSegments = 0f;
 
@@ -46,7 +46,7 @@ namespace RengeGames.HealthBars {
                 if (GraphicsSettings.renderPipelineAsset && Int32.Parse(Application.unityVersion.Split('.')[0]) > 2018)
                     return "RadialSegmentedHealthBarMaterial";
 
-                return "RadialSegmentedHealthBarBuiltInMaterial";
+                return "MaskedMaterial";
             }
         }
 

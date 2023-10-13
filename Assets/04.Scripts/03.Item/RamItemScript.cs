@@ -24,11 +24,12 @@ public class RamItemScript : ItemScript
             overclocked = true;
         }
     }
+
     protected override void ActiveEffect()
     {
         var gm = GameManager.Instance;
         var counter = (factor / (gm.CurScore / scoreFactor)) + defaultAmount;
-        gm.RamCount += Mathf.Clamp(counter, minAmount, maxAmount);        
+        gm.RamCount += Mathf.Clamp(counter, minAmount, maxAmount);
     }
 
     protected override void OnDestroy()

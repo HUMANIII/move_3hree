@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class FallingObjTile : TrapTileScript
 {
@@ -11,6 +12,10 @@ public class FallingObjTile : TrapTileScript
 
     private bool isSignSetted = false;
 
+    private void Start()
+    {
+        //PlayerStatManager.Instance
+    }
     public void SetWarnSign()
     {
         var trans = warningSign.transform;

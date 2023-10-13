@@ -17,7 +17,16 @@ public class PlayerStatManager : MonoBehaviour
         GreenApplePhone = 4,
         BananaPhone = 8,
         MithrillPhone = 16,
+    }        
+    public enum PlayerType
+    {
+        DefaultPhone = 0,
+        JailbreakedPhone,
+        GreenApplePhone,
+        BananaPhone,
+        MithrillPhone, 
     }
+
     public class Upgrade
     {
         public int maxTime;
@@ -29,6 +38,7 @@ public class PlayerStatManager : MonoBehaviour
         public PhoneUnlockInfo phoneUnlockInfo;
     };
 
+    
     public static PlayerStatManager Instance;
 
     private GameObject player;
@@ -36,6 +46,7 @@ public class PlayerStatManager : MonoBehaviour
     public List<GameObject> playerList;
 
     public Upgrade upgrade;
+    public PlayerType playerType;
 
     public int maxTimeLimit = 4;
     public float maxTimeRate = 0.05f;
@@ -66,6 +77,7 @@ public class PlayerStatManager : MonoBehaviour
         if(player == null)
         {
             player = playerList[0];
+            playerType = PlayerType.DefaultPhone;
         }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -83,10 +95,16 @@ public class PlayerStatManager : MonoBehaviour
         }
     }
 
+    public void ChangePlayerType(PlayerType type)
+    {
+        ChangePlayerType((int)type); 
+    }
     public void ChangePlayerType(int type)
     {
         Debug.Log("PlayerChanged");
+        playerType = (PlayerType)type;
         player = playerList[type];
+
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

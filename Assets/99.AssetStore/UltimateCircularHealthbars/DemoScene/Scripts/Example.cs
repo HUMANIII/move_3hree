@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class Example : MonoBehaviour
 {
-    private UltimateCircularHealthBar hb;
+    private MaskedMaterial hb;
     [Range(0, 1)] public float healthPercent = 1;
 
     private void Start()
     {
-        hb = GetComponent<UltimateCircularHealthBar>();
+        hb = GetComponent<MaskedMaterial>();
     }
 
     private void Update()

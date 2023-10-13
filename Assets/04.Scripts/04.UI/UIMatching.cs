@@ -49,6 +49,11 @@ public class UIMatching : MonoBehaviour
     {
         dateCounter.text = DateTime.Now.ToString("hh:mm");
         
+        if(Input.GetKeyDown(KeyCode.F9))
+        {
+            GameManager.Instance.RamCount += 100;
+            UpdateRamCounter();
+        }
         if(Input.GetKeyDown(KeyCode.F2))
         {
             Debug.Log("Change MoveMode");

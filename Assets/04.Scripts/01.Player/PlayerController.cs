@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public int moveCount = 1;
     protected int moveCounter = 0;
 
+    protected int warnEarly = 0;
+
     protected void Awake()
     {
         mainCam = Camera.main;
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cr = GetComponentInChildren<Collider>();
         overclockActiveCount -= playerStatManager.upgrade.overclockOptimization * playerStatManager.overclockOptimizationRate;
+        SpecificEffect();
     }
     protected void Start()
     {
@@ -238,5 +241,10 @@ public class PlayerController : MonoBehaviour
                 Knockback();
             }
         }
+    }
+
+    protected virtual void SpecificEffect()
+    {
+
     }
 }
