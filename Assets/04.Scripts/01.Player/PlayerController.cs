@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerController : MonoBehaviour
 {

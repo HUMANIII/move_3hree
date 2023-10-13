@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class PausePage : MonoBehaviour
 {
     public Button resume;
+    public Button mainMenu;
 
     private void Awake()
     {
         resume.onClick.AddListener(Resume);
+        mainMenu.onClick.AddListener(MainMenu);
         gameObject.SetActive(false);
     }
 
@@ -17,5 +19,10 @@ public class PausePage : MonoBehaviour
     {
         gameObject.SetActive(false);
         GameManager.Instance.TogglePause();
+    }
+
+    public void MainMenu()
+    {
+        UIManager.Instance.OnMainMenuButton();
     }
 }
