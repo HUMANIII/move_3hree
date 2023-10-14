@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        State &= ~(States.IsGameOver | States.IsTrapped);
+        State &= ~(States.IsGameOver | States.IsTrapped | States.IsPause);
         CurScore = 0;
         LoadData();
     }

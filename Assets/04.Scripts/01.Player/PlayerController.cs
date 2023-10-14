@@ -99,7 +99,10 @@ public class PlayerController : MonoBehaviour
                 if((gm.State & GameManager.States.IsTrapped) != 0) 
                 {
                     var ht = TileManager.CheckUnderTile(transform.position) as HoldTile;
-                    ht.Struggle();
+                    if (ht != null) 
+                    { 
+                        ht.Struggle();
+                    }
                 }
                 else if(tileScript.CanMove)                
                 {

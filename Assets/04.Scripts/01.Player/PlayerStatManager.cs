@@ -102,8 +102,7 @@ public class PlayerStatManager : MonoBehaviour
 
     public void ChangePlayerType(int type)
     {
-        
-            ChangePlayerType((PlayerType)type); 
+       ChangePlayerType((PlayerType)type); 
     }
     public void ChangePlayerType(PlayerType type)
     {
@@ -118,7 +117,7 @@ public class PlayerStatManager : MonoBehaviour
     {
         if(scene.name == "GameScene")
         {
-            Instantiate(player,new Vector3(0f, 1.7f, 0f),Quaternion.identity);
+            Instantiate(player,new Vector3(0f, 1.7f, 0f),Quaternion.Euler(0f,180f,0f));
         } 
     }
 
