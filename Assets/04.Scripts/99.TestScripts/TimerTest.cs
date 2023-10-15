@@ -57,13 +57,13 @@ public class TimerTest : MonoBehaviour
     {
         var gm = GameManager.Instance;
         gm.ToggleMoveOption();
-        if((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-        {
-            moveButtons.SetActive(true);
-        }
-        else
-        {
-            moveButtons.SetActive(false);
-        }
+        //if((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+        //{
+        //    moveButtons.SetActive(true);
+        //}
+        //else
+        //{
+        //    moveButtons.SetActive(false);
+        //}
     }
 }

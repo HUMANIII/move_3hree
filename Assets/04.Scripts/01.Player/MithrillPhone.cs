@@ -47,7 +47,6 @@ public class MithrillPhone : PlayerController
             overclockActiveCounter = 0;
         }
 
-        Debug.Log(overclockActiveCounter);
         MoveObjectAndTriggerEvent(pos);
 
         if (overclockActiveCounter >= overclockActiveCount)

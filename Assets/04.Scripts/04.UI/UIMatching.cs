@@ -21,12 +21,26 @@ public class UIMatching : MonoBehaviour
     public TextMeshProUGUI ramCounter;
     public TextMeshProUGUI dateCounter;
 
-    private void Awake()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
+    //private void Awake()
+    //{
+    //    SceneManager.sceneLoaded += OnSceneLoaded;
+    //}
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    var um = UIManager.Instance;
+    //    settingBtn.onClick.AddListener(um.OnSettingPopup);
+    //    ExitBtn.onClick.AddListener(um.OnExitButton);
+    //    shopBtn.onClick.AddListener(um.OnShopButton);
+    //    TutoBtn.onClick.AddListener(um.OnTutoPopup);
+    //    RunBtn.onClick.AddListener(um.OnStartButton);
+    //    settingCloseBtn.onClick.AddListener(um.CloseSettingPopup);
+    //    shopCloseBtn.onClick.AddListener(um.CloseShoppopup);
+    //    TutoCloseBtn.onClick.AddListener(um.CloseTutoPopup);
+    //    UpdateRamCounter();
+    //}
+
+    private void Start()
     {
         var um = UIManager.Instance;
         settingBtn.onClick.AddListener(um.OnSettingPopup);

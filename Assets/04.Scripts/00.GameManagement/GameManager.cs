@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SaveDataVC = SaveDataV4;
+using SaveDataVC = SaveDataV5;
 
 
 public class GameManager : MonoBehaviour
@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
             bestScore = BestScore,
             ramCount = RamCount,
             options = Options,
-            upgrade = PlayerStatManager.Instance.upgrade
+            upgrade = PlayerStatManager.Instance.upgrade,
+            playerType = PlayerStatManager.Instance.playerType,
         };
         SaveLoadSystem.Save(data, "saveData.Json");
     }
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
             RamCount = data.ramCount;
             Options = data.options;
             PlayerStatManager.Instance.upgrade = data.upgrade;
+            PlayerStatManager.Instance.playerType = data.playerType;
         }
     }
 

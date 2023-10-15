@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2379712159070873326}
   - component: {fileID: 6763331237013564333}
-  - component: {fileID: 1141239802683019943}
+  - component: {fileID: -6295652773865857798}
   m_Layer: 2
   m_Name: 05.MithrillPhone
   m_TagString: Player
@@ -61,7 +61,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1141239802683019943
+--- !u!114 &-6295652773865857798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,15 +70,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 752078592890140258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1add98526b6100a4986948bcb88c7aa2, type: 3}
+  m_Script: {fileID: 11500000, guid: 24e3c6df6143738418352db735846438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timerDecreaseFactor: 10
   scoreFactor: 10
   overclockActiveCount: 40
-  moveCount: 1
+  moveCount: 3
   warnEarly: 0
-  obstructionFactor: 2
+  obstructionFactor: 1
   ramGatheringFactor: 1
   maxTimeLimitCtrl: 0
 --- !u!1 &3802717647883484208

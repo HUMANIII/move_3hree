@@ -50,7 +50,6 @@ public class BananaPhoneScript : PlayerController
         {
             overclockActiveCounter = 0;
         }
-        Debug.Log(overclockActiveCounter);
         MoveObjectAndTriggerEvent(pos);
 
         if (overclockActiveCounter >= overclockActiveCount)

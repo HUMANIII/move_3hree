@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerStatManager;
 
 public abstract class SaveData
 {
@@ -72,6 +73,27 @@ public class SaveDataV4 : SaveDataV3
     }
 
     public PlayerStatManager.Upgrade upgrade;
+
+    public override SaveData VersionUp()
+    {
+        var rtn = new SaveDataV5();
+        rtn.bestScore = bestScore;
+        rtn.ramCount = ramCount;
+        rtn.options = options;
+        rtn.upgrade = upgrade;
+        return rtn;
+    }
+}
+
+public class SaveDataV5 : SaveDataV4
+{
+    public SaveDataV5()
+    {
+        Version = 5;
+        playerType = PlayerType.DefaultPhone;
+    }
+
+    public PlayerType playerType;
 
     public override SaveData VersionUp()
     {
