@@ -93,7 +93,7 @@ public class PlayerStatManager : MonoBehaviour
     public void TestMethod()
     {
         testCounter++;
-        if (testCounter == playerList.Count)
+        if (testCounter == playerList.Count -1)
         {
             testCounter = 0;
         }
