@@ -24,5 +24,6 @@ public class PausePage : MonoBehaviour
     public void MainMenu()
     {
         UIManager.Instance.OnMainMenuButton();
+        GameManager.Instance.TogglePause();
     }
 }
