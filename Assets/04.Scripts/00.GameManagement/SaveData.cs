@@ -90,10 +90,9 @@ public class SaveDataV5 : SaveDataV4
     public SaveDataV5()
     {
         Version = 5;
-        playerType = PlayerType.DefaultPhone;
     }
 
-    public PlayerType playerType;
+    public PlayerType playerType = PlayerType.DefaultPhone;
 
     public override SaveData VersionUp()
     {

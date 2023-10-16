@@ -90,6 +90,14 @@ public class GameManager : MonoBehaviour
             PlayerStatManager.Instance.upgrade = data.upgrade;
             PlayerStatManager.Instance.ChangePlayerType(data.playerType);
         }
+        else
+        {
+            BestScore = 0;
+            RamCount = 0;
+            Options = new();
+            PlayerStatManager.Instance.upgrade = new();
+            PlayerStatManager.Instance.ChangePlayerType(PlayerStatManager.PlayerType.DefaultPhone);
+        }
     }
 
     public void TogglePause()
