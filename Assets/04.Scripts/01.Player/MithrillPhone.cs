@@ -13,10 +13,26 @@ public class MithrillPhone : PlayerController
         moveCounter++;
         if (moveCount <= moveCounter)
         {
-            pos.x *= 2;
-            pos.z *= 2;
+            pos += prevMoveTo switch
+            {
+                MoveTo.Forward => new Vector3(0f, 0f, moveUpperInterval * 2),
+                MoveTo.Left => new Vector3(-moveSideInterval * 2, 0f, moveUpperInterval),
+                MoveTo.Right => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),
+                _ => new Vector3()
+            };
+            if(TileManager.CheckUnderTile(pos) == null) 
+            {
+                GameManager.Instance.ReleaseTrap();
+                pos += prevMoveTo switch
+                {
+                    MoveTo.Right => new Vector3(-moveSideInterval * 2, 0f, moveUpperInterval),
+                    MoveTo.Left => new Vector3(moveSideInterval * 2, 0f, moveUpperInterval),
+                    _ => new Vector3()
+                };
+            }
             moveCounter = 0;
         }
+
 
         if (pos.x == transform.position.x)
         {
@@ -27,14 +43,14 @@ public class MithrillPhone : PlayerController
             GameManager.Instance.CurScore += scoreFactor / 2;
         }
 
-        pos.y += 1.8f;
-        var ts = TileManager.CheckUnderTile(pos);
-        if (ts != null)
-        {
-            ts.GetPos();
-            if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-                pos.y -= 1.4f;
-        }
+        pos.y = 2f;
+        //var ts = TileManager.CheckUnderTile(pos);
+        //if (ts != null)
+        //{
+        //    ts.GetPos();
+        //    if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+        //        pos.y -= 1.4f;
+        //}
 
         
 
@@ -56,10 +72,10 @@ public class MithrillPhone : PlayerController
         }
         tileManager.SpawnTile();
         tileManager.CheckAllTiles();
-
         if (tileManager.PlayerLineCounter % timerDecreaseFactor == 0)
         {
             timerScripts.DecreaseMaxTime();
         }
+        timerScripts.ResetTimer();
     }
 }

@@ -33,14 +33,14 @@ public class BananaPhoneScript : PlayerController
             GameManager.Instance.CurScore += scoreFactor / 2;
         }
 
-        pos.y += 1.8f;
+        pos.y = 2f;
         var ts = TileManager.CheckUnderTile(pos);
-        if (ts != null)
-        {
-            ts.GetPos();
-            if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-                pos.y -= 1.4f;
-        }
+        //if (ts != null)
+        //{
+        //    ts.GetPos();
+        //    if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+        //        pos.y -= 1.4f;
+        //}
 
         if ((timerScripts.curMaxTime / 2f) < timerScripts.Timer)
         {

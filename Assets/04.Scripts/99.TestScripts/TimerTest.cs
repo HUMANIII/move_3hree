@@ -25,14 +25,15 @@ public class TimerTest : MonoBehaviour
         pauseBtn.onClick.AddListener(Pause);
         //endPannel = GameObject.FindGameObjectWithTag("Pannel");
         bestScoreText.text = "BestScore = " + gm.BestScore.ToString();
-        if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-        {
-            moveButtons.SetActive(true);
-        }
-        else
-        {
-            moveButtons.SetActive(false);
-        }
+        moveButtons.SetActive(true);
+        //if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+        //{
+        //    moveButtons.SetActive(true);
+        //}
+        //else
+        //{
+        //    moveButtons.SetActive(false);
+        //}
     }
     private void Update()
     {

@@ -32,9 +32,9 @@ public class UIManager : MonoBehaviour
         var Panel = GameObject.FindGameObjectWithTag("Pannel");
         if(Panel != null)
         {
-            Tutopopup = Panel.transform.GetChild(4).gameObject;
-            Settingpopup = Panel.transform.GetChild(5).gameObject;
-            Shoppopup = Panel.transform.GetChild(6).gameObject;
+            Tutopopup = Panel.transform.GetChild(3).gameObject;
+            Settingpopup = Panel.transform.GetChild(4).gameObject;
+            Shoppopup = Panel.transform.GetChild(5).gameObject;
         }
     }
 

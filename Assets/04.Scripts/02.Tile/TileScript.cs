@@ -46,6 +46,12 @@ public class TileScript : MonoBehaviour
             tileManager.DestroyTiles.Add(gameObject);
             gameObject.SetActive(false);
         }
+
+        //if (player.transform.position.z - transform.position.z >= tileManager.UpperInterval * 2f - 0.1f)
+        //{
+        //    tileManager.DestroyTiles.Add(gameObject);
+        //    gameObject.SetActive(false);
+        //}
     }
 
     public virtual void CheckPlayerRange()

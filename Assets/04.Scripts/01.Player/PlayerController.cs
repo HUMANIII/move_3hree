@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     protected PlayerStatManager playerStatManager;
     protected Collider cr;
     protected int knockbackCounter = 0;
+    protected MoveTo prevMoveTo;
     
     public int timerDecreaseFactor = 10; 
     public int scoreFactor = 10;
@@ -82,38 +83,38 @@ public class PlayerController : MonoBehaviour
         {
             tileManager.ActiveOverclock();
         }
-            var gm = GameManager.Instance;
+        var gm = GameManager.Instance;
         if ((gm.State & (GameManager.States.IsGameOver | GameManager.States.IsPause)) != 0)
             return;
 
-        if(((gm.Options & GameManager.Settings.ControllWithButton) == 0) && Input.GetMouseButtonDown(0)) 
-        { 
-            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-            TileScript tileScript = null;
+        //if(((gm.Options & GameManager.Settings.ControllWithButton) == 0) && Input.GetMouseButtonDown(0)) 
+        //{ 
+        //    Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        //    TileScript tileScript = null;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 999f))
-                hit.collider.TryGetComponent(out tileScript);
+        //    if (Physics.Raycast(ray, out RaycastHit hit, 999f))
+        //        hit.collider.TryGetComponent(out tileScript);
 
-            if (tileScript != null)
-            {
-                if((gm.State & GameManager.States.IsTrapped) != 0) 
-                {
-                    var ht = TileManager.CheckUnderTile(transform.position) as HoldTile;
-                    if (ht != null) 
-                    { 
-                        ht.Struggle();
-                    }
-                }
-                else if(tileScript.CanMove)                
-                {
-                    if(tileScript as TrapTileScript != null) 
-                    {
-                        gm.IsTrapped();
-                    }
-                    MovePosition(tileScript.GetPos());                    
-                }
-            }
-        }
+        //    if (tileScript != null)
+        //    {
+        //        if((gm.State & GameManager.States.IsTrapped) != 0) 
+        //        {
+        //            var ht = TileManager.CheckUnderTile(transform.position) as HoldTile;
+        //            if (ht != null) 
+        //            { 
+        //                ht.Struggle();
+        //            }
+        //        }
+        //        else if(tileScript.CanMove)                
+        //        {
+        //            if(tileScript as TrapTileScript != null) 
+        //            {
+        //                gm.IsTrapped();
+        //            }
+        //            MovePosition(tileScript.GetPos());                    
+        //        }
+        //    }
+        //}
 
         //testCode
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -145,14 +146,14 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.CurScore += scoreFactor / 2;
         }
 
-        pos.y += 1.8f;
+        pos.y = 2f;
         var ts = TileManager.CheckUnderTile(pos);
-        if(ts != null) 
-        {
-            ts.GetPos();
-            if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-                pos.y -= 1.4f;
-        }
+        //if(ts != null) 
+        //{
+        //    ts.GetPos();
+        //    if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
+        //        pos.y -= 1.4f;
+        //}
 
         if((timerScripts.curMaxTime / 2f) < timerScripts.Timer)
         {
@@ -163,7 +164,6 @@ public class PlayerController : MonoBehaviour
             overclockActiveCounter = 0;
         }
         MoveObjectAndTriggerEvent(pos);
-
         if (overclockActiveCounter >= overclockActiveCount) 
         {
             tileManager.ActiveOverclock();
@@ -187,8 +187,9 @@ public class PlayerController : MonoBehaviour
     public void MoveWithButton(MoveTo where) 
     {
         var gm = GameManager.Instance;
-        if ((gm.Options & GameManager.Settings.ControllWithButton) == 0)
-            return;
+        //if ((gm.Options & GameManager.Settings.ControllWithButton) == 0)
+        //    return;
+        prevMoveTo = where;
 
         Vector3 pos = transform.position;
         if ((gm.State & GameManager.States.IsTrapped) != 0)
@@ -227,7 +228,7 @@ public class PlayerController : MonoBehaviour
     public void Knockback()
     {
         var kc = Mathf.Clamp(knockbackCounter, 0, 1);
-        var knockbackRange = moveUpperInterval * (kc + 1) * 2 * obstructionFactor;
+        var knockbackRange = moveUpperInterval * (kc + 2) * 2 * obstructionFactor;
         var pos = transform.position;
         pos.z -= knockbackRange;
         MoveObjectAndTriggerEvent(pos);
@@ -238,7 +239,7 @@ public class PlayerController : MonoBehaviour
     protected void MoveObjectAndTriggerEvent(Vector3 newPosition)
     {
         transform.position = newPosition;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.8f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
         foreach (Collider collider in colliders)
         {
             var kb = collider.GetComponent<KnockbackTile>();
