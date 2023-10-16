@@ -7,6 +7,13 @@ TagManager:
   - TileManager
   - Tile
   - Timer
+  - Pannel
+  - UIManager
+  - Tuto
+  - Setting
+  - Shop
+  - PlayerStatManager
+  - StageManager
   layers:
   - Default
   - TransparentFX
