@@ -259,6 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1235eba4bcad52a48b1feea0e20c47cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 4
+  stage: 3
   clickCount: 3
 --- !u!1 &6017758404450277105
 GameObject:

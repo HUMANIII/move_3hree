@@ -219,8 +219,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4559605514125194}
-  - component: {fileID: 1457395421107463786}
   - component: {fileID: 3562510623091761700}
+  - component: {fileID: 1457395421107463786}
   m_Layer: 7
   m_Name: 01.HoleTile
   m_TagString: Tile
@@ -246,18 +246,6 @@ Transform:
   - {fileID: 4798197116534620}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1457395421107463786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991328963452212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b7c9373c7f01c45b19547f32cfd267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &3562510623091761700
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -280,6 +268,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c874fa2b3ce8f8246bc08b7b8a1c6c09, type: 3}
+--- !u!114 &1457395421107463786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991328963452212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b7c9373c7f01c45b19547f32cfd267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileType: 1
+  stage: 1
 --- !u!1 &107090390783734729
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public class TileScript : MonoBehaviour
     protected List<GameObject> nearTiles = new();
     protected GameObject player;
 
+    public TilePool.TileType tileType;
+    public int stage;
+
     public int LineNumber { get; set; } = 0;
     protected TileManager tileManager;
 
@@ -36,15 +39,14 @@ public class TileScript : MonoBehaviour
     public virtual void CheckTile()
     {
         CheckPlayerRange();
-        if (player.transform.position.z >= transform.position.z)
-        {
-            CanMove = false;
-        }
+        //if (player.transform.position.z >= transform.position.z)
+        //{
+        //    CanMove = false;
+        //}
 
         if (tileManager.PlayerLineCounter - LineNumber > 1)
         {
-            tileManager.DestroyTiles.Add(gameObject);
-            gameObject.SetActive(false);
+            tileManager.tilePool.UnsetTile(gameObject);
         }
 
         //if (player.transform.position.z - transform.position.z >= tileManager.UpperInterval * 2f - 0.1f)

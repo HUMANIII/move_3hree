@@ -393,9 +393,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c6bb45e01eb5240b4eb84b4cf5fea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 2
+  stage: 3
   warningSign: {fileID: 8870951124927004658}
   fallingObj: {fileID: 513628293220941227}
-  anounceTime: 2
+  anounceTime: 3
 --- !u!1 &6017758404450277105
 GameObject:
   m_ObjectHideFlags: 0

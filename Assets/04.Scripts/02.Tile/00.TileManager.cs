@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class TileManager : MonoBehaviour
 {
@@ -11,14 +12,11 @@ public class TileManager : MonoBehaviour
     private int curStageNumber = 1;
     public int nextStateScore;
 
-    private GameObject normalTile;
-    private GameObject holeTile;
+    public TilePool tilePool;
+
     private float holeTileSpawnRate;
-    private GameObject fallingObjectTile;
     private float fallingObjectTileSpawnRate;
-    private GameObject knockbackTile;
     private float knockbackTileSpawnRate;
-    private GameObject holdTile;
     private float holdTileSpawnRate;
 
     public GameObject battery;
@@ -32,7 +30,7 @@ public class TileManager : MonoBehaviour
     public int tileRow;
 
     public int maximunItemNumber = 2;
-    private int maximumTrapTile;
+    public int maximumTrapTile;
     public int TrapTileCount { get; set; }
     public int ItemCount { get; set; } = 0;
 
@@ -60,6 +58,7 @@ public class TileManager : MonoBehaviour
     private void Start()
     {
         tileColumn += GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().warnEarly;
+        tilePool.MakePools();
         StartGame();
     }
 
@@ -103,9 +102,9 @@ public class TileManager : MonoBehaviour
         {
             foreach (var tilePos in TilePoses)
             {
-                var tile = Instantiate(GetRandomTile(out bool isNormalTile), tilePos + new Vector3(0f, 0f, LineCounter * UpperInterval * 2), Quaternion.identity);
-                tiles.Add(tile);
-                tile.transform.localScale *= sizeFator;
+                var tile = GetRandomTile(out bool isNormalTile);
+                tile.transform.position = new Vector3(0f, 0f, LineCounter * UpperInterval * 2) + tilePos;
+                //tiles.Add(tile);
                 tile.SendMessage("Init", LineCounter,SendMessageOptions.DontRequireReceiver);
                 if(isNormalTile && !(LineCounter == 0))
                 {
@@ -123,11 +122,11 @@ public class TileManager : MonoBehaviour
                 Overclocked = false;
             }
         }
-        foreach(var obj in  DestroyTiles)
-        {
-            AllTiles.Remove(obj);
-            Destroy(obj);
-        }
+        //foreach(var obj in  DestroyTiles)
+        //{
+        //    AllTiles.Remove(obj);
+        //    Destroy(obj);
+        //}
     }
 
     public void CheckAllTiles()
@@ -150,7 +149,7 @@ public class TileManager : MonoBehaviour
     public void StartGame()
     {   
         SpawnTile();
-        //SetStage(stageNumber);
+        SetStage(curStageNumber);
         foreach (GameObject tile in AllTiles)
             tile.SendMessage("CheckPlayerRange", SendMessageOptions.DontRequireReceiver);
     }
@@ -160,7 +159,7 @@ public class TileManager : MonoBehaviour
         if (Overclocked || maximumTrapTile <= TrapTileCount || LineCounter == 0)
         {
             isNormal = true;
-            return normalTile;
+            return tilePool.SetTile(TilePool.TileType.normalTile, curStageNumber);
         }
 
         var rv = Random.value;
@@ -169,31 +168,31 @@ public class TileManager : MonoBehaviour
         {
             TrapTileCount++;
             isNormal = false;
-            return holeTile;
+            return tilePool.SetTile(TilePool.TileType.holeTile, curStageNumber);
         }
         rate += fallingObjectTileSpawnRate;
         if (rv < rate)
         {
             TrapTileCount++;
             isNormal = false;
-            return fallingObjectTile;
+            return tilePool.SetTile(TilePool.TileType.fallingObjectTile, curStageNumber);
         }
         rate += knockbackTileSpawnRate;
         if (rv < rate)
         {
             TrapTileCount++;
             isNormal = false;
-            return knockbackTile;
+            return tilePool.SetTile(TilePool.TileType.knockbackTile, curStageNumber);
         }
         rate += holdTileSpawnRate;
         if (rv < rate)
         {
             TrapTileCount++;
             isNormal = false;
-            return holdTile;
+            return tilePool.SetTile(TilePool.TileType.holdTile, curStageNumber);
         }
         isNormal = true;
-        return normalTile;
+        return tilePool.SetTile(TilePool.TileType.normalTile, curStageNumber);
     }
     
     private GameObject GetRandomItem()
@@ -232,14 +231,9 @@ public class TileManager : MonoBehaviour
     private void SetStage(int stage)
     {
         var si = StageManager.GetStageTileInfo(stage);
-        normalTile = si.normalTile;
-        holeTile = si.holeTile;
         holeTileSpawnRate = si.holeTileSpawnRate;
-        fallingObjectTile = si.fallingObjectTile;
         fallingObjectTileSpawnRate = si.fallingObjectTileSpawnRate;
-        knockbackTile = si.knockbackTile;
         knockbackTileSpawnRate = si.knockbackTileSpawnRate;
-        holdTile = si.holdTile;
         holdTileSpawnRate = si.holdTileSpawnRate;
         maximumTrapTile = si.maximumTrapTile;
         nextStateScore = si.nextStateScore;

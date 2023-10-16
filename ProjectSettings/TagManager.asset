@@ -13,6 +13,7 @@ TagManager:
   - Setting
   - Shop
   - PlayerStatManager
+  - StageManager
   layers:
   - Default
   - TransparentFX

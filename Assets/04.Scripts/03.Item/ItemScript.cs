@@ -24,6 +24,11 @@ public abstract class ItemScript : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        Destroy(gameObject);
+    }
+
     protected virtual void OnDestroy()
     {
         tileManager.ItemCount--;
