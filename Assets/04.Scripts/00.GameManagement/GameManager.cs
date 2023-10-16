@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
         State &= ~(States.IsGameOver | States.IsTrapped | States.IsPause);
         CurScore = 0;
@@ -87,7 +88,7 @@ public class GameManager : MonoBehaviour
             RamCount = data.ramCount;
             Options = data.options;
             PlayerStatManager.Instance.upgrade = data.upgrade;
-            PlayerStatManager.Instance.playerType = data.playerType;
+            PlayerStatManager.Instance.ChangePlayerType(data.playerType);
         }
     }
 
