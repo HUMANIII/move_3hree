@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     private GameObject Settingpopup;
     private GameObject Shoppopup;
 
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,10 +33,11 @@ public class UIManager : MonoBehaviour
         var Panel = GameObject.FindGameObjectWithTag("Pannel");
         if(Panel != null)
         {
-            Tutopopup = Panel.transform.GetChild(3).gameObject;
-            Settingpopup = Panel.transform.GetChild(4).gameObject;
-            Shoppopup = Panel.transform.GetChild(5).gameObject;
+            Tutopopup = Panel.transform.GetChild(4).gameObject;
+            Settingpopup = Panel.transform.GetChild(5).gameObject;
+            Shoppopup = Panel.transform.GetChild(6).gameObject;
         }
+
     }
 
     public void OnMainMenuButton()
@@ -66,6 +68,8 @@ public class UIManager : MonoBehaviour
     {
         SoundManager.Instance.ClickSound();
         Shoppopup.SetActive(false);
+        Shop_upgrade.SetActive(false);
+        Shop_char.SetActive(false);
     }
 
     public void OnExitButton()
@@ -97,5 +101,6 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.ClickSound();
         Settingpopup.SetActive(false);
     }
+
 
 }
