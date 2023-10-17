@@ -18,11 +18,6 @@ public class FallingObjTile : TrapTileScript
     }
     public void SetWarnSign()
     {
-        var trans = warningSign.transform;
-        trans.LookAt(player.transform);
-        var rot = trans.rotation.eulerAngles;
-        rot.x = 0;
-        trans.rotation = Quaternion.Euler(rot);
         warningSign.SetActive(true);
 
         isSignSetted = true;

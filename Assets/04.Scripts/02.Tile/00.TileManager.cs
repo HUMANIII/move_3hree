@@ -237,6 +237,7 @@ public class TileManager : MonoBehaviour
         holdTileSpawnRate = si.holdTileSpawnRate;
         maximumTrapTile = si.maximumTrapTile;
         nextStateScore = si.nextStateScore;
+        RenderSettings.skybox = si.skyBoxMaterial;
         SoundManager.Instance.PlayStageBGM(stage);
     }
 

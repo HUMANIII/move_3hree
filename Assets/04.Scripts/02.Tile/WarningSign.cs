@@ -25,8 +25,8 @@ public class WarningSign : MonoBehaviour
         if (go == player || go == fallingObj)
         {
             cldr.isTrigger = true;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-            GameManager.Instance.GameOver();
+            //rb.constraints = RigidbodyConstraints.FreezeAll;
+            //GameManager.Instance.GameOver();
             fallingObj.SetActive(true);
         }
     }

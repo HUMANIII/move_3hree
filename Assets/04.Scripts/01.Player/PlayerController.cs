@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     }
 
     protected Rigidbody rb;
-    protected Camera mainCam;
+    //protected Camera mainCam;
     protected TileManager tileManager;
     protected TimerScripts timerScripts;
     protected PlayerStatManager playerStatManager;
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     protected void Awake()
     {
-        mainCam = Camera.main;
+        //mainCam = Camera.main;
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
         playerStatManager = GameObject.FindGameObjectWithTag("PlayerStatManager").GetComponent<PlayerStatManager>();

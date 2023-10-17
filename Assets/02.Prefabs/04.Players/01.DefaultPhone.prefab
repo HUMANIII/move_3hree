@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2379712159070873326}
   - component: {fileID: 6763331237013564333}
   - component: {fileID: 1141239802683019943}
-  - component: {fileID: 3876890725657725758}
+  - component: {fileID: -6328192132732964675}
   m_Layer: 2
   m_Name: 01.DefaultPhone
   m_TagString: Player
@@ -77,12 +77,12 @@ MonoBehaviour:
   timerDecreaseFactor: 10
   scoreFactor: 10
   overclockActiveCount: 40
-  moveCount: 1
+  moveCount: 2
   warnEarly: 0
   obstructionFactor: 1
-  ramGatheringFactor: 1
+  ramGatheringFactor: 1.5
   maxTimeLimitCtrl: 0
---- !u!95 &3876890725657725758
+--- !u!95 &-6328192132732964675
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3281200740832557604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

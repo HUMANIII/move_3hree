@@ -17,6 +17,8 @@ public class StageManager : MonoBehaviour
         public GameObject holdTile;
         public float holdTileSpawnRate;
 
+        public Material skyBoxMaterial;
+
         public int maximumTrapTile;
 
         public int nextStateScore;
