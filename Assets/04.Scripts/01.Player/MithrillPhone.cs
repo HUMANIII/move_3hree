@@ -31,6 +31,12 @@ public class MithrillPhone : PlayerController
                 };
             }
             moveCounter = 0;
+
+            SoundManager.Instance.MoveSound(true);
+        }
+        else
+        {
+            SoundManager.Instance.MoveSound();
         }
 
 

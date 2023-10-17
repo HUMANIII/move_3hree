@@ -23,6 +23,8 @@ public class InGameUISetting : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         homeButton.onClick.AddListener(UIManager.Instance.OnMainMenuButton);
+        homeButton.onClick.AddListener(SoundManager.Instance.ClickSound);
         restartButton.onClick.AddListener(GameManager.Instance.GameReStart);
+        restartButton.onClick.AddListener(SoundManager.Instance.ClickSound);
     }
 }

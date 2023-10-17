@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour
             overclockActiveCounter = 0;
         }
         MoveObjectAndTriggerEvent(pos);
+        SoundManager.Instance.MoveSound();
         if (overclockActiveCounter >= overclockActiveCount) 
         {
             tileManager.ActiveOverclock();

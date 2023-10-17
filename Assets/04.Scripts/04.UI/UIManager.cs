@@ -40,11 +40,14 @@ public class UIManager : MonoBehaviour
 
     public void OnMainMenuButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        SoundManager.Instance.ClickSound();
+        SoundManager.Instance.MoveToMainMenu();
+        SceneManager.LoadScene("MainMenu 1");
     }
     
     public void OnStartButton()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if(gm != null)
         {
@@ -55,36 +58,43 @@ public class UIManager : MonoBehaviour
 
     public void OnShopButton()
     {
+        SoundManager.Instance.ClickSound();
         Shoppopup.SetActive(true);
     }
 
     public void CloseShoppopup()
     {
+        SoundManager.Instance.ClickSound();
         Shoppopup.SetActive(false);
     }
 
     public void OnExitButton()
     {
+        SoundManager.Instance.ClickSound();
         Application.Quit();
     }
 
     public void OnTutoPopup()
     {
+        SoundManager.Instance.ClickSound();
         Tutopopup.SetActive(true);
     }
 
     public void CloseTutoPopup()
     {
+        SoundManager.Instance.ClickSound();
         Tutopopup.SetActive(false);
     }
 
     public void OnSettingPopup()
     {
+        SoundManager.Instance.ClickSound(); 
         Settingpopup.SetActive(true);
     }
 
     public void CloseSettingPopup()
     {
+        SoundManager.Instance.ClickSound();
         Settingpopup.SetActive(false);
     }
 

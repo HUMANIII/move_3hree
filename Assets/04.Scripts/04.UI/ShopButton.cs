@@ -76,6 +76,7 @@ public class ShopButton : MonoBehaviour
 
     public void UpgradeMaxTime()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UpgradeMaxTimePrice <= gm.RamCount)
         {
@@ -91,6 +92,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UpgradeBatteryItem()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UpgradeBatteryItemPrice <= gm.RamCount)
         {
@@ -106,6 +108,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UpgradeRamItem()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UpgradeRamItemPrice <= gm.RamCount)
         {
@@ -121,6 +124,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UpgradeKnockbackResist()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UpgradeKnockbackResistPrice <= gm.RamCount)
         {
@@ -136,6 +140,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UpgradeOverclockEfficiency()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UpgradeOverclockEfficiencyPrice <= gm.RamCount)
         {
@@ -151,6 +156,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UpgradeOverclockOptimization()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UpgradeOverclockOptimizationPrice <= gm.RamCount)
         {
@@ -166,6 +172,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UnlockJailbreakedPhone()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UnlockJailbreakedPhonePrice <= gm.RamCount)
         {
@@ -181,6 +188,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UnlockGreenApplePhone()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UnlockGreenApplePhonePrice <= gm.RamCount)
         {
@@ -196,6 +204,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UnlockBananaPhone()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UnlockBananaPhonePrice <= gm.RamCount)
         {
@@ -211,6 +220,7 @@ public class ShopButton : MonoBehaviour
     }
     public void UnlockMithrillPhone()
     {
+        SoundManager.Instance.ClickSound();
         var gm = GameManager.Instance;
         if (UnlockMithrillPhonePrice <= gm.RamCount)
         {

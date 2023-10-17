@@ -14,6 +14,7 @@ public class ChangePlayer : MonoBehaviour
     private void Start()
     {
         btn.onClick.AddListener(PlayerStatManager.Instance.TestMethod);
+        btn.onClick.AddListener(SoundManager.Instance.ClickSound);
     }
 
 }

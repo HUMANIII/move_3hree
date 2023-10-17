@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {        
+        SoundManager.Instance.GameOver();
         State |= States.IsGameOver;
         BestScore = Mathf.Max(BestScore, CurScore);
         SaveData();

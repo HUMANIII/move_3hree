@@ -50,8 +50,8 @@ public class BananaPhoneScript : PlayerController
         {
             overclockActiveCounter = 0;
         }
+        SoundManager.Instance.MoveSound();
         MoveObjectAndTriggerEvent(pos);
-
         if (overclockActiveCounter >= overclockActiveCount)
         {
             tileManager.ActiveOverclock();

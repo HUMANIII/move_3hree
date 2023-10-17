@@ -17,6 +17,7 @@ public class PausePage : MonoBehaviour
 
     private void Resume()
     {
+        SoundManager.Instance.ClickSound();
         gameObject.SetActive(false);
         GameManager.Instance.TogglePause();
     }

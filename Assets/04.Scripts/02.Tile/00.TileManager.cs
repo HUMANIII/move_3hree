@@ -237,6 +237,7 @@ public class TileManager : MonoBehaviour
         holdTileSpawnRate = si.holdTileSpawnRate;
         maximumTrapTile = si.maximumTrapTile;
         nextStateScore = si.nextStateScore;
+        SoundManager.Instance.PlayStageBGM(stage);
     }
 
     public void ActiveOverclock()

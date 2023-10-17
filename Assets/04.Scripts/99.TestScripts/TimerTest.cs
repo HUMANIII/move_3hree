@@ -50,6 +50,7 @@ public class TimerTest : MonoBehaviour
 
     private void Pause()
     {
+        SoundManager.Instance.ClickSound();
         pausePage.SetActive(true);
         GameManager.Instance.TogglePause();
     }
