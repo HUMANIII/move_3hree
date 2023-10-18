@@ -102,7 +102,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   stage: 2
-  effects: []
+  effects:
+  - {fileID: 198297418966626338, guid: 28f031731bde7304699fb9d08f07498d, type: 3}
+  - {fileID: 198032251219402368, guid: a866b6400b710fa4b8d82f2d8e105133, type: 3}
+  - {fileID: 198256505731947616, guid: 9760821691aa8aa4da1d5ce9c0edacc8, type: 3}
+  - {fileID: 198297482278303354, guid: 6fbdc10d280ccd94fae70a2b8aa120bc, type: 3}
+  - {fileID: 198612339624913244, guid: 0ff0b5a44b50e424f94ae70d4fe3dbbf, type: 3}
 --- !u!1001 &3482263736895464814
 PrefabInstance:
   m_ObjectHideFlags: 0
