@@ -36,7 +36,7 @@ namespace QuantumTek.QuantumUI
         [Header("Scene Transition Variables")]
         [Tooltip("How to load the scene.")]
         public QUI_LoadType loadType;
-        public static string sceneToLoad = "";
+        public static string sceneToLoad = "GameScene";
         [Tooltip("The name of the loading scene, if the type is LoadingScene.")]
         public string loadingSceneName = "";
         [Tooltip("The name of the transition animation to play when entering a scene.")]

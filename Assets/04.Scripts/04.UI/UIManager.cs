@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
         {
             //Tutopopup = Panel.transform.GetChild(4).gameObject;
             //Settingpopup = Panel.transform.GetChild(5).gameObject;
-            //Shoppopup = Panel.transform.GetChild(6).gameObject;
+            Shoppopup = Panel.transform.GetChild(5).gameObject;
         }
 
     }

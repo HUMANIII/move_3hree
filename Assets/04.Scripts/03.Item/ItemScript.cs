@@ -15,6 +15,10 @@ public abstract class ItemScript : MonoBehaviour
         player = plyr.GetComponentInChildren<Collider>();
         scoreFactor = plyr.GetComponent<PlayerController>().scoreFactor;
     }
+
+    private void Update()
+    {
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other == player)

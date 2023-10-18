@@ -1409,9 +1409,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 383749255}
-  - component: {fileID: 383749257}
+  - component: {fileID: 383749256}
   m_Layer: 0
-  m_Name: DashEffects
+  m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1432,7 +1432,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &383749257
+--- !u!114 &383749256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1450,6 +1450,8 @@ MonoBehaviour:
   - {fileID: 198068751275031892, guid: b1aa778cbcf909140bbe30724984a9e5, type: 3}
   - {fileID: 198973582133976054, guid: 91d7b0516fc06a349a76ba42baf53237, type: 3}
   - {fileID: 198473176142376620, guid: 5305d832fba400d47ae09b32cc84986c, type: 3}
+  ramEffect: {fileID: 198896921063854162, guid: 84ae17915b469ee46a2fb682f80ed515, type: 3}
+  batteryEffect: {fileID: 198368701946964184, guid: b520340e34214824099c32912bb26bba, type: 3}
 --- !u!1 &406069373
 GameObject:
   m_ObjectHideFlags: 0
@@ -4380,8 +4382,8 @@ MonoBehaviour:
   StageManager: {fileID: 1299320874}
   nextStateScore: 0
   tilePool: {fileID: 292426473}
-  battery: {fileID: 7860067089900168265, guid: 4b43a5ba67fcfb6458324835b2edbcb2, type: 3}
-  ram: {fileID: 6495671172325337939, guid: a0eb710c4f378d84d8bba7197686b7e7, type: 3}
+  battery: {fileID: 7860067089900168265, guid: 11f102f1bf04ca4449159291f3823e6f, type: 3}
+  ram: {fileID: 6495671172325337939, guid: 57dcec9cc6619b6489bc7c5f56ce512b, type: 3}
   sizeFator: 2
   tileColumn: 7
   tileRow: 5

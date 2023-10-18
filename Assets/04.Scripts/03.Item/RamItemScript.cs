@@ -32,6 +32,7 @@ public class RamItemScript : ItemScript
         var gm = GameManager.Instance;
         var counter = (factor / (gm.CurScore / scoreFactor)) + defaultAmount;
         gm.RamCount += (int)(Mathf.Clamp(counter, minAmount, maxAmount) * ramGatheringFactor);
+        EffectPool.RamEffect(transform.position);
     }
 
     protected override void OnDestroy()

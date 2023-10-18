@@ -25,5 +25,6 @@ public class BatteryItemScript : ItemScript
         {
             player.GetComponentInParent<BananaPhoneScript>().StackBattery();
         }
+        EffectPool.BatteryEffect(transform.position);
     }
 }

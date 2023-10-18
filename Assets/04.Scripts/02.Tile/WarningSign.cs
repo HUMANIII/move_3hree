@@ -21,20 +21,17 @@ public class WarningSign : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var go = collision.gameObject;
-        if (go == player || go == fallingObj)
-        {
-            cldr.isTrigger = true;
-            //rb.constraints = RigidbodyConstraints.FreezeAll;
-            //GameManager.Instance.GameOver();
-            fallingObj.SetActive(true);
-        }
+        
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player)
+        var objs = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var obj in objs)
         {
-            
+            if (other.gameObject == obj)
+            {
+                fallingObj.SetActive(true);
+            }
         }
     }
 }
