@@ -1400,6 +1400,56 @@ Transform:
   - {fileID: 202946004}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &383749254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 383749255}
+  - component: {fileID: 383749257}
+  m_Layer: 0
+  m_Name: DashEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &383749255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383749254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3, y: 0.29999998, z: 39.836}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383749257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383749254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045ec887e3b1da84c889773c22384193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashList:
+  - {fileID: 198453203807914442, guid: 3f43845488a4a974380129c3924b0855, type: 3}
+  - {fileID: 198472046996112406, guid: d96922704a17d334ab5560e6b72744b0, type: 3}
+  - {fileID: 198068751275031892, guid: b1aa778cbcf909140bbe30724984a9e5, type: 3}
+  - {fileID: 198973582133976054, guid: 91d7b0516fc06a349a76ba42baf53237, type: 3}
+  - {fileID: 198473176142376620, guid: 5305d832fba400d47ae09b32cc84986c, type: 3}
 --- !u!1 &406069373
 GameObject:
   m_ObjectHideFlags: 0
@@ -5745,3 +5795,4 @@ SceneRoots:
   - {fileID: 101950691}
   - {fileID: 102356237}
   - {fileID: 563371709}
+  - {fileID: 383749255}

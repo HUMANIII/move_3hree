@@ -17,7 +17,6 @@ public class HoleTile : TrapTileScript
                 var pos = transform.position;
                 pos.y += 0.5f;
                 Instantiate(effects[index], pos, Quaternion.Euler(-90f, 0f, 0f));
-                Debug.LogError("er");
             }
         }
     }

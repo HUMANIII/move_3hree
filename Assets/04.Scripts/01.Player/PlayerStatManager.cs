@@ -20,11 +20,12 @@ public class PlayerStatManager : MonoBehaviour
     }        
     public enum PlayerType
     {
-        DefaultPhone = 0,
+        DefaultPhone,
         JailbreakedPhone,
         GreenApplePhone,
         BananaPhone,
         MithrillPhone, 
+        Nums
     }
 
     public class Upgrade

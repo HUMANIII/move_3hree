@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     {
         Forward,
         Right,
-        Left
+        Left,
+        Back
     }
     
     protected Rigidbody rb;
@@ -125,6 +126,7 @@ public class PlayerController : MonoBehaviour
         {
             overclockActiveCounter = 0;
         }
+        DashPool.DashEffect(prevMoveTo, transform.position);
         MoveObjectAndTriggerEvent(pos);
         SoundManager.Instance.MoveSound();
         if (overclockActiveCounter >= overclockActiveCount) 
