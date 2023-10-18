@@ -16,7 +16,7 @@ public class FallingObjectEffect : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (delTime < timer)
+        if (delTime < timer &&((GameManager.Instance.State & GameManager.States.IsGameOver) == 0))
         {
             GameManager.Instance.GameOver();
         }

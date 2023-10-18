@@ -3,50 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using QuantumTek.QuantumUI;
 
 public class ShopButton : MonoBehaviour
 {
-    public UIMatching ui;
+    //public UIMatching ui;
 
     public Button UpgradeMaxTimeBtn; 
     public int UpgradeMaxTimePrice;
-    public MaskedMaterial maxTimeBar;
+    public QUI_Bar maxTimeBar;
 
     public Button UpgradeBatteryItemBtn; 
     public int UpgradeBatteryItemPrice;
-    public MaskedMaterial batteryBar;
+    public QUI_Bar batteryBar;
 
     public Button UpgradeRamItemBtn; 
     public int UpgradeRamItemPrice;
-    public MaskedMaterial ramBar;
+    public QUI_Bar ramBar;
 
     public Button UpgradeKnockbackResistBtn; 
     public int UpgradeKnockbackResistPrice;
-    public MaskedMaterial knockbackBar;
+    public QUI_Bar knockbackBar;
 
     public Button UpgradeOverclockEfficiencyBtn; 
     public int UpgradeOverclockEfficiencyPrice;
-    public MaskedMaterial overclockEfficiencyBar;
+    public QUI_Bar overclockEfficiencyBar;
 
     public Button UpgradeOverclockOptimizationBtn; 
     public int UpgradeOverclockOptimizationPrice;
-    public MaskedMaterial overclockOptimizationBar;
+    public QUI_Bar overclockOptimizationBar;
 
     public Button UnlockJailbreakedPhoneBtn; 
     public int UnlockJailbreakedPhonePrice;
-    public MaskedMaterial jailbreakBar;
+    public GameObject jailbreak;
 
     public Button UnlockGreenApplePhoneBtn; 
     public int UnlockGreenApplePhonePrice;
-    public MaskedMaterial GreenAppleBar;
+    public GameObject GreenApple;
 
     public Button UnlockBananaPhoneBtn; 
     public int UnlockBananaPhonePrice;
-    public MaskedMaterial bananaBar;
+    public GameObject banana;
 
     public Button UnlockMithrillPhoneBtn; 
     public int UnlockMithrillPhonePrice;
-    public MaskedMaterial mithrillBar;
+    public GameObject mithrill;
 
     public Button Btn; 
     public int Price;
@@ -85,7 +86,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UpgradeMaxTimePrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -101,7 +101,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UpgradeBatteryItemPrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -117,7 +116,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UpgradeRamItemPrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -133,7 +131,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UpgradeKnockbackResistPrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -149,7 +146,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UpgradeOverclockEfficiencyPrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -165,7 +161,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UpgradeOverclockOptimizationPrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -180,8 +175,7 @@ public class ShopButton : MonoBehaviour
             {
                 gm.RamCount -= UnlockJailbreakedPhonePrice;
                 UpdateState();
-            }
-            ui.UpdateRamCounter();
+            }   
             return;
         }
         Anouncement(false);
@@ -197,7 +191,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UnlockGreenApplePhonePrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -213,7 +206,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UnlockBananaPhonePrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -229,7 +221,6 @@ public class ShopButton : MonoBehaviour
                 gm.RamCount -= UnlockMithrillPhonePrice;
                 UpdateState();
             }
-            ui.UpdateRamCounter();
             return;
         }
         Anouncement(false);
@@ -249,28 +240,35 @@ public class ShopButton : MonoBehaviour
         CalcValue(ref UpgradeOverclockEfficiencyPrice, psm.upgrade.overclockEfficiency);
         CalcValue(ref UpgradeOverclockOptimizationPrice, psm.upgrade.overclockOptimization);
 
-        maxTimeBar.RemovedSegments = maxTimeBar.SegmentCount - psm.upgrade.maxTime;
-        batteryBar.RemovedSegments = batteryBar.SegmentCount - psm.upgrade.batteryItem;
-        ramBar.RemovedSegments = ramBar.SegmentCount - psm.upgrade.ramItem;
-        overclockEfficiencyBar.RemovedSegments = overclockEfficiencyBar.SegmentCount - psm.upgrade.overclockEfficiency;
-        overclockOptimizationBar.RemovedSegments = overclockOptimizationBar.SegmentCount - psm.upgrade.overclockOptimization;
+        maxTimeBar.fillAmount = psm.upgrade.maxTime - psm.maxTimeLimit / (float)psm.maxTimeLimit;
+        batteryBar.fillAmount = psm.upgrade.batteryItem - psm.batteryItemLimit / (float)psm.batteryItemLimit;
+        ramBar.fillAmount = psm.upgrade.ramItem - psm.ramItemLimit / (float)psm.ramItemLimit;
+        overclockEfficiencyBar.fillAmount = psm.upgrade.overclockEfficiency - psm.overclockEfficiencyLimit / (float)psm.overclockEfficiencyLimit;
+        overclockOptimizationBar.fillAmount = psm.upgrade.overclockOptimization - psm.overclockOptimizationLimit / (float)psm.overclockOptimizationLimit;
 
         SetBoolSegment(psm.upgrade.knockbackResist == 0, knockbackBar);
-        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.JailbreakedPhone) != 0, jailbreakBar);
-        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.GreenApplePhone) != 0, GreenAppleBar);
-        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.BananaPhone) != 0, bananaBar);
-        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.MithrillPhone) != 0, mithrillBar);
+
+        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.JailbreakedPhone) != 0, jailbreak);
+        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.GreenApplePhone) != 0, GreenApple);
+        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.BananaPhone) != 0, banana);
+        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.MithrillPhone) != 0, mithrill);
+
+        //ui.UpdateRamCounter();
     }
 
-    private void SetBoolSegment(bool info, MaskedMaterial mtr)
+    private void SetBoolSegment(bool info, QUI_Bar amount)
     {
         if(info)
         {
-            mtr.RemovedSegments = 0;
+            amount.fillAmount = 1;
         }
         else 
         {
-            mtr.RemovedSegments = 1;
+            amount.fillAmount = 0;
         }
+    }
+    private void SetBoolSegment(bool info, GameObject obj)
+    {
+        obj.SetActive(!info);
     }
 }
