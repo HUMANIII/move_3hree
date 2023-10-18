@@ -196,10 +196,6 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.Instance.IsTrapped();                
             }
-            if (ts.gameObject.GetComponent<KnockbackTile>() != null)
-            {
-                GameManager.Instance.ReleaseTrap();
-            }
         }
     }
 
@@ -220,10 +216,12 @@ public class PlayerController : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
         foreach (Collider collider in colliders)
         {
-            var kb = collider.GetComponent<KnockbackTile>();
+            var kb = collider.GetComponentInParent<KnockbackTile>();
             if(kb != null)
             {
                 Knockback();
+                Physics.Raycast(transform.position,(collider.transform.position - transform.position).normalized, out var hitInfo, 15f);
+                kb.ActiveEffect(hitInfo.point);
             }
         }
     }

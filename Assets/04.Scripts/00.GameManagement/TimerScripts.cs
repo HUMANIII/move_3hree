@@ -31,7 +31,7 @@ public class TimerScripts : MonoBehaviour
     }
     private void FixedUpdate()                    
     {
-        if ((GameManager.Instance.State & (GameManager.States.IsGameOver | GameManager.States.IsPause)) != 0)
+        if ((GameManager.Instance.State & (GameManager.States.IsGameOver | GameManager.States.IsPause | GameManager.States.IsTrapped)) != 0)
             return;
 
         Timer -= Time.deltaTime;        
