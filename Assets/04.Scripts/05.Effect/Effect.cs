@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class FallingObjectEffect : MonoBehaviour
 {
-    private ParticleSystem _particleSystem;
+    private ParticleSystem effect;
     private float timer;
     private float delTime;
     public float timerInterval = 1f;
     private void Awake()
     {
-        _particleSystem = GetComponent<ParticleSystem>();        
+        effect = GetComponent<ParticleSystem>();        
     }
 
     private void Update()
     {
         timer += Time.deltaTime;
-        if (delTime > timer)
+        if (delTime < timer)
         {
             GameManager.Instance.GameOver();
         }
@@ -24,6 +24,8 @@ public class FallingObjectEffect : MonoBehaviour
 
     private void OnEnable()
     {
+        effect.Stop();
+        effect.Play();
         timer = Time.time;
         delTime = Time.time + timerInterval;
     }

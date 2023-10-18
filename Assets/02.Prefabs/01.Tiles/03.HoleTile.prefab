@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4559605514125194}
   - component: {fileID: 3562510623091761700}
-  - component: {fileID: 1457395421107463786}
+  - component: {fileID: -815895515244453923}
   m_Layer: 7
   m_Name: 03.HoleTile
   m_TagString: Tile
@@ -163,7 +163,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c874fa2b3ce8f8246bc08b7b8a1c6c09, type: 3}
---- !u!114 &1457395421107463786
+--- !u!114 &-815895515244453923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,11 +172,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991328963452212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b7c9373c7f01c45b19547f32cfd267, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b857b8fe3bcc42499840c3dabaa2a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 1
   stage: 3
+  effects:
+  - {fileID: 198038708294147840, guid: 403ba10f9c34c2641b9562b836683af4, type: 3}
+  - {fileID: 198046116442395862, guid: 9b73965788031f7448c0933558f1a0ad, type: 3}
+  - {fileID: 198895403433560382, guid: 954765aff137cea46bf8120261b80099, type: 3}
+  - {fileID: 198052119433049416, guid: 1d864d7c4083b9e4daa3a5b19b5ccd32, type: 3}
+  - {fileID: 198724499637059262, guid: f3e566858e518c84ca166a69d759d1ad, type: 3}
 --- !u!1 &107090390783734729
 GameObject:
   m_ObjectHideFlags: 0

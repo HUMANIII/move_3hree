@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     protected int knockbackCounter = 0;
     protected MoveTo prevMoveTo;
     [SerializeField] protected ParticleSystem chainedEffect;
+    [SerializeField] protected ParticleSystem fallDownEffect;
 
     protected Animator animator;
     
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
         
         if (transform.position.y < -0.5f && (gm.State & GameManager.States.IsGameOver) == 0)
         {
-            gm.GameOver();
+            fallDownEffect.gameObject.SetActive(true);
         }
     }
 
