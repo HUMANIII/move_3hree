@@ -20,7 +20,7 @@ public class HoldTile : TrapTileScript
 
         if(clickCounter >= clickCount)
         {
-            GameManager.Instance.ReleaseTrap();
+            player.GetComponent<PlayerController>().ReleaseHold();
             Debug.Log("Released");
         }        
     }

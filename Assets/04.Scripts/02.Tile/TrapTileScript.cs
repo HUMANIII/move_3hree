@@ -12,11 +12,6 @@ public class TrapTileScript : TileScript
         {
             tileManager.TrapTileCount--;
         }
-
-        //if (player.transform.position.z - transform.position.z >= tileManager.UpperInterval *  2f - 0.1f)
-        //{
-        //    tileManager.TrapTileCount--;
-        //}
     }
 
     private void OnTriggerEnter(Collider other)

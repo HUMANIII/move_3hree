@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,15 +9,15 @@ public class PlayerController : MonoBehaviour
         Right,
         Left
     }
-
+    
     protected Rigidbody rb;
-    //protected Camera mainCam;
     protected TileManager tileManager;
     protected TimerScripts timerScripts;
     protected PlayerStatManager playerStatManager;
     protected Collider cr;
     protected int knockbackCounter = 0;
     protected MoveTo prevMoveTo;
+    [SerializeField] protected ParticleSystem chainedEffect;
 
     protected Animator animator;
     
@@ -35,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public int overclockActiveCount = 40;
     protected int overclockActiveCounter;
 
-    public int moveCount = 1;
+    [SerializeField] protected int moveCount = 1;
     protected int moveCounter = 0;
 
     public int warnEarly = 0;
@@ -48,7 +43,6 @@ public class PlayerController : MonoBehaviour
 
     protected void Awake()
     {
-        //mainCam = Camera.main;
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         timerScripts = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
         playerStatManager = GameObject.FindGameObjectWithTag("PlayerStatManager").GetComponent<PlayerStatManager>();
@@ -90,36 +84,6 @@ public class PlayerController : MonoBehaviour
         if ((gm.State & (GameManager.States.IsGameOver | GameManager.States.IsPause)) != 0)
             return;
 
-        //if(((gm.Options & GameManager.Settings.ControllWithButton) == 0) && Input.GetMouseButtonDown(0)) 
-        //{ 
-        //    Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        //    TileScript tileScript = null;
-
-        //    if (Physics.Raycast(ray, out RaycastHit hit, 999f))
-        //        hit.collider.TryGetComponent(out tileScript);
-
-        //    if (tileScript != null)
-        //    {
-        //        if((gm.State & GameManager.States.IsTrapped) != 0) 
-        //        {
-        //            var ht = TileManager.CheckUnderTile(transform.position) as HoldTile;
-        //            if (ht != null) 
-        //            { 
-        //                ht.Struggle();
-        //            }
-        //        }
-        //        else if(tileScript.CanMove)                
-        //        {
-        //            if(tileScript as TrapTileScript != null) 
-        //            {
-        //                gm.IsTrapped();
-        //            }
-        //            MovePosition(tileScript.GetPos());                    
-        //        }
-        //    }
-        //}
-
-        //testCode
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveWithButton(MoveTo.Forward);
@@ -137,7 +101,7 @@ public class PlayerController : MonoBehaviour
     protected virtual void MovePosition(Vector3 pos)
     {
         var gm = GameManager.Instance;
-        if ((gm.State & GameManager.States.IsTrapped) != 0)
+        if ((gm.State & (GameManager.States.IsTrapped | GameManager.States.IsHolded)) != 0)
             return;
 
         if (pos.x == transform.position.x)
@@ -150,13 +114,7 @@ public class PlayerController : MonoBehaviour
         }
 
         pos.y = 2f;
-        var ts = TileManager.CheckUnderTile(pos);
-        //if(ts != null) 
-        //{
-        //    ts.GetPos();
-        //    if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-        //        pos.y -= 1.4f;
-        //}
+        //var ts = TileManager.CheckUnderTile(pos);
 
         if((timerScripts.curMaxTime / 2f) < timerScripts.Timer)
         {
@@ -191,12 +149,10 @@ public class PlayerController : MonoBehaviour
     public void MoveWithButton(MoveTo where) 
     {
         var gm = GameManager.Instance;
-        //if ((gm.Options & GameManager.Settings.ControllWithButton) == 0)
-        //    return;
         prevMoveTo = where;
 
         Vector3 pos = transform.position;
-        if ((gm.State & GameManager.States.IsTrapped) != 0)
+        if ((gm.State & GameManager.States.IsHolded) != 0)
         {
             var ht = TileManager.CheckUnderTile(pos) as HoldTile;
             if(ht != null)
@@ -230,7 +186,13 @@ public class PlayerController : MonoBehaviour
         if (ts != null)         
         {
             ts.GetPos();
-            if(ts.GetComponent<TrapTileScript>() != null)
+            if(ts.GetComponent<HoldTile>() != null)
+            {
+                GameManager.Instance.IsHolded();
+                chainedEffect.gameObject.SetActive(true);
+                chainedEffect.Play();
+            }
+            else if(ts.GetComponent<TrapTileScript>() != null)
             {
                 GameManager.Instance.IsTrapped();                
             }
@@ -243,12 +205,12 @@ public class PlayerController : MonoBehaviour
 
     public void Knockback()
     {
+        ReleaseHold();
         var kc = Mathf.Clamp(knockbackCounter, 0, 1);
         var knockbackRange = moveUpperInterval * (kc + 2) * 2 * obstructionFactor;
         var pos = transform.position;
         pos.z -= knockbackRange;
         MoveObjectAndTriggerEvent(pos);
-        //tileManager.CheckAllTiles();
         knockbackCounter++;
     }
 
@@ -264,6 +226,13 @@ public class PlayerController : MonoBehaviour
                 Knockback();
             }
         }
+    }
+
+    public void ReleaseHold()
+    {
+        chainedEffect.Stop();
+        chainedEffect.gameObject.SetActive(false);
+        GameManager.Instance.ReleaseHold();
     }
 
     protected virtual void SpecificEffect()

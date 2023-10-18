@@ -6,7 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance = null;
 
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource BGM;
+    [SerializeField] private AudioSource SFX;
 
     [SerializeField] private List<AudioClip> Move;
     [SerializeField] private AudioClip MoveSpecific;
@@ -29,34 +30,33 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         MoveToMainMenu();
-        audioSource.loop = true;
+        BGM.loop = true;
     }
         
     public void MoveToMainMenu()
     {
-        audioSource.Stop();
-        audioSource.clip = MainMenuBGM;
-        audioSource.Play();
+        BGM.Stop();
+        BGM.clip = MainMenuBGM;
+        BGM.Play();
     }
 
     public void PlayStageBGM(int stage)
     {
-        audioSource.Stop();
+        BGM.Stop();
         if (PlayerStatManager.Instance.playerType == PlayerStatManager.PlayerType.JailbreakedPhone)
         {
-            audioSource.clip = StageBGMJailbreak[stage - 1];
+            BGM.clip = StageBGMJailbreak[stage - 1];
         }
         else
         {
-            audioSource.clip = StageBGM[stage - 1];
+            BGM.clip = StageBGM[stage - 1];
         }
-        audioSource.Play();
+        BGM.Play();
     }
 
     public void MoveSound(bool isSpecific = false)
@@ -71,16 +71,16 @@ public class SoundManager : MonoBehaviour
             PlayerStatManager.PlayerType.MithrillPhone when isSpecific == true => MoveSpecific,
             _ => Move[0]
         };
-        audioSource.PlayOneShot(moveSound);
+        SFX.PlayOneShot(moveSound);
     }
 
     public void GameOver()
     {
-        audioSource.PlayOneShot(Die);
+        SFX.PlayOneShot(Die);
     }
 
     public void ClickSound()
     {
-        audioSource.PlayOneShot(Select);
+        SFX.PlayOneShot(Select);
     }
 }

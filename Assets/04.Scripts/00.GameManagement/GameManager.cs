@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         IsGameOver = 1,
         IsPause = 2,
         IsTrapped = 4,
+        IsHolded = 8,
     }
 
     public static GameManager Instance = null;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
         State &= ~States.IsGameOver;
         State &= ~States.IsTrapped;
+        State &= ~States.IsHolded;
         CurScore = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -119,5 +121,14 @@ public class GameManager : MonoBehaviour
     public void ReleaseTrap()
     {
         State &= ~States.IsTrapped;
+    }
+    public void IsHolded()
+    {
+        State |= States.IsHolded; 
+    }
+
+    public void ReleaseHold()
+    {
+        State &= ~States.IsHolded;
     }
 }

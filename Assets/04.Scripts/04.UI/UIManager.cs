@@ -68,8 +68,6 @@ public class UIManager : MonoBehaviour
     {
         SoundManager.Instance.ClickSound();
         Shoppopup.SetActive(false);
-        Shop_upgrade.SetActive(false);
-        Shop_char.SetActive(false);
     }
 
     public void OnExitButton()
