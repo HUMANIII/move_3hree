@@ -85,7 +85,6 @@ public class ShopButton : MonoBehaviour
 
     public void SetButton(UnityEngine.Events.UnityAction action, bool IsUpgrade = true)
     {
-        Debug.Log("tlqkf");
         confirmWindow.gameObject.SetActive(true);
         confirmBtn.onClick.AddListener(action);
         buyMessageTitle. text = IsUpgrade ? "업데이트 요청" : "";

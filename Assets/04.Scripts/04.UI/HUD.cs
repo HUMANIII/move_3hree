@@ -53,7 +53,7 @@ public class HUD : MonoBehaviour
     private void Pause()
     {
         SoundManager.Instance.ClickSound();
-        pausePage.SetActive(true);
+        //pausePage.gameObject.SetActive(true);
         GameManager.Instance.TogglePause();
     }
 

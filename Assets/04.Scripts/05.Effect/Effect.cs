@@ -19,6 +19,7 @@ public class FallingObjectEffect : MonoBehaviour
         if (delTime < timer &&((GameManager.Instance.State & GameManager.States.IsGameOver) == 0))
         {
             GameManager.Instance.GameOver();
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
         }
     }
 

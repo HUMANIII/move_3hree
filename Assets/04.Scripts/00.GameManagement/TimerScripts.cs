@@ -26,7 +26,8 @@ public class TimerScripts : MonoBehaviour
         ResetTimer();
         if (playerType == PlayerStatManager.PlayerType.BananaPhone)
         {
-            Timer = 120f;
+            curMaxTime = 120f;
+            Timer = curMaxTime;
         }
     }
     private void FixedUpdate()                    
