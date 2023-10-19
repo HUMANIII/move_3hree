@@ -14,7 +14,7 @@ public class UIMatching : MonoBehaviour
     //public Button ExitBtn;
     //public Button shopBtn;
     //public Button shopCloseBtn;
-    //public Button RunBtn;
+    public Button RunBtn;
     //public Button TutoBtn;
     //public Button TutoCloseBtn;
 
@@ -47,7 +47,7 @@ public class UIMatching : MonoBehaviour
         //ExitBtn.onClick.AddListener(um.OnExitButton);
         //shopBtn.onClick.AddListener(um.OnShopButton);
         //TutoBtn.onClick.AddListener(um.OnTutoPopup);
-        //RunBtn.onClick.AddListener(um.OnStartButton);
+        RunBtn.onClick.AddListener(um.OnStartButton);
         //settingCloseBtn.onClick.AddListener(um.CloseSettingPopup);
         //shopCloseBtn.onClick.AddListener(um.CloseShoppopup);
         //TutoCloseBtn.onClick.AddListener(um.CloseTutoPopup);

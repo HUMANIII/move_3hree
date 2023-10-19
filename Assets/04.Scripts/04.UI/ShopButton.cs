@@ -53,7 +53,7 @@ public class ShopButton : MonoBehaviour
     public GameObject mithrill;
 
     public Button confirmBtn; 
-    public QUI_Window confirmWindow;
+    public GameObject confirmWindow;
     public TextMeshProUGUI buyMessageTitle;
     public TextMeshProUGUI buyMessage;
 
@@ -85,7 +85,7 @@ public class ShopButton : MonoBehaviour
 
     public void SetButton(UnityEngine.Events.UnityAction action, bool IsUpgrade = true)
     {
-        confirmWindow.gameObject.SetActive(true);
+        confirmWindow.SetActive(true);
         confirmBtn.onClick.AddListener(action);
         buyMessageTitle. text = IsUpgrade ? "업데이트 요청" : "";
         buyMessage.text = IsUpgrade ? "해당 업데이트를 다운로드 하겠습니까?" : "해당 기기를 구매하시겠습니까?";
