@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using QuantumTek.QuantumUI;
+using TMPro;
 
 public class ShopButton : MonoBehaviour
 {
-    //public UIMatching ui;
-
     public Button UpgradeMaxTimeBtn; 
     public int UpgradeMaxTimePrice;
     public QUI_Bar maxTimeBar;
+    public TextMeshProUGUI maxTimeMsg;
 
     public Button UpgradeBatteryItemBtn; 
     public int UpgradeBatteryItemPrice;
     public QUI_Bar batteryBar;
+    public TextMeshProUGUI batteryMsg;
 
     public Button UpgradeRamItemBtn; 
     public int UpgradeRamItemPrice;
     public QUI_Bar ramBar;
+    public TextMeshProUGUI ramMsg;
 
     public Button UpgradeKnockbackResistBtn; 
     public int UpgradeKnockbackResistPrice;
@@ -27,10 +29,12 @@ public class ShopButton : MonoBehaviour
     public Button UpgradeOverclockEfficiencyBtn; 
     public int UpgradeOverclockEfficiencyPrice;
     public QUI_Bar overclockEfficiencyBar;
+    public TextMeshProUGUI overclockEfficiencyMsg;
 
     public Button UpgradeOverclockOptimizationBtn; 
     public int UpgradeOverclockOptimizationPrice;
     public QUI_Bar overclockOptimizationBar;
+    public TextMeshProUGUI overclockOptimizationMsg;
 
     public Button UnlockJailbreakedPhoneBtn; 
     public int UnlockJailbreakedPhonePrice;
@@ -48,21 +52,26 @@ public class ShopButton : MonoBehaviour
     public int UnlockMithrillPhonePrice;
     public GameObject mithrill;
 
-    public Button Btn; 
-    public int Price;
+    public Button confirmBtn; 
+    public QUI_Window confirmWindow;
+    public TextMeshProUGUI buyMessageTitle;
+    public TextMeshProUGUI buyMessage;
+
+    public TextMeshProUGUI RamCounter1;
+    public TextMeshProUGUI RamCounter2;
 
     private void Awake()
     {
-        UpgradeMaxTimeBtn.onClick.AddListener(UpgradeMaxTime);
-        UpgradeBatteryItemBtn.onClick.AddListener(UpgradeBatteryItem);
-        UpgradeRamItemBtn.onClick.AddListener(UpgradeRamItem);
-        UpgradeKnockbackResistBtn.onClick.AddListener(UpgradeKnockbackResist);
-        UpgradeOverclockEfficiencyBtn.onClick.AddListener(UpgradeOverclockEfficiency);
-        UpgradeOverclockOptimizationBtn.onClick.AddListener(UpgradeOverclockOptimization);
-        UnlockJailbreakedPhoneBtn.onClick.AddListener(UnlockJailbreakedPhone);
-        UnlockGreenApplePhoneBtn.onClick.AddListener(UnlockGreenApplePhone);
-        UnlockBananaPhoneBtn.onClick.AddListener(UnlockBananaPhone);
-        UnlockMithrillPhoneBtn.onClick.AddListener(UnlockMithrillPhone);   
+        UpgradeMaxTimeBtn.onClick.AddListener(() => SetButton(UpgradeMaxTime));
+        UpgradeBatteryItemBtn.onClick.AddListener(() => SetButton(UpgradeBatteryItem));
+        UpgradeRamItemBtn.onClick.AddListener(() => SetButton(UpgradeRamItem));
+        UpgradeKnockbackResistBtn.onClick.AddListener(() => SetButton(UpgradeKnockbackResist));
+        UpgradeOverclockEfficiencyBtn.onClick.AddListener(() => SetButton(UpgradeOverclockEfficiency));
+        UpgradeOverclockOptimizationBtn.onClick.AddListener(() => SetButton(UpgradeOverclockOptimization));
+        UnlockJailbreakedPhoneBtn.onClick.AddListener(() => SetButton(UnlockJailbreakedPhone, false));
+        UnlockGreenApplePhoneBtn.onClick.AddListener(() => SetButton(UnlockGreenApplePhone, false));
+        UnlockBananaPhoneBtn.onClick.AddListener(() => SetButton(UnlockBananaPhone, false));
+        UnlockMithrillPhoneBtn.onClick.AddListener(() => SetButton(UnlockMithrillPhone, false));   
     }
 
     private void Start()
@@ -74,6 +83,14 @@ public class ShopButton : MonoBehaviour
         value *= (int)Mathf.Pow( 2, raise );
     }
 
+    public void SetButton(UnityEngine.Events.UnityAction action, bool IsUpgrade = true)
+    {
+        Debug.Log("tlqkf");
+        confirmWindow.gameObject.SetActive(true);
+        confirmBtn.onClick.AddListener(action);
+        buyMessageTitle. text = IsUpgrade ? "업데이트 요청" : "";
+        buyMessage.text = IsUpgrade ? "해당 업데이트를 다운로드 하겠습니까?" : "해당 기기를 구매하시겠습니까?";
+    }
     public void UpgradeMaxTime()
     {
         SoundManager.Instance.ClickSound();
@@ -252,7 +269,13 @@ public class ShopButton : MonoBehaviour
         SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.BananaPhone) != 0, banana);
         SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.MithrillPhone) != 0, mithrill);
 
-        //ui.UpdateRamCounter();
+        RamCounter1.text = GameManager.Instance.RamCount.ToString();
+        RamCounter2.text = GameManager.Instance.RamCount.ToString();
+        maxTimeMsg.text = UpgradeMaxTimePrice.ToString();
+        batteryMsg.text = UpgradeBatteryItemPrice.ToString();
+        ramMsg.text = UpgradeRamItemPrice.ToString();
+        overclockEfficiencyMsg.text = UpgradeOverclockEfficiencyPrice.ToString();
+        overclockOptimizationMsg.text = UpgradeOverclockOptimizationPrice.ToString();   
     }
 
     private void SetBoolSegment(bool info, QUI_Bar amount)

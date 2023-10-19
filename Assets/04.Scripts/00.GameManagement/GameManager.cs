@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int BestScore { get; private set; }
     public int CurScore { get; set; } = 0;
     public int RamCount { get; set; } = 0;
+    public int prevRamCount;
 
     public Settings Options { get; private set; }
     public States State { get; private set; }
@@ -65,8 +66,8 @@ public class GameManager : MonoBehaviour
 
     public void GameReStart()
     {
+        prevRamCount = RamCount;
         State |= States.IsLoading;
-        Debug.Log($"로딩 시작{State}");
         State &= ~States.IsGameOver;
         State &= ~States.IsTrapped;
         State &= ~States.IsHolded;

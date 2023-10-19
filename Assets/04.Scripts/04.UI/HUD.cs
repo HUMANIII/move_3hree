@@ -10,10 +10,10 @@ public class HUD : MonoBehaviour
     public Slider timerSlier;
     public TextMeshProUGUI scoreText;
     //public TextMeshProUGUI bestScoreText;
+    public TextMeshProUGUI ramText;
     private TimerScripts timerScripts;
     public GameObject endPannel;    
-    public GameObject pausePage;    
-    public GameObject moveButtons;    
+    public GameObject pausePage;      
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class HUD : MonoBehaviour
         pauseBtn.onClick.AddListener(Pause);
         //endPannel = GameObject.FindGameObjectWithTag("Pannel");
         //bestScoreText.text = "BestScore = " + gm.BestScore.ToString();
-        moveButtons.SetActive(true);
+        //moveButtons.SetActive(true);
         //if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
         //{
         //    moveButtons.SetActive(true);
@@ -40,7 +40,9 @@ public class HUD : MonoBehaviour
         var gm = GameManager.Instance;
         timerSlier.maxValue = timerScripts.curMaxTime;
         timerSlier.value = timerScripts.Timer;
-        scoreText.text = gm.CurScore.ToString();        
+        scoreText.text = gm.CurScore.ToString();       
+        ramText.text = (gm.RamCount - gm.prevRamCount).ToString();
+
         if((gm.State & GameManager.States.IsGameOver) != 0)
         {
             endPannel.SetActive(true);

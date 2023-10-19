@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     {
         SoundManager.Instance.ClickSound();
         SoundManager.Instance.MoveToMainMenu();
-        SceneManager.LoadScene("MainMenu 1");
+        SceneManager.LoadScene("MainMenu");
     }
     
     public void OnStartButton()

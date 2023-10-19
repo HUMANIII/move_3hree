@@ -7,11 +7,13 @@ public class PausePage : MonoBehaviour
 {
     public Button resume;
     public Button mainMenu;
+    public Button exit;
 
     private void Awake()
     {
         resume.onClick.AddListener(Resume);
         mainMenu.onClick.AddListener(MainMenu);
+        exit.onClick.AddListener(Exit);
         gameObject.SetActive(false);
     }
 
@@ -26,5 +28,10 @@ public class PausePage : MonoBehaviour
     {
         UIManager.Instance.OnMainMenuButton();
         GameManager.Instance.TogglePause();
+    }
+
+    public void Exit()
+    {
+        UIManager.Instance.OnExitButton();
     }
 }
