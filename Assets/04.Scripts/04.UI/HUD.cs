@@ -40,7 +40,7 @@ public class HUD : MonoBehaviour
         var gm = GameManager.Instance;
         timerSlier.maxValue = timerScripts.curMaxTime;
         timerSlier.value = timerScripts.Timer;
-        scoreText.text = gm.CurScore.ToString();       
+        scoreText.text = $"{gm.CurScore}M";       
         ramText.text = (gm.RamCount - gm.prevRamCount).ToString();
 
         if((gm.State & GameManager.States.IsGameOver) != 0)

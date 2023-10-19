@@ -15,13 +15,11 @@ public class HoldTile : TrapTileScript
 
     public void Struggle()
     {
-        Debug.Log("Struggled");
         clickCounter++;
 
         if(clickCounter >= clickCount)
         {
             player.GetComponent<PlayerController>().ReleaseHold();
-            Debug.Log("Released");
         }        
     }
 }

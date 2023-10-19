@@ -15,6 +15,6 @@ public class CameraSetting : MonoBehaviour
     {
         var player = GameObject.FindGameObjectWithTag("Player").transform;
         vc.Follow = player;
-        vc.LookAt = player;
+        //vc.LookAt = player;
     }
 }
