@@ -4,11 +4,11 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SaveDataVC = SaveDataV5;
+using SaveDataVC = SaveDataV6;
 
 public static class SaveLoadSystem
 {
-    public static int SaveDataVersion { get; } = 5;
+    public static int SaveDataVersion { get; } = 6;
     public static string SaveDirectory
     {
         get
@@ -69,6 +69,9 @@ public static class SaveLoadSystem
                     break;
                 case 5:
                     data = deserialize.Deserialize<SaveDataV5>(reader);
+                    break;
+                case 6:
+                    data = deserialize.Deserialize<SaveDataV6>(reader);
                     break;
             }
 

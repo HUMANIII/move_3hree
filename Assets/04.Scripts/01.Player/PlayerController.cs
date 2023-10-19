@@ -64,10 +64,13 @@ public class PlayerController : MonoBehaviour
     protected void FixedUpdate()
     {
         var gm = GameManager.Instance;
-        
-        if (transform.position.y < -0.5f && (gm.State & GameManager.States.IsGameOver) == 0)
+        if (transform.position.y < -0.5f && (gm.State & (GameManager.States.IsGameOver | GameManager.States.IsLoading)) == 0)
         {
             fallDownEffect.gameObject.SetActive(true);
+        }
+        if((gm.State & GameManager.States.IsGameOver) != 0)
+        {
+            Destroy(gameObject);
         }
     }
 

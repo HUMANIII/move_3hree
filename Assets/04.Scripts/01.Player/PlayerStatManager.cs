@@ -109,7 +109,6 @@ public class PlayerStatManager : MonoBehaviour
     {
         if (playerType != type)
         {
-            Debug.Log("PlayerChanged");
             playerType = type;
             player = playerList[(int)type];
         }

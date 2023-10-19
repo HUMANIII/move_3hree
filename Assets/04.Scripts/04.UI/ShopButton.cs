@@ -1,4 +1,3 @@
-using RengeGames.HealthBars;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,7 +38,7 @@ public class ShopButton : MonoBehaviour
 
     public Button UnlockGreenApplePhoneBtn; 
     public int UnlockGreenApplePhonePrice;
-    public GameObject GreenApple;
+    public GameObject greenApple;
 
     public Button UnlockBananaPhoneBtn; 
     public int UnlockBananaPhonePrice;
@@ -240,16 +239,16 @@ public class ShopButton : MonoBehaviour
         CalcValue(ref UpgradeOverclockEfficiencyPrice, psm.upgrade.overclockEfficiency);
         CalcValue(ref UpgradeOverclockOptimizationPrice, psm.upgrade.overclockOptimization);
 
-        maxTimeBar.fillAmount = psm.upgrade.maxTime - psm.maxTimeLimit / (float)psm.maxTimeLimit;
-        batteryBar.fillAmount = psm.upgrade.batteryItem - psm.batteryItemLimit / (float)psm.batteryItemLimit;
-        ramBar.fillAmount = psm.upgrade.ramItem - psm.ramItemLimit / (float)psm.ramItemLimit;
-        overclockEfficiencyBar.fillAmount = psm.upgrade.overclockEfficiency - psm.overclockEfficiencyLimit / (float)psm.overclockEfficiencyLimit;
-        overclockOptimizationBar.fillAmount = psm.upgrade.overclockOptimization - psm.overclockOptimizationLimit / (float)psm.overclockOptimizationLimit;
+        maxTimeBar.SetFill((psm.maxTimeLimit - psm.upgrade.maxTime) / (float)psm.maxTimeLimit);
+        batteryBar.SetFill((psm.batteryItemLimit - psm.upgrade.batteryItem) / (float)psm.batteryItemLimit);
+        ramBar.SetFill((psm.ramItemLimit - psm.upgrade.ramItem) / (float)psm.ramItemLimit);
+        overclockEfficiencyBar.SetFill((psm.overclockEfficiencyLimit - psm.upgrade.overclockEfficiency) / (float)psm.overclockEfficiencyLimit);
+        overclockOptimizationBar.SetFill((psm.overclockOptimizationLimit - psm.upgrade.overclockOptimization) / (float)psm.overclockOptimizationLimit);
 
         SetBoolSegment(psm.upgrade.knockbackResist == 0, knockbackBar);
 
         SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.JailbreakedPhone) != 0, jailbreak);
-        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.GreenApplePhone) != 0, GreenApple);
+        SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.GreenApplePhone) != 0, greenApple);
         SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.BananaPhone) != 0, banana);
         SetBoolSegment((psm.upgrade.phoneUnlockInfo & PlayerStatManager.PhoneUnlockInfo.MithrillPhone) != 0, mithrill);
 

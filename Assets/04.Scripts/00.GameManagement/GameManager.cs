@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SaveDataVC = SaveDataV5;
+using SaveDataVC = SaveDataV6;
 
 
 public class GameManager : MonoBehaviour
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         IsPause = 2,
         IsTrapped = 4,
         IsHolded = 8,
+        IsLoading = 16,
     }
 
     public static GameManager Instance = null;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         State &= ~(States.IsGameOver | States.IsTrapped | States.IsPause);
         CurScore = 0;
         LoadData();
+        State &= ~(States.IsLoading);
     }
 
     public void GameOver()
@@ -63,11 +65,14 @@ public class GameManager : MonoBehaviour
 
     public void GameReStart()
     {
+        State |= States.IsLoading;
+        Debug.Log($"로딩 시작{State}");
         State &= ~States.IsGameOver;
         State &= ~States.IsTrapped;
         State &= ~States.IsHolded;
         CurScore = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        State &= ~(States.IsLoading);
     }
 
     public void SaveData()
@@ -79,6 +84,10 @@ public class GameManager : MonoBehaviour
             options = Options,
             upgrade = PlayerStatManager.Instance.upgrade,
             playerType = PlayerStatManager.Instance.playerType,
+            soundState = SoundManager.Instance.soundState,
+            masterVolume = SoundManager.Instance.masterVolume,
+            BGMVolume = SoundManager.Instance.BGMVolume,
+            SFXVolume = SoundManager.Instance.SFXVolume,
         };
         SaveLoadSystem.Save(data, "saveData.Json");
     }
@@ -93,14 +102,24 @@ public class GameManager : MonoBehaviour
             Options = data.options;
             PlayerStatManager.Instance.upgrade = data.upgrade;
             PlayerStatManager.Instance.ChangePlayerType(data.playerType);
+            SoundManager.Instance.soundState = data.soundState;
+            SoundManager.Instance.masterVolume = data.masterVolume;
+            SoundManager.Instance.BGMVolume = data.BGMVolume;
+            SoundManager.Instance.SFXVolume = data.SFXVolume;
         }
         else
         {
             BestScore = 0;
             RamCount = 0;
             Options = new();
-            PlayerStatManager.Instance.upgrade = new();
+            var upgrade = new PlayerStatManager.Upgrade();
+            upgrade.phoneUnlockInfo = PlayerStatManager.PhoneUnlockInfo.DefaultPhone;
+            PlayerStatManager.Instance.upgrade = upgrade;
             PlayerStatManager.Instance.ChangePlayerType(PlayerStatManager.PlayerType.DefaultPhone);
+            SoundManager.Instance.soundState = 0;
+            SoundManager.Instance.masterVolume = 0;
+            SoundManager.Instance.BGMVolume = 0;
+            SoundManager.Instance.SFXVolume = 0;
         }
     }
 

@@ -72,7 +72,7 @@ public class SaveDataV4 : SaveDataV3
         upgrade = new();
     }
 
-    public PlayerStatManager.Upgrade upgrade;
+    public Upgrade upgrade;
 
     public override SaveData VersionUp()
     {
@@ -93,6 +93,30 @@ public class SaveDataV5 : SaveDataV4
     }
 
     public PlayerType playerType = PlayerType.DefaultPhone;
+
+    public override SaveData VersionUp()
+    {
+        var rtn = new SaveDataV6();
+        rtn.bestScore = bestScore;
+        rtn.ramCount = ramCount;
+        rtn.options = options;
+        rtn.upgrade = upgrade;
+        rtn.playerType = playerType;
+        return rtn;
+    }
+}
+public class SaveDataV6 : SaveDataV5
+{
+    public SaveDataV6()
+    {
+        Version = 6;
+    }
+
+    public SoundManager.SoundState soundState = 0;
+    public float masterVolume = 0;
+    public float BGMVolume = 0;
+    public float SFXVolume = 0;
+
 
     public override SaveData VersionUp()
     {

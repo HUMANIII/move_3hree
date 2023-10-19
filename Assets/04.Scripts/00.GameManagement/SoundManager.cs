@@ -1,11 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
+    [Flags]
+    public enum SoundState
+    {
+        None = 0,
+        MuteMaster = 1 << 0,
+        MuteBGM = 1 << 1,
+        MuteSFX = 1 << 2,
+    }
+
     public static SoundManager Instance = null;
 
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource BGM;
     [SerializeField] private AudioSource SFX;
 
@@ -17,6 +29,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private List<AudioClip> StageBGM;
     [SerializeField] private List<AudioClip> StageBGMJailbreak;
     [SerializeField] private AudioClip MainMenuBGM;
+
+    public SoundState soundState;
+    public float masterVolume;
+    public float BGMVolume;
+    public float SFXVolume;
 
     private void Awake()
     {
@@ -82,5 +99,35 @@ public class SoundManager : MonoBehaviour
     public void ClickSound()
     {
         SFX.PlayOneShot(Select);
+    }
+
+    public void SetSound(string name, float value)
+    {
+        audioMixer.SetFloat(name, value);
+    }
+
+    public void ToggleMute(string name)
+    {
+        switch(name)
+        {
+            case "Master":
+                soundState ^= SoundState.MuteMaster;
+                break;
+            case "BGM":
+                soundState ^= SoundState.MuteBGM;
+                break;
+            case "SFX":
+                soundState ^= SoundState.MuteSFX;
+                break;
+            default: break;
+        }
+
+        BGM.mute = (soundState & SoundState.MuteBGM) != 0;
+        SFX.mute = (soundState & SoundState.MuteSFX) != 0;
+        if((soundState & SoundState.MuteMaster) != 0)
+        {
+            BGM.mute = true;
+            SFX.mute = true;
+        }        
     }
 }
