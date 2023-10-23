@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5815,33 +5815,33 @@ MonoBehaviour:
     holdTile: {fileID: 5539101885611274806, guid: 26bc7b28db6f74f4d9673cb9df72a02f, type: 3}
     holdTileSpawnRate: 0
     skyBoxMaterial: {fileID: 2100000, guid: c82a334cf5a5e47978749c210cee72a7, type: 2}
-    maximumTrapTile: 5
-    nextStateScore: 1000
+    maximumTrapTile: 10
+    nextStateScore: 2000
   - name: Stage2
     normalTile: {fileID: 5539101885611274806, guid: 341a1188e3e9b4c4286276678438c8c3, type: 3}
     holeTile: {fileID: 1991328963452212, guid: 825b86b37aad9c144a822503ab5e3910, type: 3}
-    holeTileSpawnRate: 0.05
+    holeTileSpawnRate: 0.11
     fallingObjectTile: {fileID: 5539101885611274806, guid: b83ac9016999bc14eb837c212ba4205d, type: 3}
-    fallingObjectTileSpawnRate: 0.05
+    fallingObjectTileSpawnRate: 0.11
     knockbackTile: {fileID: 5539101885611274806, guid: d8fa5a8975d10e64d974d3484ad25d7a, type: 3}
-    knockbackTileSpawnRate: 0.05
+    knockbackTileSpawnRate: 0.11
     holdTile: {fileID: 5539101885611274806, guid: 721d84e231cc40046a71cd884e26a30c, type: 3}
-    holdTileSpawnRate: 0.05
+    holdTileSpawnRate: 0.11
     skyBoxMaterial: {fileID: 2100000, guid: 3a6db933fef1d4c759bf21220420505f, type: 2}
     maximumTrapTile: 6
-    nextStateScore: 2000
+    nextStateScore: 4000
   - name: Stage3
     normalTile: {fileID: 5539101885611274806, guid: 6346dd6dc3703004398ec80e039230c1, type: 3}
     holeTile: {fileID: 1991328963452212, guid: 0050ca46889824448b693dc71b06b71b, type: 3}
-    holeTileSpawnRate: 0.05
+    holeTileSpawnRate: 0.08
     fallingObjectTile: {fileID: 5539101885611274806, guid: d2f8bab5561428d4f9c14845ad904ad7, type: 3}
-    fallingObjectTileSpawnRate: 0.05
+    fallingObjectTileSpawnRate: 0.08
     knockbackTile: {fileID: 5539101885611274806, guid: 03d55136d4e492d4c8d8cdb91278b78c, type: 3}
     knockbackTileSpawnRate: 0
     holdTile: {fileID: 5539101885611274806, guid: 91d501cc30968fb4dac31583e5de116f, type: 3}
-    holdTileSpawnRate: 0.05
+    holdTileSpawnRate: 0.08
     skyBoxMaterial: {fileID: 2100000, guid: eac2ef371405749e0bd050b4c3272f16, type: 2}
-    maximumTrapTile: 7
+    maximumTrapTile: 10
     nextStateScore: 0
 --- !u!1 &1301020565
 GameObject:

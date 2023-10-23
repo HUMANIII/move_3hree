@@ -82,7 +82,7 @@ MonoBehaviour:
   scoreFactor: 10
   overclockActiveCount: 40
   moveCount: 1
-  warnEarly: 1
+  warnEarly: 4
   obstructionFactor: 1
   ramGatheringFactor: 1
   maxTimeLimitCtrl: 0.5
