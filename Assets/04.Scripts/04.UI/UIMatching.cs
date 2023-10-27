@@ -17,6 +17,7 @@ public class UIMatching : MonoBehaviour
     public Button RunBtn;
     //public Button TutoBtn;
     //public Button TutoCloseBtn;
+    [SerializeField] private GameObject[] tabs = new GameObject[0];
 
     public TextMeshProUGUI ramCounter;
     public TextMeshProUGUI dateCounter;
@@ -73,5 +74,17 @@ public class UIMatching : MonoBehaviour
         //    Debug.Log("Change MoveMode");
         //    GameManager.Instance.ToggleMoveOption();
         //}
+
+        if(Input.GetKeyDown(KeyCode.Escape)) 
+        { 
+            foreach(var tab in tabs) 
+            {
+                if (tab.activeSelf == true)
+                {
+                    return;
+                }
+            }
+            Application.Quit();
+        }
     }
 }

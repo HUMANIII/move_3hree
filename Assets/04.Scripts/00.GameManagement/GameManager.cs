@@ -13,18 +13,19 @@ public class GameManager : MonoBehaviour
     public enum Settings
     {
         None = 0,
-        ControllWithButton = 1
+        ControllWithButton = 1 << 0,
+        ControllWithScreenTouch = 1 << 1,
     }
 
     [Flags]
     public enum States
     {
         None = 0,
-        IsGameOver = 1,
-        IsPause = 2,
-        IsTrapped = 4,
-        IsHolded = 8,
-        IsLoading = 16,
+        IsGameOver = 1 << 0,
+        IsPause = 1 << 1,
+        IsTrapped = 1 << 2,
+        IsHolded = 1 << 3,
+        IsLoading = 1 << 4,
     }
 
     public static GameManager Instance = null;
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
     public int RamCount { get; set; } = 0;
     public int prevRamCount;
 
-    public Settings Options { get; private set; }
+    public Settings Options { get; set; }
     public States State { get; private set; }
 
     private void Awake()
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
         State &= ~(States.IsGameOver | States.IsTrapped | States.IsPause);
         CurScore = 0;
         LoadData();
-        State &= ~(States.IsLoading);
+        State &= ~(States.IsLoading);        
     }
 
     public void GameOver()
@@ -108,11 +109,12 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.BGMVolume = data.BGMVolume;
             SoundManager.Instance.SFXVolume = data.SFXVolume;
         }
+        /*
         else
         {
             BestScore = 0;
             RamCount = 0;
-            Options = new();
+            Options = Settings.ControllWithButton;
             var upgrade = new PlayerStatManager.Upgrade();
             upgrade.phoneUnlockInfo = PlayerStatManager.PhoneUnlockInfo.DefaultPhone;
             PlayerStatManager.Instance.upgrade = upgrade;
@@ -122,16 +124,12 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.BGMVolume = 0;
             SoundManager.Instance.SFXVolume = 0;
         }
+        */
     }
 
     public void TogglePause()
     {
         State ^= States.IsPause;
-    }
-
-    public void ToggleMoveOption()
-    {
-        Options ^= Settings.ControllWithButton;        
     }
     public void IsTrapped()
     {

@@ -13,7 +13,10 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI ramText;
     private TimerScripts timerScripts;
     public GameObject endPannel;    
-    public GameObject pausePage;      
+    public GameObject pausePage;     
+    
+    public GameObject ButtonController;
+    public GameObject ScreenController;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class HUD : MonoBehaviour
     {
         var gm = GameManager.Instance;
         pauseBtn.onClick.AddListener(Pause);
+        SetController();
         //endPannel = GameObject.FindGameObjectWithTag("Pannel");
         //bestScoreText.text = "BestScore = " + gm.BestScore.ToString();
         //moveButtons.SetActive(true);
@@ -57,17 +61,11 @@ public class HUD : MonoBehaviour
         GameManager.Instance.TogglePause();
     }
 
-    public void ToggleMoveOpt()
+    public void SetController()
     {
-        var gm = GameManager.Instance;
-        gm.ToggleMoveOption();
-        //if((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-        //{
-        //    moveButtons.SetActive(true);
-        //}
-        //else
-        //{
-        //    moveButtons.SetActive(false);
-        //}
+        var gm = GameManager.Instance.Options;
+        ButtonController.SetActive((gm & GameManager.Settings.ControllWithButton) != 0);
+        ScreenController.SetActive((gm & GameManager.Settings.ControllWithScreenTouch) != 0);
     }
+
 }

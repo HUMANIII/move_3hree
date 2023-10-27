@@ -15,6 +15,14 @@ public class PausePage : MonoBehaviour
         //gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            resume.onClick.Invoke();
+        }
+    }
+
     private void Resume()
     {
         SoundManager.Instance.ClickSound();

@@ -11,23 +11,4 @@ public class ChangePlayMode : MonoBehaviour
     {
         btn = GetComponent<Button>();
     }
-
-    private void Start()
-    {
-        btn.onClick.AddListener(GameManager.Instance.ToggleMoveOption);
-    }
-
-    public void ChangeMoveMode()        
-    {
-        var gm = GameManager.Instance;
-        gm.ToggleMoveOption();
-        if ((gm.Options & GameManager.Settings.ControllWithButton) != 0)
-        {
-            //moveButtons.SetActive(true);
-        }
-        else
-        {
-            //moveButtons.SetActive(false);
-        }
-    }
 }

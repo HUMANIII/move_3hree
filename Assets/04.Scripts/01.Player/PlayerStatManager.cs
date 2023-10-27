@@ -12,11 +12,11 @@ public class PlayerStatManager : MonoBehaviour
     [Flags]
     public enum PhoneUnlockInfo
     {
-        DefaultPhone = 1,
-        JailbreakedPhone = 2,
-        GreenApplePhone = 4,
-        BananaPhone = 8,
-        MithrillPhone = 16,
+        DefaultPhone = 1 << 0,
+        JailbreakedPhone = 1 << 1,
+        GreenApplePhone = 1 << 2,
+        BananaPhone = 1 << 3,
+        MithrillPhone = 1 << 4,
     }        
     public enum PlayerType
     {
