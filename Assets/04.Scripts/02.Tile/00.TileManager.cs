@@ -94,8 +94,9 @@ public class TileManager : MonoBehaviour
     {
         if(nextStateScore != 0 && nextStateScore < GameManager.Instance.CurScore)
         {
-            curStageNumber++;
+            curStageNumber++;            
             SetStage(curStageNumber);
+            Debug.Log(curStageNumber);
         }
         List<GameObject> tiles = new();
         while(LineCounter < PlayerLineCounter + tileColumn)
@@ -111,7 +112,7 @@ public class TileManager : MonoBehaviour
                     SpawnItem(tile);
                 }
                 AllTiles.Add(tile);
-            }            
+            }
             LineCounter++;
             if(Overclocked) 
             {

@@ -108,8 +108,7 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.masterVolume = data.masterVolume;
             SoundManager.Instance.BGMVolume = data.BGMVolume;
             SoundManager.Instance.SFXVolume = data.SFXVolume;
-        }
-        /*
+        }        
         else
         {
             BestScore = 0;
@@ -123,8 +122,7 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.masterVolume = 0;
             SoundManager.Instance.BGMVolume = 0;
             SoundManager.Instance.SFXVolume = 0;
-        }
-        */
+        }        
     }
 
     public void TogglePause()

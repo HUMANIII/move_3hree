@@ -158,7 +158,7 @@ MonoBehaviour:
   tileType: 2
   stage: 3
   warningSign: {fileID: 4581166105345731054}
-  fallingObj: {fileID: 0}
+  fallingObj: {fileID: 6103348844623442354}
   anounceTime: 3
 --- !u!1001 &1113823107760114675
 PrefabInstance:

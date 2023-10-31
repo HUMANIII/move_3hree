@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2379712159070873326}
   - component: {fileID: 6763331237013564333}
   - component: {fileID: 1141239802683019943}
-  - component: {fileID: -6328192132732964675}
   m_Layer: 2
   m_Name: 01.DefaultPhone
   m_TagString: Player
@@ -86,27 +85,6 @@ MonoBehaviour:
   obstructionFactor: 1
   ramGatheringFactor: 1.5
   maxTimeLimitCtrl: 0
---- !u!95 &-6328192132732964675
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752078592890140258}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 236b33d924a51b14e9f76890fa1d9894, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8191110790967783530
 GameObject:
   m_ObjectHideFlags: 0
@@ -10203,7 +10181,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: G1_Black
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4581718618250850183, guid: 8146374d820c3ac45baeed5014144363, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4581718618250850181, guid: 8146374d820c3ac45baeed5014144363, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

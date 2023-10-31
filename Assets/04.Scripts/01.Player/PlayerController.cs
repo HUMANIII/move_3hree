@@ -176,16 +176,17 @@ public class PlayerController : MonoBehaviour
             _ => new Vector3()
         };
         MovePosition(pos);
+        animator.SetTrigger("Move");
         switch (where)
         {
             case MoveTo.Forward:
-                animator.SetTrigger("MoveForward");
+                rb.rotation = Quaternion.Euler(0f, 0f, 0f);
                 break;
             case MoveTo.Right:
-                animator.SetTrigger("MoveRight");
+                rb.rotation = Quaternion.Euler(0f, 30f, 0f);
                 break;
             case MoveTo.Left:
-                animator.SetTrigger("MoveLeft");
+                rb.rotation = Quaternion.Euler(0f, -30f, 0f);
                 break;
         }
         var ts = TileManager.CheckUnderTile(transform.position);

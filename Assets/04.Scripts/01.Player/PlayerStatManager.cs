@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static PlayerStatManager;
+
 
 public class PlayerStatManager : MonoBehaviour
 {
