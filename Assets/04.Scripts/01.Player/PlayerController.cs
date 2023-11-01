@@ -190,8 +190,10 @@ public class PlayerController : MonoBehaviour
                 break;
         }
         var ts = TileManager.CheckUnderTile(transform.position);
+        Debug.Assert(ts != null);
         if (ts != null)         
         {
+            Debug.Log("In");
             ts.GetPos();
             if(ts.GetComponent<HoldTile>() != null)
             {

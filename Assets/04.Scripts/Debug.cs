@@ -85,6 +85,6 @@ public static class Debug
     [System.Diagnostics.Conditional("ENABLE_DEBUG_LOG")]
     public static void Assert(bool condition)
     {
-	if (!condition) throw new Exception();
+	    UnityEngine.Debug.Assert(condition);
     }
 }

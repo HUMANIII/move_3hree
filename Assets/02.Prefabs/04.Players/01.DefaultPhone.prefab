@@ -80,10 +80,10 @@ MonoBehaviour:
   timerDecreaseFactor: 10
   scoreFactor: 10
   overclockActiveCount: 40
-  moveCount: 2
+  moveCount: 1
   warnEarly: 2
   obstructionFactor: 1
-  ramGatheringFactor: 1.5
+  ramGatheringFactor: 1
   maxTimeLimitCtrl: 0
 --- !u!1 &8191110790967783530
 GameObject:
