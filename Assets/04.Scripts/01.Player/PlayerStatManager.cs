@@ -28,7 +28,7 @@ public class PlayerStatManager : MonoBehaviour
         Nums
     }
 
-    public class Upgrade
+    public struct Upgrade
     {
         public int maxTime;
         public int batteryItem;
@@ -118,7 +118,7 @@ public class PlayerStatManager : MonoBehaviour
         if(scene.name == "GameScene")
         {
             Instantiate(player,new Vector3(0f, 1.7f, 0f),Quaternion.Euler(0f,180f,0f));
-        } 
+        }
     }
 
     public bool UpgradeMaxTime()

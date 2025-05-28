@@ -9,21 +9,27 @@ public class BatteryItemScript : ItemScript
     public float decreaseAmount = 0.1f;
     public float defaultAmount = 0.5f;
 
+    private TimerScripts _ts;
+
+    private BananaPhoneScript _bananaPhoneScript;
+
     private void Start()
     {
         var ps = PlayerStatManager.Instance;
         defaultAmount += ps.upgrade.batteryItem * ps.batteryItemRate;
+        _ts ??= GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>();
+        _bananaPhoneScript ??= player.GetComponentInParent<BananaPhoneScript>();
     }
     protected override void ActiveEffect()
     {
         if(PlayerStatManager.Instance.playerType != PlayerStatManager.PlayerType.BananaPhone) 
         {
             var amount = defaultAmount - decreaseAmount * GameManager.Instance.CurScore / scoreFactor * factor;
-            GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScripts>().RestoreTime(Mathf.Clamp(amount, minAmount, defaultAmount));
+            _ts.RestoreTime(Mathf.Clamp(amount, minAmount, defaultAmount));
         }
         else
         {
-            player.GetComponentInParent<BananaPhoneScript>().StackBattery();
+            _bananaPhoneScript.StackBattery();
         }
         EffectPool.BatteryEffect(transform.position);
     }

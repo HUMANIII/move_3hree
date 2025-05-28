@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
+using static GameManager.States;
 
 public class TimerScripts : MonoBehaviour
 {
@@ -32,7 +29,7 @@ public class TimerScripts : MonoBehaviour
     }
     private void FixedUpdate()                    
     {
-        if ((GameManager.Instance.State & (GameManager.States.IsGameOver | GameManager.States.IsPause | GameManager.States.IsTrapped)) != 0)
+        if ((GameManager.Instance.State & (IsGameOver | IsPause | IsTrapped)) != 0)
             return;
 
         Timer -= Time.deltaTime;        

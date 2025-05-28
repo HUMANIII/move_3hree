@@ -23,9 +23,9 @@ public class EndPanel : MonoBehaviour
     private void OnEnable()
     {
         var gm = GameManager.Instance;
-        ramGot.text = $"¿©À¯ ¸Ş¸ğ¸® : {gm.RamCount - gm.prevRamCount}MB";
-        bestScore.text = $"ÃÖ°í ÀÌµ¿ °Å¸® : {gm.BestScore}M";
-        currentScore.text = $"ÀÌµ¿ °Å¸® : {gm.CurScore}M";
+        ramGot.text = $"ì—¬ìœ  ë©”ëª¨ë¦¬ : {gm.RamCount - gm.prevRamCount}MB";
+        bestScore.text = $"ìµœê³  ì´ë™ ê±°ë¦¬ : {gm.BestScore}M";
+        currentScore.text = $"ì´ë™ ê±°ë¦¬ : {gm.CurScore}M";
     }
 
     public void Restart()

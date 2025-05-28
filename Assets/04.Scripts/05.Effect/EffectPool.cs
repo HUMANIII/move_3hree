@@ -1,19 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerController;
 
 public class EffectPool : MonoBehaviour
 {
     [SerializeField] private ParticleSystem[] dashList;
-    private readonly static int dashCount = 20;
+    private const int dashCount = 20;
     private static int dashCounter = 0;
 
     [SerializeField] private ParticleSystem ramEffect;
-    private readonly static int ramCount = 20;
+    private const int ramCount = 20;
     private static int ramCounter = 0;
 
     [SerializeField] private ParticleSystem batteryEffect;
-    private readonly static int batteryCount = 20;
+    private const int batteryCount = 20;
     private static int batteryCounter = 0;
 
     private static List<GameObject> dashObjects = new();
@@ -46,7 +46,7 @@ public class EffectPool : MonoBehaviour
         }
     }
 
-    public static void DashEffect(PlayerController.MoveTo moveTo, Vector3 pos)
+    public static void DashEffect(MoveTo moveTo, Vector3 pos)
     {
         dashCounter++;
         if(dashCount == dashCounter)
@@ -55,10 +55,11 @@ public class EffectPool : MonoBehaviour
         }
         var rot = moveTo switch
         {
-            PlayerController.MoveTo.Forward => new Vector3(0f, 0f, 0f),
-            PlayerController.MoveTo.Right => new Vector3(0f, 60f, 0f),
-            PlayerController.MoveTo.Left => new Vector3(0f, -60f, 0f),
-            PlayerController.MoveTo.Back => new Vector3(0f, 180f, 0f),
+            MoveTo.Forward => new Vector3(0f, 0f, 0f),
+            MoveTo.Right => new Vector3(0f, 60f, 0f),
+            MoveTo.Left => new Vector3(0f, -60f, 0f),
+            MoveTo.Back => new Vector3(0f, 180f, 0f),
+            _ => new Vector3(0f, 180f, 0f)
         };
 
         var effect = dashObjects[dashCounter];

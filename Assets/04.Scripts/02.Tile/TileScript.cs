@@ -46,7 +46,7 @@ public class TileScript : MonoBehaviour
 
         if (tileManager.PlayerLineCounter - LineNumber > 1)
         {
-            tileManager.tilePool.UnsetTile(gameObject);
+            tileManager.tilePool.UnsetTile(this);
         }
 
         //if (player.transform.position.z - transform.position.z >= tileManager.UpperInterval * 2f - 0.1f)

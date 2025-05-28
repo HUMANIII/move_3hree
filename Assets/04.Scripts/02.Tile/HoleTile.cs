@@ -11,13 +11,13 @@ public class HoleTile : TrapTileScript
         var objs = GameObject.FindGameObjectsWithTag("Player");
         foreach (var obj in objs)
         {
-            if (other.gameObject == obj)
-            {
-                var index = (int)PlayerStatManager.Instance.playerType;
-                var pos = transform.position;
-                pos.y += 0.5f;
-                Instantiate(effects[index], pos, Quaternion.Euler(-90f, 0f, 0f));
-            }
+            if (other.gameObject != obj) 
+                continue;
+            
+            var index = (int)PlayerStatManager.Instance.playerType;
+            var pos = transform.position;
+            pos.y += 0.5f;
+            Instantiate(effects[index], pos, Quaternion.Euler(-90f, 0f, 0f));
         }
     }
 }

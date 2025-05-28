@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
         {
             gm.GameReStart();
         }
-        SceneManager.LoadScene("GameScene");
+        //SceneManager.LoadScene("GameScene");
     }
 
     public void OnShopButton()

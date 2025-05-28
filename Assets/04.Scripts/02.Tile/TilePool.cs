@@ -13,80 +13,135 @@ public class TilePool : MonoBehaviour
         holdTile,
     }
 
-    public TileManager tileManager;
-    public StageManager stageManager;
+    private const int InitOffset = 4;
 
-    public GameObject alltiles;
-    public List<GameObject> normalTiles = new();
-    public List<GameObject> holeTiles = new();
-    public List<GameObject> fallingObjectTiles = new();
-    public List<GameObject> knockbackTiles = new();
-    public List<GameObject> holdTiles = new();
+    [SerializeField] private TileManager tileManager;
+    [SerializeField] private StageManager stageManager;
+
+    public List<TileScript> ActiveTile { get; set; } = new();
+    [SerializeField] private List<Transform> normalTilePos = new();
+    [SerializeField] private List<Transform> holeTilesPos = new();
+    [SerializeField] private List<Transform> fallingObjectTilesPos = new();
+    [SerializeField] private List<Transform> knockbackTilesPos = new();
+    [SerializeField] private List<Transform> holdTilesPos = new();
+
+    private List<List<TileScript>> normalTiles = new();
+    private int normalTileCount = 0;
+    private List<List<TileScript>> holeTiles = new();
+    private int  holeTileCount = 0;
+    private List<List<TileScript>> fallingObjectTiles = new();
+    private int fallingObjectTileCount = 0;
+    private List<List<TileScript>> knockbackTiles = new();
+    private int knockbackTileCount = 0;
+    private List<List<TileScript>> holdTiles = new();
+    private int holdTileCount = 0;
 
     public void MakePools()
     {
         var stageTileInfos = stageManager.stageTileInfos;
         for (int i = 0; i < stageTileInfos.Length; i++)
         {
-            for(int j = 0; j < (tileManager.tileColumn + 4)* tileManager.tileRow + stageTileInfos[i].maximumTrapTile; j++)
+            var normalTileTemp = new List<TileScript>();
+            normalTiles.Add(normalTileTemp);
+
+            int createTileCount = (tileManager.tileColumn + InitOffset) * tileManager.tileRow + stageTileInfos[i].maximumTrapTile;
+            for (int j = 0; j < createTileCount; j++)
             {
-                var tile = Instantiate(stageTileInfos[i].normalTile);
-                tile.transform.localScale *= tileManager.sizeFator;
-                tile.transform.SetParent(normalTiles[i].transform);
-                tile.SetActive(false);
+                var tileScript = InstanceTile(stageTileInfos[i].normalTile, normalTilePos[i]);
+                normalTileTemp.Add(tileScript);
             }
+
+            //타일을 담을 컨테이너 생성
+            var holeTileTemp = new List<TileScript>();
+            holeTiles.Add(holeTileTemp);
+            var fallingObjectTileTemp = new List<TileScript>();
+            fallingObjectTiles.Add(fallingObjectTileTemp);
+            var knockbackTileTemp = new List<TileScript>();
+            knockbackTiles.Add(knockbackTileTemp);
+            var holdTileTemp = new List<TileScript>();
+            holdTiles.Add(holdTileTemp);
 
             for (int j = 0; j < stageTileInfos[i].maximumTrapTile; j++)
             {
-                var tile = Instantiate(stageTileInfos[i].holeTile);
-                tile.transform.localScale *= tileManager.sizeFator;
-                tile.transform.SetParent(holeTiles[i].transform);
-                tile.SetActive(false);
-                tile = Instantiate(stageTileInfos[i].fallingObjectTile);
-                tile.transform.localScale *= tileManager.sizeFator;
-                tile.transform.SetParent(fallingObjectTiles[i].transform);
-                tile.SetActive(false);
-                tile = Instantiate(stageTileInfos[i].knockbackTile);
-                tile.transform.localScale *= tileManager.sizeFator;
-                tile.transform.SetParent(knockbackTiles[i].transform);
-                tile.SetActive(false);
-                tile = Instantiate(stageTileInfos[i].holdTile);
-                tile.transform.localScale *= tileManager.sizeFator;
-                tile.transform.SetParent(holdTiles[i].transform);
-                tile.SetActive(false);
+                var tileScript = InstanceTile(stageTileInfos[i].holeTile, holeTilesPos[i]);
+                holeTileTemp.Add(tileScript);
+                tileScript = InstanceTile(stageTileInfos[i].fallingObjectTile, fallingObjectTilesPos[i]);
+                fallingObjectTileTemp.Add(tileScript);
+                tileScript = InstanceTile(stageTileInfos[i].knockbackTile, knockbackTilesPos[i]);
+                knockbackTileTemp.Add(tileScript);
+                tileScript = InstanceTile(stageTileInfos[i].holdTile, holdTilesPos[i]);
+                holdTileTemp.Add(tileScript);
             }
         }
     }
 
-    public GameObject SetTile(TileType tileType, int stage)
+    private TileScript InstanceTile(GameObject tileObject, Transform parent)
     {
-        var tile = tileType switch
-        {
-            TileType.normalTile => normalTiles[stage - 1].transform.GetChild(0),
-            TileType.holeTile => holeTiles[stage - 1].transform.GetChild(0),
-            TileType.fallingObjectTile => fallingObjectTiles[stage - 1].transform.GetChild(0),
-            TileType.knockbackTile => knockbackTiles[stage - 1].transform.GetChild(0),
-            TileType.holdTile => holdTiles[stage - 1].transform.GetChild(0),
-            _ => null
-        };
-        tile.gameObject.SetActive(true);
-        tile.transform.SetParent(alltiles.transform);
-        return tile.gameObject;
+        var tile = Instantiate(tileObject, parent);
+        tile.transform.localScale *= tileManager.sizeFator;
+        tile.SetActive(false);
+        var tileScript = tile.GetComponent<TileScript>();
+        return tileScript;
     }
 
-    public void UnsetTile(GameObject tile) 
+    public TileScript SetTile(TileType tileType, int stage)
     {
-        var ts = tile.GetComponent<TileScript>();
-        var pool = ts.tileType switch
+        TileScript tileScript;
+        switch (tileType)
         {
-            TileType.normalTile => normalTiles,
-            TileType.holeTile => holeTiles,
-            TileType.fallingObjectTile => fallingObjectTiles,
-            TileType.knockbackTile => knockbackTiles,
-            TileType.holdTile => holdTiles,
+            case TileType.normalTile:
+                normalTileCount = normalTileCount < normalTiles[stage - 1].Count ? normalTileCount + 1 : 0;
+                tileScript = normalTiles[stage - 1][normalTileCount];
+                break;
+            case TileType.holeTile:
+                holdTileCount = holdTileCount < holdTiles[stage - 1].Count ? holdTileCount + 1 : 0;
+                tileScript = holeTiles[stage - 1][holdTileCount];
+                break;
+            case TileType.fallingObjectTile:
+                fallingObjectTileCount = fallingObjectTileCount < fallingObjectTiles[stage - 1].Count ? fallingObjectTileCount + 1 : 0;
+                tileScript = fallingObjectTiles[stage - 1][fallingObjectTileCount];
+                break;
+            case TileType.knockbackTile:
+                knockbackTileCount = knockbackTileCount < knockbackTiles[stage - 1].Count ? knockbackTileCount + 1 : 0;
+                tileScript = knockbackTiles[stage - 1][knockbackTileCount];
+                break;
+            case TileType.holdTile:
+                holdTileCount = holdTileCount < holdTiles[stage - 1].Count ? holdTileCount + 1 : 0;
+                tileScript = holdTiles[stage - 1][holdTileCount];
+                break;
+            default:
+                normalTileCount = normalTileCount < normalTiles[stage - 1].Count ? normalTileCount + 1 : 0;
+                tileScript = normalTiles[stage - 1][normalTileCount];
+                break;
+        }
+
+        tileScript.gameObject.SetActive(true);
+        ActiveTile.Add(tileScript);
+        return tileScript;
+    }
+
+    public void ResetTileCount()
+    {
+        normalTileCount = 0;
+        holeTileCount = 0;
+        fallingObjectTileCount = 0;
+        knockbackTileCount = 0;
+        holdTileCount = 0;
+    }
+
+    public void UnsetTile(TileScript tile)
+    {
+        var pool = tile.tileType switch
+        {
+            TileType.normalTile => normalTilePos,
+            TileType.holeTile => holeTilesPos,
+            TileType.fallingObjectTile => fallingObjectTilesPos,
+            TileType.knockbackTile => knockbackTilesPos,
+            TileType.holdTile => holdTilesPos,
             _ => null
         };
-        tile.SetActive(false);
-        tile.transform.SetParent(pool[ts.stage - 1].transform);
+        tile.gameObject.SetActive(false);
+        ActiveTile.Remove(tile);
+        //tile.transform.SetParent(pool[ts.stage - 1].transform);
     }
 }

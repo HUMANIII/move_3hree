@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-using UnityEngine.UI;
+using static GameManager.States;
 
 public class PlayerController : MonoBehaviour
 {
@@ -64,11 +65,11 @@ public class PlayerController : MonoBehaviour
     protected void FixedUpdate()
     {
         var gm = GameManager.Instance;
-        if (transform.position.y < -0.5f && (gm.State & (GameManager.States.IsGameOver | GameManager.States.IsLoading)) == 0)
+        if (transform.position.y < -0.5f && (gm.State & (IsGameOver | IsLoading)) == 0)
         {
             fallDownEffect.gameObject.SetActive(true);
         }
-        if((gm.State & GameManager.States.IsGameOver) != 0)
+        if((gm.State & IsGameOver) != 0)
         {
             Destroy(gameObject);
         }
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
     protected void Update()
     {
+#if UNITY_EDITOR
         //cheatCode
         if(Input.GetKeyDown(KeyCode.F8))
         {
@@ -85,8 +87,9 @@ public class PlayerController : MonoBehaviour
         {
             tileManager.ActiveOverclock();
         }
+#endif
         var gm = GameManager.Instance;
-        if ((gm.State & (GameManager.States.IsGameOver | GameManager.States.IsPause)) != 0)
+        if ((gm.State & (IsGameOver | IsPause)) != 0)
             return;
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -109,7 +112,7 @@ public class PlayerController : MonoBehaviour
         if ((gm.State & (GameManager.States.IsTrapped | GameManager.States.IsHolded)) != 0)
             return;
 
-        if (pos.x == transform.position.x)
+        if (Mathf.Approximately(pos.x, transform.position.x))
         {
             GameManager.Instance.CurScore += scoreFactor;
         }
@@ -158,7 +161,7 @@ public class PlayerController : MonoBehaviour
         prevMoveTo = where;
 
         Vector3 pos = transform.position;
-        if ((gm.State & GameManager.States.IsHolded) != 0)
+        if ((gm.State & IsHolded) != 0)
         {
             var ht = TileManager.CheckUnderTile(pos) as HoldTile;
             if(ht != null)
@@ -190,18 +193,16 @@ public class PlayerController : MonoBehaviour
                 break;
         }
         var ts = TileManager.CheckUnderTile(transform.position);
-        Debug.Assert(ts != null);
         if (ts != null)         
         {
-            Debug.Log("In");
             ts.GetPos();
-            if(ts.GetComponent<HoldTile>() != null)
+            if(ts.GetComponent<HoldTile>() is not null)
             {
                 GameManager.Instance.IsHolded();
                 chainedEffect.gameObject.SetActive(true);
                 chainedEffect.Play();
             }
-            else if(ts.GetComponent<TrapTileScript>() != null)
+            else if(ts.GetComponent<TrapTileScript>() is not null)
             {
                 GameManager.Instance.IsTrapped();                
             }
@@ -245,5 +246,10 @@ public class PlayerController : MonoBehaviour
     protected virtual void SpecificEffect()
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.GameOver();
     }
 }

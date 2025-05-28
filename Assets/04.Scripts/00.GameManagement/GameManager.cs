@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         State &= ~(States.IsGameOver | States.IsTrapped | States.IsPause);
         CurScore = 0;
         LoadData();
-        State &= ~(States.IsLoading);        
+        State &= ~States.IsLoading;
     }
 
     public void GameOver()
@@ -73,7 +73,8 @@ public class GameManager : MonoBehaviour
         State &= ~States.IsTrapped;
         State &= ~States.IsHolded;
         CurScore = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("GameScene");
         State &= ~(States.IsLoading);
     }
 

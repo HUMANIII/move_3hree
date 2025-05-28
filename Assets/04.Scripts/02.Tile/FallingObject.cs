@@ -7,10 +7,10 @@ public class FallingObject : MonoBehaviour
     [SerializeField] protected ParticleSystem Effect;
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == GameObject.FindGameObjectWithTag("Player"))
-        {
-            Effect.gameObject.SetActive(true);
-            Destroy(gameObject);
-        }
+        if (collision.gameObject != GameObject.FindGameObjectWithTag("Player")) 
+            return;
+        
+        Effect.gameObject.SetActive(true);
+        Destroy(gameObject);
     }
 }

@@ -38,7 +38,7 @@ public class TileManager : MonoBehaviour
     public int PlayerLineCounter { get; set; }
 
     private readonly List<Vector3> TilePoses = new();
-    public List<GameObject> AllTiles { get; set; } = new();
+    public List<TileScript> AllTiles { get; set; } = new();
     public List<GameObject> DestroyTiles { get; set; } = new();
 
     public int overclockCount = 5;
@@ -96,7 +96,8 @@ public class TileManager : MonoBehaviour
         {
             curStageNumber++;            
             SetStage(curStageNumber);
-            Debug.Log(curStageNumber);
+            //Debug.Log(curStageNumber);
+            tilePool.ResetTileCount();
         }
         List<GameObject> tiles = new();
         while(LineCounter < PlayerLineCounter + tileColumn)
@@ -106,10 +107,10 @@ public class TileManager : MonoBehaviour
                 var tile = GetRandomTile(out bool isNormalTile);
                 tile.transform.position = new Vector3(0f, 0f, LineCounter * UpperInterval * 2) + tilePos;
                 //tiles.Add(tile);
-                tile.SendMessage("Init", LineCounter,SendMessageOptions.DontRequireReceiver);
-                if(isNormalTile && !(LineCounter == 0))
+                tile.Init(LineCounter);
+                if(isNormalTile && LineCounter != 0)
                 {
-                    SpawnItem(tile);
+                    SpawnItem(tile.gameObject);
                 }
                 AllTiles.Add(tile);
             }
@@ -134,28 +135,28 @@ public class TileManager : MonoBehaviour
     {
         foreach (var tile in AllTiles)
         {
-            tile.SendMessage("CheckTile", SendMessageOptions.DontRequireReceiver);
+            tile.CheckTile();
         }
     }
 
     private void SpawnItem(GameObject tile)
     {
         var item = GetRandomItem();
-        if (item != null)
+        if (item)
         {
             Instantiate(item, tile.transform);
         }
     }
-    
-    public void StartGame()
+
+    private void StartGame()
     {   
         SpawnTile();
         SetStage(curStageNumber);
-        foreach (GameObject tile in AllTiles)
-            tile.SendMessage("CheckPlayerRange", SendMessageOptions.DontRequireReceiver);
+        foreach (var tile in AllTiles)
+            tile.CheckPlayerRange();
     }
 
-    private GameObject GetRandomTile(out bool isNormal)
+    private TileScript GetRandomTile(out bool isNormal)
     {
         if (Overclocked || maximumTrapTile <= TrapTileCount || LineCounter == 0)
         {
@@ -220,13 +221,12 @@ public class TileManager : MonoBehaviour
     }
     public static TileScript CheckUnderTile(Vector3 pos)
     {
-        Physics.Raycast(pos, Vector3.down, out var hitInfo, 10f);
-        if (hitInfo.collider == null)
-        {
-            GameManager.Instance.IsTrapped();
-            return null;
-        }
-        return hitInfo.collider.GetComponent<TileScript>();
+        Physics.Raycast(pos, Vector3.down, out var hitInfo, maxDistance: 10f);
+        if (hitInfo.collider != null) 
+            return hitInfo.collider.GetComponent<TileScript>();
+        
+        GameManager.Instance.IsTrapped();
+        return null;
     }
 
     private void SetStage(int stage)
@@ -239,6 +239,7 @@ public class TileManager : MonoBehaviour
         maximumTrapTile = si.maximumTrapTile;
         nextStateScore = si.nextStateScore;
         RenderSettings.skybox = si.skyBoxMaterial;
+        DynamicGI.UpdateEnvironment();
         SoundManager.Instance.PlayStageBGM(stage);
     }
 

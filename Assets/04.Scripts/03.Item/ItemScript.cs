@@ -21,11 +21,11 @@ public abstract class ItemScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other == player)
-        {
-            ActiveEffect();
-            Destroy(gameObject);
-        }
+        if (other != player) 
+            return;
+        
+        ActiveEffect();
+        Destroy(gameObject);
     }
 
     private void OnDisable()
