@@ -90,27 +90,51 @@ public class TilePool : MonoBehaviour
         switch (tileType)
         {
             case TileType.normalTile:
-                normalTileCount = normalTileCount < normalTiles[stage - 1].Count ? normalTileCount + 1 : 0;
+                normalTileCount++;
+                if (normalTileCount >= normalTiles[stage - 1].Count)
+                {
+                    normalTileCount = 0;
+                }
                 tileScript = normalTiles[stage - 1][normalTileCount];
                 break;
             case TileType.holeTile:
-                holdTileCount = holdTileCount < holdTiles[stage - 1].Count ? holdTileCount + 1 : 0;
+                holdTileCount++;
+                if (holdTileCount >= holdTiles[stage - 1].Count)
+                {
+                    holdTileCount = 0;
+                }
                 tileScript = holeTiles[stage - 1][holdTileCount];
                 break;
             case TileType.fallingObjectTile:
-                fallingObjectTileCount = fallingObjectTileCount < fallingObjectTiles[stage - 1].Count ? fallingObjectTileCount + 1 : 0;
+                fallingObjectTileCount++;
+                if (fallingObjectTileCount >= fallingObjectTiles[stage - 1].Count)
+                {
+                    fallingObjectTileCount = 0;
+                }
                 tileScript = fallingObjectTiles[stage - 1][fallingObjectTileCount];
                 break;
             case TileType.knockbackTile:
-                knockbackTileCount = knockbackTileCount < knockbackTiles[stage - 1].Count ? knockbackTileCount + 1 : 0;
+                knockbackTileCount++;
+                if (knockbackTileCount >= knockbackTiles[stage - 1].Count)
+                {
+                    knockbackTileCount = 0;
+                }
                 tileScript = knockbackTiles[stage - 1][knockbackTileCount];
                 break;
             case TileType.holdTile:
-                holdTileCount = holdTileCount < holdTiles[stage - 1].Count ? holdTileCount + 1 : 0;
+                holdTileCount++;
+                if (holdTileCount >= holdTiles[stage - 1].Count)
+                {
+                    holdTileCount = 0;
+                }
                 tileScript = holdTiles[stage - 1][holdTileCount];
                 break;
             default:
-                normalTileCount = normalTileCount < normalTiles[stage - 1].Count ? normalTileCount + 1 : 0;
+                normalTileCount++;
+                if (normalTileCount >= normalTiles[stage - 1].Count)
+                {
+                    normalTileCount = 0;
+                }
                 tileScript = normalTiles[stage - 1][normalTileCount];
                 break;
         }
