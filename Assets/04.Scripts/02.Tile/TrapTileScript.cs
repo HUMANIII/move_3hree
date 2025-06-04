@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 public class TrapTileScript : TileScript
 {
@@ -10,8 +8,17 @@ public class TrapTileScript : TileScript
 
         if (tileManager.PlayerLineCounter - LineNumber > 1)
         {
-            tileManager.TrapTileCount--;
+            //tileManager.TrapTileCount--;
         }
     }
 
+    private void OnEnable()
+    {
+        tileManager.TrapTileCount++;
+    }
+
+    private void OnDisable()
+    {
+        tileManager.TrapTileCount--;
+    }
 }

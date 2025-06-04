@@ -38,8 +38,6 @@ public class TileManager : MonoBehaviour
     public int PlayerLineCounter { get; set; }
 
     private readonly List<Vector3> TilePoses = new();
-    public List<TileScript> AllTiles { get; set; } = new();
-    public List<GameObject> DestroyTiles { get; set; } = new();
 
     public int overclockCount = 5;
     private int leftOverclockCount = 0;
@@ -112,7 +110,7 @@ public class TileManager : MonoBehaviour
                 {
                     SpawnItem(tile.gameObject);
                 }
-                AllTiles.Add(tile);
+                tilePool.ActiveTile.Add(tile);
             }
             LineCounter++;
             if(Overclocked) 
@@ -133,7 +131,7 @@ public class TileManager : MonoBehaviour
 
     public void CheckAllTiles()
     {
-        foreach (var tile in AllTiles)
+        foreach (var tile in tilePool.ActiveTile)
         {
             tile.CheckTile();
         }
@@ -152,7 +150,7 @@ public class TileManager : MonoBehaviour
     {   
         SpawnTile();
         SetStage(curStageNumber);
-        foreach (var tile in AllTiles)
+        foreach (var tile in tilePool.ActiveTile)
             tile.CheckPlayerRange();
     }
 
@@ -168,28 +166,28 @@ public class TileManager : MonoBehaviour
         var rate = holeTileSpawnRate;
         if (rv < rate)
         {
-            TrapTileCount++;
+            //TrapTileCount++;
             isNormal = false;
             return tilePool.SetTile(TilePool.TileType.holeTile, curStageNumber);
         }
         rate += fallingObjectTileSpawnRate;
         if (rv < rate)
         {
-            TrapTileCount++;
+            //TrapTileCount++;
             isNormal = false;
             return tilePool.SetTile(TilePool.TileType.fallingObjectTile, curStageNumber);
         }
         rate += knockbackTileSpawnRate;
         if (rv < rate)
         {
-            TrapTileCount++;
+            //TrapTileCount++;
             isNormal = false;
             return tilePool.SetTile(TilePool.TileType.knockbackTile, curStageNumber);
         }
         rate += holdTileSpawnRate;
         if (rv < rate)
         {
-            TrapTileCount++;
+            //TrapTileCount++;
             isNormal = false;
             return tilePool.SetTile(TilePool.TileType.holdTile, curStageNumber);
         }

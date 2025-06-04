@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class HoldTile : TrapTileScript
 {
     public int clickCount;
     private int clickCounter = 0;
+    private PlayerController pc;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        pc = player.GetComponent<PlayerController>();
+    }
 
     private void Start()
     {
-        clickCount *= player.GetComponent<PlayerController>().obstructionFactor;
+        clickCount *= pc.obstructionFactor;
     }
 
 
@@ -19,7 +22,7 @@ public class HoldTile : TrapTileScript
 
         if(clickCounter >= clickCount)
         {
-            player.GetComponent<PlayerController>().ReleaseHold();
+            pc.ReleaseHold();
         }        
     }
 }

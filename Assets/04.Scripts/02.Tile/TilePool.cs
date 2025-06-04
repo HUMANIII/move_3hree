@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +34,16 @@ public class TilePool : MonoBehaviour
     private int knockbackTileCount = 0;
     private List<List<TileScript>> holdTiles = new();
     private int holdTileCount = 0;
+
+    private Stack<TileScript> deleteTileStack = new();
+
+    private void Update()
+    {
+        while (deleteTileStack.Count > 0)
+        {
+            ActiveTile.Remove(deleteTileStack.Pop());
+        }
+    }
 
     public void MakePools()
     {
@@ -155,17 +164,24 @@ public class TilePool : MonoBehaviour
 
     public void UnsetTile(TileScript tile)
     {
-        var pool = tile.tileType switch
-        {
-            TileType.normalTile => normalTilePos,
-            TileType.holeTile => holeTilesPos,
-            TileType.fallingObjectTile => fallingObjectTilesPos,
-            TileType.knockbackTile => knockbackTilesPos,
-            TileType.holdTile => holdTilesPos,
-            _ => null
-        };
+        // var pool = tile.tileType switch
+        // {
+        //     TileType.normalTile => normalTilePos,
+        //     TileType.holeTile => holeTilesPos,
+        //     TileType.fallingObjectTile => fallingObjectTilesPos,
+        //     TileType.knockbackTile => knockbackTilesPos,
+        //     TileType.holdTile => holdTilesPos,
+        //     _ => null
+        // };
+        if(!ActiveTile.Contains(tile))
+            return;
+
+        // if (tile.tileType != TileType.normalTile)
+        // {
+        //     tileManager.TrapTileCount--;
+        // }
         tile.gameObject.SetActive(false);
-        ActiveTile.Remove(tile);
+        deleteTileStack.Push(tile);
         //tile.transform.SetParent(pool[ts.stage - 1].transform);
     }
 }
