@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public class ScrollRectOption : MonoBehaviour
 
     }
 
-    public void SetLayoutGroupOption()
+    public IEnumerator SetLayoutGroupOption()
     {
         SetData();
         if (lg != null)
@@ -40,7 +41,10 @@ public class ScrollRectOption : MonoBehaviour
         {
             csf.enabled = true;
         }
-
+        //왜인지 자세히는 모르겠지만 이렇게 하면 잘됐음 ㅎㅎ
+        yield return null;
+        yield return null;
+        
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(content);
 

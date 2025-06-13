@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
-using System.Net.Sockets;
-using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class UIMatching : MonoBehaviour
 {
@@ -18,6 +13,7 @@ public class UIMatching : MonoBehaviour
     //public Button TutoBtn;
     //public Button TutoCloseBtn;
     [SerializeField] private GameObject[] tabs = new GameObject[0];
+    [SerializeField] private GameObject SetNickNamePanel;
 
     public TextMeshProUGUI ramCounter;
     public TextMeshProUGUI dateCounter;
@@ -53,6 +49,7 @@ public class UIMatching : MonoBehaviour
         //shopCloseBtn.onClick.AddListener(um.CloseShoppopup);
         //TutoCloseBtn.onClick.AddListener(um.CloseTutoPopup);
         UpdateRamCounter();
+        SetNickNamePanel.SetActive(!GameManager.Instance.isNickNameSetted);
     }
 
     public void UpdateRamCounter()

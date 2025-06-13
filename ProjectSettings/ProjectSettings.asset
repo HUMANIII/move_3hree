@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: KyungIl
+  companyName: PersonalProject
   productName: Move_3hree
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -158,8 +158,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.KyungIl.Move_3hree
-    Standalone: com.DefaultCompany.My-project
+    Android: com.PersonalProject.Move_3hree
+    Standalone: com.PersonalProject.Move-3hree
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -167,8 +167,8 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 3
-  AndroidMinSdkVersion: 32
-  AndroidTargetSdkVersion: 32
+  AndroidMinSdkVersion: 33
+  AndroidTargetSdkVersion: 34
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -250,18 +250,18 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   useCustomMainManifest: 0
   useCustomLauncherManifest: 0
-  useCustomMainGradleTemplate: 0
+  useCustomMainGradleTemplate: 1
   useCustomLauncherGradleManifest: 0
   useCustomBaseGradleTemplate: 0
-  useCustomGradlePropertiesTemplate: 0
+  useCustomGradlePropertiesTemplate: 1
   useCustomGradleSettingsTemplate: 0
   useCustomProguardFile: 0
   AndroidTargetArchitectures: 3
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Downloads/Move_3hree.keystore'
-  AndroidKeyaliasName: release
+  AndroidKeystoreName: E:/98.Academy/004.Unity/m3.keystore
+  AndroidKeyaliasName: dh
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
@@ -870,27 +870,28 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: ENABLE_DEBUG_LOG;UNITY_POST_PROCESSING_STACK_V2
-    EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2
-    GameCoreScarlett: 
-    GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2
-    LinuxHeadlessSimulation: 
-    Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2
-    PS4: UNITY_POST_PROCESSING_STACK_V2
-    PS5: UNITY_POST_PROCESSING_STACK_V2
-    QNX: UNITY_POST_PROCESSING_STACK_V2
-    Stadia: UNITY_POST_PROCESSING_STACK_V2
-    Standalone: UNITY_POST_PROCESSING_STACK_V2
-    VisionOS: UNITY_POST_PROCESSING_STACK_V2
-    WebGL: UNITY_POST_PROCESSING_STACK_V2
-    Windows Store Apps: 
-    XboxOne: UNITY_POST_PROCESSING_STACK_V2
-    iPhone: 
-    tvOS: UNITY_POST_PROCESSING_STACK_V2
+    Android: ENABLE_DEBUG_LOG;UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    GameCoreScarlett: DOTWEEN
+    GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN
+    Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    PS4: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    PS5: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    QNX: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    Stadia: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    Standalone: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    VisionOS: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    WebGL: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    Windows Store Apps: DOTWEEN
+    XboxOne: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    iPhone: DOTWEEN
+    tvOS: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
@@ -975,7 +976,13 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -995,11 +1002,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: d4160815-a312-4080-be85-cf56c487895e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Move_3hree
+  organizationId: jangdahoon8850
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
