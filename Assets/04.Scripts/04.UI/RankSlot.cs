@@ -10,6 +10,14 @@ public class RankSlot : MonoBehaviour
     public void SetData(int rank, string nickname, int score)
     {
         rankText.text = rank.ToString();
+        if (rank is 1 or 2 or 3)
+        {
+            rankText.color = Color.yellow;
+        }
+        else
+        {
+            rankText.color = Color.white;
+        }
         nameText.text = nickname;
         scoreText.text = score.ToString();
     }

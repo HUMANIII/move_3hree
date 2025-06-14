@@ -87,4 +87,9 @@ public static class Debug
     {
 	    UnityEngine.Debug.Assert(condition);
     }
+    [System.Diagnostics.Conditional("ENABLE_DEBUG_LOG")]
+    public static void LogFormat(string format, params object[] args)
+    {
+        UnityEngine.Debug.LogFormat(format, args);
+    }
 }

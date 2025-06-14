@@ -26,6 +26,7 @@ public class EndPanel : MonoBehaviour
         ramGot.text = $"여유 메모리 : {gm.RamCount - gm.prevRamCount}MB";
         bestScore.text = $"최고 이동 거리 : {gm.BestScore}M";
         currentScore.text = $"이동 거리 : {gm.CurScore}M";
+        StartCoroutine(ServerHandler.SendScore(gm.NickName, gm.CurScore));
     }
 
     public void Restart()

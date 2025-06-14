@@ -123,3 +123,17 @@ public class SaveDataV6 : SaveDataV5
         return null;
     }
 }
+public class SaveDataV7 : SaveDataV6
+{
+    public SaveDataV7()
+    {
+        Version = 7;
+    }
+
+    public string nickName;
+
+    public override SaveData VersionUp()
+    {
+        return null;
+    }
+}

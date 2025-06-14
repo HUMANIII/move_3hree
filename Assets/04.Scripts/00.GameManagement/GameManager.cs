@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using SaveDataVC = SaveDataV6;
+using SaveDataVC = SaveDataV7;
 
 
 public class GameManager : MonoBehaviour
@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
 
     public Settings Options { get; set; }
     public States State { get; private set; }
+    
+    public string NickName { get; private set; }
+    public bool isNickNameSetted => !string.IsNullOrEmpty(NickName);
 
     private void Awake()
     {
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
             masterVolume = SoundManager.Instance.masterVolume,
             BGMVolume = SoundManager.Instance.BGMVolume,
             SFXVolume = SoundManager.Instance.SFXVolume,
+            nickName = NickName,       
         };
         SaveLoadSystem.Save(data, "saveData.Json");
     }
@@ -109,6 +113,7 @@ public class GameManager : MonoBehaviour
             SoundManager.Instance.masterVolume = data.masterVolume;
             SoundManager.Instance.BGMVolume = data.BGMVolume;
             SoundManager.Instance.SFXVolume = data.SFXVolume;
+            NickName = data.nickName;       
         }        
         else
         {
@@ -147,5 +152,10 @@ public class GameManager : MonoBehaviour
     public void ReleaseHold()
     {
         State &= ~States.IsHolded;
+    }
+    
+    public void SetNickName(string name)
+    {
+        NickName = name;
     }
 }

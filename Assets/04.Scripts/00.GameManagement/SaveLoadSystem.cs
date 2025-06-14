@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SaveDataVC = SaveDataV6;
+using SaveDataVC = SaveDataV7;
 
 public static class SaveLoadSystem
 {
@@ -72,6 +72,9 @@ public static class SaveLoadSystem
                     break;
                 case 6:
                     data = deserialize.Deserialize<SaveDataV6>(reader);
+                    break;
+                case 7:
+                    data = deserialize.Deserialize<SaveDataV7>(reader);
                     break;
             }
 

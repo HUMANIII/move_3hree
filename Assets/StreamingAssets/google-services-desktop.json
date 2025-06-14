@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "235914886181",
+    "project_id": "move-3hree-1b923",
+    "storage_bucket": "move-3hree-1b923.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235914886181:android:02f9ac9a2bc3117f3d93cc",
+        "android_client_info": {
+          "package_name": "com.PersonalProject.Move_3hree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235914886181-3p0anejrsttogdfdtanpk2ub1dd28rmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClPbR8brn5fDgGNQxvA52zwQJtB15ts_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235914886181-3p0anejrsttogdfdtanpk2ub1dd28rmk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

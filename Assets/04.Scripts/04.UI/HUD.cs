@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
 {
     public Button pauseBtn;
     public Slider timerSlier;
+    [SerializeField] private Slider MaxTimeSlider;
     public TextMeshProUGUI scoreText;
     //public TextMeshProUGUI bestScoreText;
     public TextMeshProUGUI ramText;
@@ -27,6 +28,8 @@ public class HUD : MonoBehaviour
         var gm = GameManager.Instance;
         pauseBtn.onClick.AddListener(Pause);
         SetController();
+        timerSlier.maxValue = timerScripts.maxTime;
+        MaxTimeSlider.maxValue = timerScripts.maxTime;
         //endPannel = GameObject.FindGameObjectWithTag("Pannel");
         //bestScoreText.text = "BestScore = " + gm.BestScore.ToString();
         //moveButtons.SetActive(true);
@@ -42,7 +45,7 @@ public class HUD : MonoBehaviour
     private void Update()
     {
         var gm = GameManager.Instance;
-        timerSlier.maxValue = timerScripts.curMaxTime;
+        MaxTimeSlider.value = timerScripts.maxTime - timerScripts.curMaxTime;
         timerSlier.value = timerScripts.Timer;
         scoreText.text = $"{gm.CurScore}M";       
         ramText.text = (gm.RamCount - gm.prevRamCount).ToString();
