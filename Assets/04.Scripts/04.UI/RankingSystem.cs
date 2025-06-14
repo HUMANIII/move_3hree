@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
@@ -35,6 +36,7 @@ public class RankingSystem : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(LoadRanking());
+        DOTween.TweensByTarget(this, true);
     }
 
     private IEnumerator LoadRanking()

@@ -21,7 +21,6 @@ public class BatteryItemScript : ItemScript
         _bananaPhoneScript ??= player.GetComponentInParent<BananaPhoneScript>();
     }
     
-    //TODO : 배터리 아이템 시간이 줄어든다는 시각적 이펙트가 필요함
     protected override void ActiveEffect()
     {
         if(PlayerStatManager.Instance.playerType != PlayerStatManager.PlayerType.BananaPhone) 

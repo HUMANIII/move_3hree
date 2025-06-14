@@ -87,8 +87,8 @@ public class ShopButton : MonoBehaviour
     {
         confirmWindow.SetActive(true);
         confirmBtn.onClick.AddListener(action);
-        buyMessageTitle. text = IsUpgrade ? "¾÷µ¥ÀÌÆ® ¿äÃ»" : "";
-        buyMessage.text = IsUpgrade ? "ÇØ´ç ¾÷µ¥ÀÌÆ®¸¦ ´Ù¿î·Îµå ÇÏ°Ú½À´Ï±î?" : "ÇØ´ç ±â±â¸¦ ±¸¸ÅÇÏ½Ã°Ú½À´Ï±î?";
+        buyMessageTitle. text = IsUpgrade ? "ì—…ë°ì´íŠ¸ ìš”ì²­" : "";
+        buyMessage.text = IsUpgrade ? "í•´ë‹¹ ì—…ë°ì´íŠ¸ë¥¼ ë‹¤ìš´ë¡œë“œ í•˜ê² ìŠµë‹ˆê¹Œ?" : "í•´ë‹¹ ê¸°ê¸°ë¥¼ êµ¬ë§¤í•˜ì‹œê² ìŠµë‹ˆê¹Œ?";
     }
     public void UpgradeMaxTime()
     {

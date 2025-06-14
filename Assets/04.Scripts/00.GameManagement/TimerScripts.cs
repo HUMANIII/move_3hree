@@ -12,12 +12,13 @@ public class TimerScripts : MonoBehaviour
     public float decreaseFactor = 0.1f;
 
     private PlayerStatManager.PlayerType playerType;
+    private PlayerController playerController;
 
     private void Start()
     {
         var ps = PlayerStatManager.Instance;
-        var playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        maxTime += ps.maxTimeRate * ps.upgrade.maxTime - playerScript.maxTimeLimitCtrl;
+        var playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        maxTime += ps.maxTimeRate * ps.upgrade.maxTime - playerController.maxTimeLimitCtrl;
         curMaxTime = maxTime;
         playerType = PlayerStatManager.Instance.playerType;
         ResetTimer();
@@ -38,7 +39,7 @@ public class TimerScripts : MonoBehaviour
         {
             if (playerType != PlayerStatManager.PlayerType.BananaPhone)
             {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Knockback();
+                playerController.Knockback();
                 ResetTimer();
             }
             else
